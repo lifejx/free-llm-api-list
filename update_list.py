@@ -770,14 +770,20 @@ def read_json(path: Path) -> dict | None:
         return None
 
 
+def write_text_lf(path: Path, text: str, encoding: str = "utf-8") -> None:
+    """强制 LF 写入：Windows 本地跑和 Linux Actions 跑产出才会字节一致，避免换行符来回抖动。"""
+    with path.open("w", encoding=encoding, newline="\n") as fh:
+        fh.write(text)
+
+
 def write_json(path: Path, data: object) -> None:
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_text_lf(path, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
 
 
 def write_csv(path: Path, providers: list[dict]) -> None:
-    # utf-8-sig：让 Excel 双击打开不乱码
+    # utf-8-sig：让 Excel 双击打开不乱码；lineterminator 用 \n 保持跨平台一致
     with path.open("w", newline="", encoding="utf-8-sig") as fh:
-        writer = csv.writer(fh)
+        writer = csv.writer(fh, lineterminator="\n")
         writer.writerow(["平台", "密钥变量名", "模型ID", "BaseURL", "上下文", "额度类型",
                          "预期有效期", "状态", "状态码", "延迟(ms)", "备注", "检测时间"])
         for provider in providers:
@@ -798,7 +804,7 @@ def append_history(path: Path, snapshot: dict, keep: int = 500) -> None:
     if path.exists():
         lines = [ln for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip()]
     lines.append(json.dumps(snapshot, ensure_ascii=False, separators=(",", ":")))
-    path.write_text("\n".join(lines[-keep:]) + "\n", encoding="utf-8")
+    write_text_lf(path, "\n".join(lines[-keep:]) + "\n")
 
 
 def status_cell(status: str) -> str:
@@ -1118,13 +1124,13 @@ def main(argv: list[str] | None = None) -> int:
 
     readme = render_readme(results, summary, changes, generated_at, elapsed,
                            args.cron, history)
-    readme_path.write_text(readme, encoding="utf-8")
+    write_text_lf(readme_path, readme)
     write_csv(csv_path, results)
     write_json(json_path, payload)
 
     if not args.no_history:
         if not history_path.exists():
-            history_path.touch()
+            write_text_lf(history_path, "")
         if changes or previous is None:
             append_history(history_path, {
                 "at": checked_at,
