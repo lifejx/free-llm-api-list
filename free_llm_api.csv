@@ -1,63 +1,84 @@
-﻿平台,密钥变量名,模型ID,BaseURL,上下文,额度类型,预期有效期,状态,状态码,延迟(ms),备注,检测时间
-DeepSeek 深度求索,DEEPSEEK_KEY,deepseek-chat,https://api.deepseek.com/v1,128K,注册赠送测试额度，用完后按量计费,额度用尽即止（非长期免费）,⏭️ 未配置密钥,-,-,缺少环境变量 DEEPSEEK_KEY,2026-09-30 19:17:01
-DeepSeek 深度求索,DEEPSEEK_KEY,deepseek-reasoner,https://api.deepseek.com/v1,128K,注册赠送测试额度，用完后按量计费,额度用尽即止（非长期免费）,⏭️ 未配置密钥,-,-,缺少环境变量 DEEPSEEK_KEY,2026-09-30 19:17:01
-智谱 AI (BigModel),ZHIPU_KEY,glm-4-flash,https://open.bigmodel.cn/api/paas/v4,128K,Flash 系列免费，有限速,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 ZHIPU_KEY,2026-09-30 19:17:01
-智谱 AI (BigModel),ZHIPU_KEY,glm-4.5-flash,https://open.bigmodel.cn/api/paas/v4,128K,Flash 系列免费，有限速,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 ZHIPU_KEY,2026-09-30 19:17:01
-智谱 AI (BigModel),ZHIPU_KEY,glm-4v-flash,https://open.bigmodel.cn/api/paas/v4,8K,Flash 系列免费，有限速,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 ZHIPU_KEY,2026-09-30 19:17:01
-月之暗面 Kimi,MOONSHOT_KEY,kimi-k2-0905-preview,https://api.moonshot.cn/v1,262K,新用户赠送额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 MOONSHOT_KEY,2026-09-30 19:17:01
-月之暗面 Kimi,MOONSHOT_KEY,moonshot-v1-8k,https://api.moonshot.cn/v1,8K,新用户赠送额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 MOONSHOT_KEY,2026-09-30 19:17:01
-阿里云百炼 DashScope,DASHSCOPE_KEY,qwen-turbo,https://dashscope.aliyuncs.com/compatible-mode/v1,1M,新用户每个模型 100 万 tokens 免费额度,自开通起 180 天有效,⏭️ 未配置密钥,-,-,缺少环境变量 DASHSCOPE_KEY,2026-09-30 19:17:01
-阿里云百炼 DashScope,DASHSCOPE_KEY,qwen-plus,https://dashscope.aliyuncs.com/compatible-mode/v1,131K,新用户每个模型 100 万 tokens 免费额度,自开通起 180 天有效,⏭️ 未配置密钥,-,-,缺少环境变量 DASHSCOPE_KEY,2026-09-30 19:17:01
-阿里云百炼 DashScope,DASHSCOPE_KEY,qwen-long,https://dashscope.aliyuncs.com/compatible-mode/v1,10M,新用户每个模型 100 万 tokens 免费额度,自开通起 180 天有效,⏭️ 未配置密钥,-,-,缺少环境变量 DASHSCOPE_KEY,2026-09-30 19:17:01
-硅基流动 SiliconFlow,SILICONFLOW_KEY,Qwen/Qwen3-8B,https://api.siliconflow.cn/v1,32K,部分小模型免费，有限速,长期免费（免费名单会轮换）,⏭️ 未配置密钥,-,-,缺少环境变量 SILICONFLOW_KEY,2026-09-30 19:17:01
-硅基流动 SiliconFlow,SILICONFLOW_KEY,THUDM/glm-4-9b-chat,https://api.siliconflow.cn/v1,32K,部分小模型免费，有限速,长期免费（免费名单会轮换）,⏭️ 未配置密钥,-,-,缺少环境变量 SILICONFLOW_KEY,2026-09-30 19:17:01
-硅基流动 SiliconFlow,SILICONFLOW_KEY,deepseek-ai/DeepSeek-R1-0528-Qwen3-8B,https://api.siliconflow.cn/v1,131K,部分小模型免费，有限速,长期免费（免费名单会轮换）,⏭️ 未配置密钥,-,-,缺少环境变量 SILICONFLOW_KEY,2026-09-30 19:17:01
-魔搭 ModelScope,MODELSCOPE_KEY,Qwen/Qwen3-8B,https://api-inference.modelscope.cn/v1,32K,每日 2000 次免费调用,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 MODELSCOPE_KEY,2026-09-30 19:17:01
-魔搭 ModelScope,MODELSCOPE_KEY,deepseek-ai/DeepSeek-R1-Distill-Qwen-7B,https://api-inference.modelscope.cn/v1,65K,每日 2000 次免费调用,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 MODELSCOPE_KEY,2026-09-30 19:17:01
-魔搭 ModelScope,MODELSCOPE_KEY,Qwen/Qwen2.5-7B-Instruct,https://api-inference.modelscope.cn/v1,32K,每日 2000 次免费调用,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 MODELSCOPE_KEY,2026-09-30 19:17:01
-腾讯混元 Hunyuan,HUNYUAN_KEY,hunyuan-turbos-latest,https://api.hunyuan.cloud.tencent.com/v1,32K,新用户赠送免费额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 HUNYUAN_KEY,2026-09-30 19:17:01
-腾讯混元 Hunyuan,HUNYUAN_KEY,hunyuan-lite,https://api.hunyuan.cloud.tencent.com/v1,32K,新用户赠送免费额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 HUNYUAN_KEY,2026-09-30 19:17:01
-百度千帆 Qianfan,QIANFAN_KEY,ernie-speed-128k,https://qianfan.baidubce.com/v2,131K,ERNIE Speed 系列免费,长期免费（限速）,⏭️ 未配置密钥,-,-,缺少环境变量 QIANFAN_KEY,2026-09-30 19:17:01
-百度千帆 Qianfan,QIANFAN_KEY,ernie-4.5-turbo-128k,https://qianfan.baidubce.com/v2,131K,ERNIE Speed 系列免费,长期免费（限速）,⏭️ 未配置密钥,-,-,缺少环境变量 QIANFAN_KEY,2026-09-30 19:17:01
-火山方舟 Volcengine Ark,VOLC_ARK_KEY,doubao-seed-1-6-250615,https://ark.cn-beijing.volces.com/api/v3,262K,新用户每个模型 50 万 tokens 免费额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 VOLC_ARK_KEY,2026-09-30 19:17:01
-火山方舟 Volcengine Ark,VOLC_ARK_KEY,doubao-1-5-lite-32k-250115,https://ark.cn-beijing.volces.com/api/v3,32K,新用户每个模型 50 万 tokens 免费额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 VOLC_ARK_KEY,2026-09-30 19:17:01
-讯飞星火 Spark,SPARK_KEY,lite,https://spark-api-open.xf-yun.com/v1,8K,Lite 版免费不限量（限速）,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 SPARK_KEY,2026-09-30 19:17:01
-讯飞星火 Spark,SPARK_KEY,generalv3.5,https://spark-api-open.xf-yun.com/v1,8K,Lite 版免费不限量（限速）,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 SPARK_KEY,2026-09-30 19:17:01
-MiniMax,MINIMAX_KEY,MiniMax-Text-01,https://api.minimax.chat/v1,1M,注册赠送额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 MINIMAX_KEY,2026-09-30 19:17:01
-MiniMax,MINIMAX_KEY,abab6.5s-chat,https://api.minimax.chat/v1,245K,注册赠送额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 MINIMAX_KEY,2026-09-30 19:17:01
-阶跃星辰 StepFun,STEPFUN_KEY,step-1-flash,https://api.stepfun.com/v1,8K,Flash 系列免费（限速）,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 STEPFUN_KEY,2026-09-30 19:17:01
-阶跃星辰 StepFun,STEPFUN_KEY,step-2-mini,https://api.stepfun.com/v1,32K,Flash 系列免费（限速）,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 STEPFUN_KEY,2026-09-30 19:17:01
-零一万物 Yi,YI_KEY,yi-lightning,https://api.lingyiwanwu.com/v1,16K,注册赠送额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 YI_KEY,2026-09-30 19:17:01
-百川智能 Baichuan,BAICHUAN_KEY,Baichuan4-Turbo,https://api.baichuan-ai.com/v1,32K,新用户赠送 tokens,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 BAICHUAN_KEY,2026-09-30 19:17:01
-OpenRouter,OPENROUTER_KEY,meta-llama/llama-3.3-70b-instruct:free,https://openrouter.ai/api/v1,131K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,⏭️ 未配置密钥,-,-,缺少环境变量 OPENROUTER_KEY,2026-09-30 19:17:01
-OpenRouter,OPENROUTER_KEY,deepseek/deepseek-r1:free,https://openrouter.ai/api/v1,163K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,⏭️ 未配置密钥,-,-,缺少环境变量 OPENROUTER_KEY,2026-09-30 19:17:01
-OpenRouter,OPENROUTER_KEY,google/gemini-2.0-flash-exp:free,https://openrouter.ai/api/v1,1M,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,⏭️ 未配置密钥,-,-,缺少环境变量 OPENROUTER_KEY,2026-09-30 19:17:01
-Groq,GROQ_KEY,llama-3.3-70b-versatile,https://api.groq.com/openai/v1,131K,免费层按 RPM/TPM/每日限额,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 GROQ_KEY,2026-09-30 19:17:01
-Groq,GROQ_KEY,llama-3.1-8b-instant,https://api.groq.com/openai/v1,131K,免费层按 RPM/TPM/每日限额,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 GROQ_KEY,2026-09-30 19:17:01
-Groq,GROQ_KEY,openai/gpt-oss-120b,https://api.groq.com/openai/v1,131K,免费层按 RPM/TPM/每日限额,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 GROQ_KEY,2026-09-30 19:17:01
-Google Gemini,GEMINI_KEY,gemini-2.5-flash,https://generativelanguage.googleapis.com/v1beta/openai,1M,免费层按 RPM/RPD 限速,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 GEMINI_KEY,2026-09-30 19:17:01
-Google Gemini,GEMINI_KEY,gemini-2.5-flash-lite,https://generativelanguage.googleapis.com/v1beta/openai,1M,免费层按 RPM/RPD 限速,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 GEMINI_KEY,2026-09-30 19:17:01
-Google Gemini,GEMINI_KEY,gemini-2.0-flash,https://generativelanguage.googleapis.com/v1beta/openai,1M,免费层按 RPM/RPD 限速,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 GEMINI_KEY,2026-09-30 19:17:01
-Cerebras,CEREBRAS_KEY,llama3.3-70b,https://api.cerebras.ai/v1,131K,免费层每日 100 万 tokens,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 CEREBRAS_KEY,2026-09-30 19:17:01
-Cerebras,CEREBRAS_KEY,qwen-3-32b,https://api.cerebras.ai/v1,131K,免费层每日 100 万 tokens,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 CEREBRAS_KEY,2026-09-30 19:17:01
-Cerebras,CEREBRAS_KEY,gpt-oss-120b,https://api.cerebras.ai/v1,131K,免费层每日 100 万 tokens,长期免费,⏭️ 未配置密钥,-,-,缺少环境变量 CEREBRAS_KEY,2026-09-30 19:17:01
-Mistral AI,MISTRAL_KEY,mistral-small-latest,https://api.mistral.ai/v1,131K,Experiment 免费层（需手机验证，限速）,长期免费（限速）,⏭️ 未配置密钥,-,-,缺少环境变量 MISTRAL_KEY,2026-09-30 19:17:01
-Mistral AI,MISTRAL_KEY,open-mistral-nemo,https://api.mistral.ai/v1,131K,Experiment 免费层（需手机验证，限速）,长期免费（限速）,⏭️ 未配置密钥,-,-,缺少环境变量 MISTRAL_KEY,2026-09-30 19:17:01
-Together AI,TOGETHER_KEY,meta-llama/Llama-Vision-Free,https://api.together.xyz/v1,131K,新用户赠送额度 + 少量 free 模型,额度用尽即止（free 名单会轮换）,⏭️ 未配置密钥,-,-,缺少环境变量 TOGETHER_KEY,2026-09-30 19:17:01
-Together AI,TOGETHER_KEY,deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free,https://api.together.xyz/v1,131K,新用户赠送额度 + 少量 free 模型,额度用尽即止（free 名单会轮换）,⏭️ 未配置密钥,-,-,缺少环境变量 TOGETHER_KEY,2026-09-30 19:17:01
-NVIDIA NIM,NVIDIA_KEY,deepseek-ai/deepseek-r1,https://integrate.api.nvidia.com/v1,131K,注册赠送 1000 credits,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 NVIDIA_KEY,2026-09-30 19:17:01
-NVIDIA NIM,NVIDIA_KEY,meta/llama-3.3-70b-instruct,https://integrate.api.nvidia.com/v1,131K,注册赠送 1000 credits,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 NVIDIA_KEY,2026-09-30 19:17:01
-SambaNova,SAMBANOVA_KEY,Meta-Llama-3.3-70B-Instruct,https://api.sambanova.ai/v1,131K,免费层限速,长期免费（限速）,⏭️ 未配置密钥,-,-,缺少环境变量 SAMBANOVA_KEY,2026-09-30 19:17:01
-SambaNova,SAMBANOVA_KEY,DeepSeek-R1-Distill-Llama-70B,https://api.sambanova.ai/v1,131K,免费层限速,长期免费（限速）,⏭️ 未配置密钥,-,-,缺少环境变量 SAMBANOVA_KEY,2026-09-30 19:17:01
-Hyperbolic,HYPERBOLIC_KEY,Qwen/Qwen3-235B-A22B,https://api.hyperbolic.xyz/v1,131K,注册赠送约 $1 额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 HYPERBOLIC_KEY,2026-09-30 19:17:01
-Hyperbolic,HYPERBOLIC_KEY,meta-llama/Llama-3.3-70B-Instruct,https://api.hyperbolic.xyz/v1,131K,注册赠送约 $1 额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 HYPERBOLIC_KEY,2026-09-30 19:17:01
-Nebius AI Studio,NEBIUS_KEY,Qwen/Qwen3-235B-A22B,https://api.studio.nebius.com/v1,131K,注册赠送试用额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 NEBIUS_KEY,2026-09-30 19:17:01
-Nebius AI Studio,NEBIUS_KEY,meta-llama/Llama-3.3-70B-Instruct,https://api.studio.nebius.com/v1,131K,注册赠送试用额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 NEBIUS_KEY,2026-09-30 19:17:01
-Novita AI,NOVITA_KEY,deepseek/deepseek-v3-0324,https://api.novita.ai/v3/openai,131K,注册赠送试用额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 NOVITA_KEY,2026-09-30 19:17:01
-Novita AI,NOVITA_KEY,meta-llama/llama-3.3-70b-instruct,https://api.novita.ai/v3/openai,131K,注册赠送试用额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 NOVITA_KEY,2026-09-30 19:17:01
-Chutes,CHUTES_KEY,deepseek-ai/DeepSeek-V3-0324,https://llm.chutes.ai/v1,131K,注册赠送少量额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 CHUTES_KEY,2026-09-30 19:17:01
-Chutes,CHUTES_KEY,Qwen/Qwen3-32B,https://llm.chutes.ai/v1,131K,注册赠送少量额度,额度用尽即止,⏭️ 未配置密钥,-,-,缺少环境变量 CHUTES_KEY,2026-09-30 19:17:01
-GitHub Models,GITHUB_MODELS_TOKEN,gpt-4o-mini,https://models.inference.ai.azure.com,131K,免费层按 RPM/RPD 限速,长期免费（限速）,⏭️ 未配置密钥,-,-,缺少环境变量 GITHUB_MODELS_TOKEN,2026-09-30 19:17:01
-GitHub Models,GITHUB_MODELS_TOKEN,Llama-3.3-70B-Instruct,https://models.inference.ai.azure.com,131K,免费层按 RPM/RPD 限速,长期免费（限速）,⏭️ 未配置密钥,-,-,缺少环境变量 GITHUB_MODELS_TOKEN,2026-09-30 19:17:01
-Cloudflare Workers AI,CLOUDFLARE_API_TOKEN,@cf/meta/llama-3.3-70b-instruct-fp8-fast,https://api.cloudflare.com/client/v4/accounts//ai/v1,24K,每日 10000 neurons 免费额度,长期免费（每日重置）,⏭️ 未配置密钥,-,-,"缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID",2026-09-30 19:17:01
-Cloudflare Workers AI,CLOUDFLARE_API_TOKEN,@cf/meta/llama-3.1-8b-instruct,https://api.cloudflare.com/client/v4/accounts//ai/v1,8K,每日 10000 neurons 免费额度,长期免费（每日重置）,⏭️ 未配置密钥,-,-,"缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID",2026-09-30 19:17:01
+﻿平台,接口探活,密钥变量名,模型ID,来源,BaseURL,上下文,额度类型,预期有效期,状态,状态码,延迟(ms),备注,检测时间
+DeepSeek 深度求索,🟢 接口在线,DEEPSEEK_KEY,deepseek-chat,人工登记,https://api.deepseek.com/v1,128K,注册赠送测试额度，用完后按量计费,额度用尽即止（非长期免费）,⏭️ 无法判断,-,-,缺少环境变量 DEEPSEEK_KEY,2026-09-30 19:48:35
+DeepSeek 深度求索,🟢 接口在线,DEEPSEEK_KEY,deepseek-reasoner,人工登记,https://api.deepseek.com/v1,128K,注册赠送测试额度，用完后按量计费,额度用尽即止（非长期免费）,⏭️ 无法判断,-,-,缺少环境变量 DEEPSEEK_KEY,2026-09-30 19:48:35
+智谱 AI (BigModel),🟢 接口在线,ZHIPU_KEY,glm-4-flash,人工登记,https://open.bigmodel.cn/api/paas/v4,128K,Flash 系列免费，有限速,长期免费,⏭️ 无法判断,-,-,缺少环境变量 ZHIPU_KEY,2026-09-30 19:48:35
+智谱 AI (BigModel),🟢 接口在线,ZHIPU_KEY,glm-4.5-flash,人工登记,https://open.bigmodel.cn/api/paas/v4,128K,Flash 系列免费，有限速,长期免费,⏭️ 无法判断,-,-,缺少环境变量 ZHIPU_KEY,2026-09-30 19:48:35
+智谱 AI (BigModel),🟢 接口在线,ZHIPU_KEY,glm-4v-flash,人工登记,https://open.bigmodel.cn/api/paas/v4,8K,Flash 系列免费，有限速,长期免费,⏭️ 无法判断,-,-,缺少环境变量 ZHIPU_KEY,2026-09-30 19:48:35
+月之暗面 Kimi,🟢 接口在线,MOONSHOT_KEY,kimi-k2-0905-preview,人工登记,https://api.moonshot.cn/v1,262K,新用户赠送额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 MOONSHOT_KEY,2026-09-30 19:48:35
+月之暗面 Kimi,🟢 接口在线,MOONSHOT_KEY,moonshot-v1-8k,人工登记,https://api.moonshot.cn/v1,8K,新用户赠送额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 MOONSHOT_KEY,2026-09-30 19:48:35
+阿里云百炼 DashScope,🟢 接口在线,DASHSCOPE_KEY,qwen-turbo,人工登记,https://dashscope.aliyuncs.com/compatible-mode/v1,1M,新用户每个模型 100 万 tokens 免费额度,自开通起 180 天有效,⏭️ 无法判断,-,-,缺少环境变量 DASHSCOPE_KEY,2026-09-30 19:48:35
+阿里云百炼 DashScope,🟢 接口在线,DASHSCOPE_KEY,qwen-plus,人工登记,https://dashscope.aliyuncs.com/compatible-mode/v1,131K,新用户每个模型 100 万 tokens 免费额度,自开通起 180 天有效,⏭️ 无法判断,-,-,缺少环境变量 DASHSCOPE_KEY,2026-09-30 19:48:35
+阿里云百炼 DashScope,🟢 接口在线,DASHSCOPE_KEY,qwen-long,人工登记,https://dashscope.aliyuncs.com/compatible-mode/v1,10M,新用户每个模型 100 万 tokens 免费额度,自开通起 180 天有效,⏭️ 无法判断,-,-,缺少环境变量 DASHSCOPE_KEY,2026-09-30 19:48:35
+硅基流动 SiliconFlow,🟢 接口在线,SILICONFLOW_KEY,Qwen/Qwen3-8B,人工登记,https://api.siliconflow.cn/v1,32K,部分小模型免费，有限速,长期免费（免费名单会轮换）,⏭️ 无法判断,-,-,缺少环境变量 SILICONFLOW_KEY,2026-09-30 19:48:35
+硅基流动 SiliconFlow,🟢 接口在线,SILICONFLOW_KEY,THUDM/glm-4-9b-chat,人工登记,https://api.siliconflow.cn/v1,32K,部分小模型免费，有限速,长期免费（免费名单会轮换）,⏭️ 无法判断,-,-,缺少环境变量 SILICONFLOW_KEY,2026-09-30 19:48:35
+硅基流动 SiliconFlow,🟢 接口在线,SILICONFLOW_KEY,deepseek-ai/DeepSeek-R1-0528-Qwen3-8B,人工登记,https://api.siliconflow.cn/v1,131K,部分小模型免费，有限速,长期免费（免费名单会轮换）,⏭️ 无法判断,-,-,缺少环境变量 SILICONFLOW_KEY,2026-09-30 19:48:35
+魔搭 ModelScope,🟢 接口在线,MODELSCOPE_KEY,Qwen/Qwen3-8B,人工登记,https://api-inference.modelscope.cn/v1,32K,每日 2000 次免费调用,长期免费,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+魔搭 ModelScope,🟢 接口在线,MODELSCOPE_KEY,deepseek-ai/DeepSeek-R1-Distill-Qwen-7B,人工登记,https://api-inference.modelscope.cn/v1,65K,每日 2000 次免费调用,长期免费,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+魔搭 ModelScope,🟢 接口在线,MODELSCOPE_KEY,Qwen/Qwen2.5-7B-Instruct,人工登记,https://api-inference.modelscope.cn/v1,32K,每日 2000 次免费调用,长期免费,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+腾讯混元 Hunyuan,🟢 接口在线,HUNYUAN_KEY,hunyuan-turbos-latest,人工登记,https://api.hunyuan.cloud.tencent.com/v1,32K,新用户赠送免费额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 HUNYUAN_KEY,2026-09-30 19:48:35
+腾讯混元 Hunyuan,🟢 接口在线,HUNYUAN_KEY,hunyuan-lite,人工登记,https://api.hunyuan.cloud.tencent.com/v1,32K,新用户赠送免费额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 HUNYUAN_KEY,2026-09-30 19:48:35
+百度千帆 Qianfan,🟢 接口在线,QIANFAN_KEY,ernie-speed-128k,人工登记,https://qianfan.baidubce.com/v2,131K,ERNIE Speed 系列免费,长期免费（限速）,⏭️ 无法判断,-,-,缺少环境变量 QIANFAN_KEY,2026-09-30 19:48:35
+百度千帆 Qianfan,🟢 接口在线,QIANFAN_KEY,ernie-4.5-turbo-128k,人工登记,https://qianfan.baidubce.com/v2,131K,ERNIE Speed 系列免费,长期免费（限速）,⏭️ 无法判断,-,-,缺少环境变量 QIANFAN_KEY,2026-09-30 19:48:35
+火山方舟 Volcengine Ark,🟢 接口在线,VOLC_ARK_KEY,doubao-seed-1-6-250615,人工登记,https://ark.cn-beijing.volces.com/api/v3,262K,新用户每个模型 50 万 tokens 免费额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 VOLC_ARK_KEY,2026-09-30 19:48:35
+火山方舟 Volcengine Ark,🟢 接口在线,VOLC_ARK_KEY,doubao-1-5-lite-32k-250115,人工登记,https://ark.cn-beijing.volces.com/api/v3,32K,新用户每个模型 50 万 tokens 免费额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 VOLC_ARK_KEY,2026-09-30 19:48:35
+讯飞星火 Spark,🟢 接口在线,SPARK_KEY,lite,人工登记,https://spark-api-open.xf-yun.com/v1,8K,Lite 版免费不限量（限速）,长期免费,⏭️ 无法判断,-,-,缺少环境变量 SPARK_KEY,2026-09-30 19:48:35
+讯飞星火 Spark,🟢 接口在线,SPARK_KEY,generalv3.5,人工登记,https://spark-api-open.xf-yun.com/v1,8K,Lite 版免费不限量（限速）,长期免费,⏭️ 无法判断,-,-,缺少环境变量 SPARK_KEY,2026-09-30 19:48:35
+MiniMax,🟢 接口在线,MINIMAX_KEY,MiniMax-Text-01,人工登记,https://api.minimax.chat/v1,1M,注册赠送额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 MINIMAX_KEY,2026-09-30 19:48:35
+MiniMax,🟢 接口在线,MINIMAX_KEY,abab6.5s-chat,人工登记,https://api.minimax.chat/v1,245K,注册赠送额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 MINIMAX_KEY,2026-09-30 19:48:35
+阶跃星辰 StepFun,🟢 接口在线,STEPFUN_KEY,step-1-flash,人工登记,https://api.stepfun.com/v1,8K,Flash 系列免费（限速）,长期免费,⏭️ 无法判断,-,-,缺少环境变量 STEPFUN_KEY,2026-09-30 19:48:35
+阶跃星辰 StepFun,🟢 接口在线,STEPFUN_KEY,step-2-mini,人工登记,https://api.stepfun.com/v1,32K,Flash 系列免费（限速）,长期免费,⏭️ 无法判断,-,-,缺少环境变量 STEPFUN_KEY,2026-09-30 19:48:35
+零一万物 Yi,🟠 接口异常,YI_KEY,yi-lightning,人工登记,https://api.lingyiwanwu.com/v1,16K,注册赠送额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 YI_KEY,2026-09-30 19:48:35
+百川智能 Baichuan,🟢 接口在线,BAICHUAN_KEY,Baichuan4-Turbo,人工登记,https://api.baichuan-ai.com/v1,32K,新用户赠送 tokens,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 BAICHUAN_KEY,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,meta-llama/llama-3.3-70b-instruct:free,人工登记,https://openrouter.ai/api/v1,131K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,deepseek/deepseek-r1:free,人工登记,https://openrouter.ai/api/v1,163K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,google/gemini-2.0-flash-exp:free,人工登记,https://openrouter.ai/api/v1,1M,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,cohere/north-mini-code:free,自动发现,https://openrouter.ai/api/v1,256K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,dots-studio/dots-3-note-preview:free,自动发现,https://openrouter.ai/api/v1,512K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,google/gemma-4-26b-a4b-it:free,自动发现,https://openrouter.ai/api/v1,262K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,google/gemma-4-31b-it:free,自动发现,https://openrouter.ai/api/v1,262K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,inclusionai/ling-3.0-flash-sante:free,自动发现,https://openrouter.ai/api/v1,262K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,liquid/lfm-2.5-2.6b:free,自动发现,https://openrouter.ai/api/v1,65K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free,自动发现,https://openrouter.ai/api/v1,256K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,nvidia/nemotron-3-super-120b-a12b:free,自动发现,https://openrouter.ai/api/v1,262K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,nvidia/nemotron-3-ultra-550b-a55b:free,自动发现,https://openrouter.ai/api/v1,1M,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,nvidia/nemotron-3.5-lightning:free,自动发现,https://openrouter.ai/api/v1,1M,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,openrouter/free,自动发现,https://openrouter.ai/api/v1,200K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,poolside/laguna-s-2.1:free,自动发现,https://openrouter.ai/api/v1,262K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,poolside/laguna-xs-2.1:free,自动发现,https://openrouter.ai/api/v1,262K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,qwen/qwen3.8-27b:free,自动发现,https://openrouter.ai/api/v1,262K,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,stealth/space-bunny-alpha,自动发现,https://openrouter.ai/api/v1,1M,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,thinkingmachines/inkling-small:free,自动发现,https://openrouter.ai/api/v1,1M,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+OpenRouter,🟢 接口在线,OPENROUTER_KEY,thinkingmachines/inkling:free,自动发现,https://openrouter.ai/api/v1,1M,免费模型每日次数受限（随账户余额放宽）,长期免费（:free 名单会轮换）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+Groq,🟢 接口在线,GROQ_KEY,llama-3.3-70b-versatile,人工登记,https://api.groq.com/openai/v1,131K,免费层按 RPM/TPM/每日限额,长期免费,⏭️ 无法判断,-,-,缺少环境变量 GROQ_KEY,2026-09-30 19:48:35
+Groq,🟢 接口在线,GROQ_KEY,llama-3.1-8b-instant,人工登记,https://api.groq.com/openai/v1,131K,免费层按 RPM/TPM/每日限额,长期免费,⏭️ 无法判断,-,-,缺少环境变量 GROQ_KEY,2026-09-30 19:48:35
+Groq,🟢 接口在线,GROQ_KEY,openai/gpt-oss-120b,人工登记,https://api.groq.com/openai/v1,131K,免费层按 RPM/TPM/每日限额,长期免费,⏭️ 无法判断,-,-,缺少环境变量 GROQ_KEY,2026-09-30 19:48:35
+Google Gemini,🟢 接口在线,GEMINI_KEY,gemini-2.5-flash,人工登记,https://generativelanguage.googleapis.com/v1beta/openai,1M,免费层按 RPM/RPD 限速,长期免费,⏭️ 无法判断,-,-,缺少环境变量 GEMINI_KEY,2026-09-30 19:48:35
+Google Gemini,🟢 接口在线,GEMINI_KEY,gemini-2.5-flash-lite,人工登记,https://generativelanguage.googleapis.com/v1beta/openai,1M,免费层按 RPM/RPD 限速,长期免费,⏭️ 无法判断,-,-,缺少环境变量 GEMINI_KEY,2026-09-30 19:48:35
+Google Gemini,🟢 接口在线,GEMINI_KEY,gemini-2.0-flash,人工登记,https://generativelanguage.googleapis.com/v1beta/openai,1M,免费层按 RPM/RPD 限速,长期免费,⏭️ 无法判断,-,-,缺少环境变量 GEMINI_KEY,2026-09-30 19:48:35
+Cerebras,🟢 接口在线,CEREBRAS_KEY,llama3.3-70b,人工登记,https://api.cerebras.ai/v1,131K,免费层每日 100 万 tokens,长期免费,⏭️ 无法判断,-,-,缺少环境变量 CEREBRAS_KEY,2026-09-30 19:48:35
+Cerebras,🟢 接口在线,CEREBRAS_KEY,qwen-3-32b,人工登记,https://api.cerebras.ai/v1,131K,免费层每日 100 万 tokens,长期免费,⏭️ 无法判断,-,-,缺少环境变量 CEREBRAS_KEY,2026-09-30 19:48:35
+Cerebras,🟢 接口在线,CEREBRAS_KEY,gpt-oss-120b,人工登记,https://api.cerebras.ai/v1,131K,免费层每日 100 万 tokens,长期免费,⏭️ 无法判断,-,-,缺少环境变量 CEREBRAS_KEY,2026-09-30 19:48:35
+Mistral AI,🟢 接口在线,MISTRAL_KEY,mistral-small-latest,人工登记,https://api.mistral.ai/v1,131K,Experiment 免费层（需手机验证，限速）,长期免费（限速）,⏭️ 无法判断,-,-,缺少环境变量 MISTRAL_KEY,2026-09-30 19:48:35
+Mistral AI,🟢 接口在线,MISTRAL_KEY,open-mistral-nemo,人工登记,https://api.mistral.ai/v1,131K,Experiment 免费层（需手机验证，限速）,长期免费（限速）,⏭️ 无法判断,-,-,缺少环境变量 MISTRAL_KEY,2026-09-30 19:48:35
+Together AI,🟢 接口在线,TOGETHER_KEY,meta-llama/Llama-Vision-Free,人工登记,https://api.together.xyz/v1,131K,新用户赠送额度 + 少量 free 模型,额度用尽即止（free 名单会轮换）,⏭️ 无法判断,-,-,缺少环境变量 TOGETHER_KEY,2026-09-30 19:48:35
+Together AI,🟢 接口在线,TOGETHER_KEY,deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free,人工登记,https://api.together.xyz/v1,131K,新用户赠送额度 + 少量 free 模型,额度用尽即止（free 名单会轮换）,⏭️ 无法判断,-,-,缺少环境变量 TOGETHER_KEY,2026-09-30 19:48:35
+NVIDIA NIM,❌ 接口已失效,NVIDIA_KEY,deepseek-ai/deepseek-r1,人工登记,https://integrate.api.nvidia.com/v1,131K,注册赠送 1000 credits,额度用尽即止,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+NVIDIA NIM,❌ 接口已失效,NVIDIA_KEY,meta/llama-3.3-70b-instruct,人工登记,https://integrate.api.nvidia.com/v1,131K,注册赠送 1000 credits,额度用尽即止,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+SambaNova,🟢 接口在线,SAMBANOVA_KEY,Meta-Llama-3.3-70B-Instruct,人工登记,https://api.sambanova.ai/v1,131K,免费层限速,长期免费（限速）,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+SambaNova,🟢 接口在线,SAMBANOVA_KEY,DeepSeek-R1-Distill-Llama-70B,人工登记,https://api.sambanova.ai/v1,131K,免费层限速,长期免费（限速）,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+Hyperbolic,❌ 接口已失效,HYPERBOLIC_KEY,Qwen/Qwen3-235B-A22B,人工登记,https://api.hyperbolic.xyz/v1,131K,注册赠送约 $1 额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 HYPERBOLIC_KEY,2026-09-30 19:48:35
+Hyperbolic,❌ 接口已失效,HYPERBOLIC_KEY,meta-llama/Llama-3.3-70B-Instruct,人工登记,https://api.hyperbolic.xyz/v1,131K,注册赠送约 $1 额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 HYPERBOLIC_KEY,2026-09-30 19:48:35
+Nebius AI Studio,🟢 接口在线,NEBIUS_KEY,Qwen/Qwen3-235B-A22B,人工登记,https://api.studio.nebius.com/v1,131K,注册赠送试用额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 NEBIUS_KEY,2026-09-30 19:48:35
+Nebius AI Studio,🟢 接口在线,NEBIUS_KEY,meta-llama/Llama-3.3-70B-Instruct,人工登记,https://api.studio.nebius.com/v1,131K,注册赠送试用额度,额度用尽即止,⏭️ 无法判断,-,-,缺少环境变量 NEBIUS_KEY,2026-09-30 19:48:35
+Novita AI,🟢 接口在线,NOVITA_KEY,deepseek/deepseek-v3-0324,人工登记,https://api.novita.ai/v3/openai,131K,注册赠送试用额度,额度用尽即止,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+Novita AI,🟢 接口在线,NOVITA_KEY,meta-llama/llama-3.3-70b-instruct,人工登记,https://api.novita.ai/v3/openai,131K,注册赠送试用额度,额度用尽即止,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+Novita AI,🟢 接口在线,NOVITA_KEY,bunny,自动发现,https://api.novita.ai/v3/openai,262K,注册赠送试用额度,额度用尽即止,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+Novita AI,🟢 接口在线,NOVITA_KEY,dev/glm46,自动发现,https://api.novita.ai/v3/openai,256K,注册赠送试用额度,额度用尽即止,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+Novita AI,🟢 接口在线,NOVITA_KEY,inclusionai/ling-3.0-flash-sante,自动发现,https://api.novita.ai/v3/openai,262K,注册赠送试用额度,额度用尽即止,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+Novita AI,🟢 接口在线,NOVITA_KEY,inclusionai/ling-3.1-flash,自动发现,https://api.novita.ai/v3/openai,262K,注册赠送试用额度,额度用尽即止,🔵 目录已确认,200,-,公开目录中存在；未配密钥，无法验证可用性,2026-09-30 19:48:35
+Chutes,🟢 接口在线,CHUTES_KEY,deepseek-ai/DeepSeek-V3-0324,人工登记,https://llm.chutes.ai/v1,131K,注册赠送少量额度,额度用尽即止,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+Chutes,🟢 接口在线,CHUTES_KEY,Qwen/Qwen3-32B,人工登记,https://llm.chutes.ai/v1,131K,注册赠送少量额度,额度用尽即止,⚪ 目录中已消失,-,-,平台公开目录里已经找不到这个模型了,2026-09-30 19:48:35
+GitHub Models,📡 域名不通,GITHUB_MODELS_TOKEN,gpt-4o-mini,人工登记,https://models.inference.ai.azure.com,131K,免费层按 RPM/RPD 限速,长期免费（限速）,⏭️ 无法判断,-,-,缺少环境变量 GITHUB_MODELS_TOKEN,2026-09-30 19:48:35
+GitHub Models,📡 域名不通,GITHUB_MODELS_TOKEN,Llama-3.3-70B-Instruct,人工登记,https://models.inference.ai.azure.com,131K,免费层按 RPM/RPD 限速,长期免费（限速）,⏭️ 无法判断,-,-,缺少环境变量 GITHUB_MODELS_TOKEN,2026-09-30 19:48:35
+Cloudflare Workers AI,⏭️ 未探活,CLOUDFLARE_API_TOKEN,@cf/meta/llama-3.3-70b-instruct-fp8-fast,人工登记,https://api.cloudflare.com/client/v4/accounts//ai/v1,24K,每日 10000 neurons 免费额度,长期免费（每日重置）,⏭️ 无法判断,-,-,"缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID",2026-09-30 19:48:35
+Cloudflare Workers AI,⏭️ 未探活,CLOUDFLARE_API_TOKEN,@cf/meta/llama-3.1-8b-instruct,人工登记,https://api.cloudflare.com/client/v4/accounts//ai/v1,8K,每日 10000 neurons 免费额度,长期免费（每日重置）,⏭️ 无法判断,-,-,"缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID",2026-09-30 19:48:35
