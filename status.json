@@ -1,0 +1,1184 @@
+{
+  "generated_at": "2026-09-30T09:47:26Z",
+  "generated_at_cst": "2026-09-30 17:47:26",
+  "elapsed_seconds": 0.0,
+  "cron": "0 */4 * * *",
+  "summary": {
+    "ok": 0,
+    "rate_limited": 0,
+    "not_found": 0,
+    "auth_error": 0,
+    "bad_request": 0,
+    "server_error": 0,
+    "network_error": 0,
+    "unknown": 0,
+    "skipped": 62,
+    "providers_total": 28,
+    "providers_configured": 0,
+    "providers_available": 0,
+    "models_total": 62,
+    "models_available": 0
+  },
+  "changes": [],
+  "providers": [
+    {
+      "name": "DeepSeek 深度求索",
+      "env": "DEEPSEEK_KEY",
+      "base_url": "https://api.deepseek.com/v1",
+      "console": "https://platform.deepseek.com/api_keys",
+      "quota": "注册赠送测试额度，用完后按量计费",
+      "lifetime": "额度用尽即止（非长期免费）",
+      "has_key": false,
+      "missing_env": [
+        "DEEPSEEK_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "deepseek-chat",
+          "context": 128000,
+          "quota": "注册赠送测试额度，用完后按量计费",
+          "lifetime": "额度用尽即止（非长期免费）",
+          "note": "缺少环境变量 DEEPSEEK_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "deepseek-reasoner",
+          "context": 128000,
+          "quota": "注册赠送测试额度，用完后按量计费",
+          "lifetime": "额度用尽即止（非长期免费）",
+          "note": "缺少环境变量 DEEPSEEK_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "智谱 AI (BigModel)",
+      "env": "ZHIPU_KEY",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4",
+      "console": "https://open.bigmodel.cn/usercenter/apikeys",
+      "quota": "Flash 系列免费，有限速",
+      "lifetime": "长期免费",
+      "has_key": false,
+      "missing_env": [
+        "ZHIPU_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 3,
+      "models": [
+        {
+          "id": "glm-4-flash",
+          "context": 128000,
+          "quota": "Flash 系列免费，有限速",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 ZHIPU_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "glm-4.5-flash",
+          "context": 128000,
+          "quota": "Flash 系列免费，有限速",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 ZHIPU_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "glm-4v-flash",
+          "context": 8192,
+          "quota": "Flash 系列免费，有限速",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 ZHIPU_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "月之暗面 Kimi",
+      "env": "MOONSHOT_KEY",
+      "base_url": "https://api.moonshot.cn/v1",
+      "console": "https://platform.moonshot.cn/console/api-keys",
+      "quota": "新用户赠送额度",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "MOONSHOT_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "kimi-k2-0905-preview",
+          "context": 262144,
+          "quota": "新用户赠送额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 MOONSHOT_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "moonshot-v1-8k",
+          "context": 8192,
+          "quota": "新用户赠送额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 MOONSHOT_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "阿里云百炼 DashScope",
+      "env": "DASHSCOPE_KEY",
+      "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "console": "https://bailian.console.aliyun.com/",
+      "quota": "新用户每个模型 100 万 tokens 免费额度",
+      "lifetime": "自开通起 180 天有效",
+      "has_key": false,
+      "missing_env": [
+        "DASHSCOPE_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 3,
+      "models": [
+        {
+          "id": "qwen-turbo",
+          "context": 1000000,
+          "quota": "新用户每个模型 100 万 tokens 免费额度",
+          "lifetime": "自开通起 180 天有效",
+          "note": "缺少环境变量 DASHSCOPE_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "qwen-plus",
+          "context": 131072,
+          "quota": "新用户每个模型 100 万 tokens 免费额度",
+          "lifetime": "自开通起 180 天有效",
+          "note": "缺少环境变量 DASHSCOPE_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "qwen-long",
+          "context": 10000000,
+          "quota": "新用户每个模型 100 万 tokens 免费额度",
+          "lifetime": "自开通起 180 天有效",
+          "note": "缺少环境变量 DASHSCOPE_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "硅基流动 SiliconFlow",
+      "env": "SILICONFLOW_KEY",
+      "base_url": "https://api.siliconflow.cn/v1",
+      "console": "https://cloud.siliconflow.cn/account/ak",
+      "quota": "部分小模型免费，有限速",
+      "lifetime": "长期免费（免费名单会轮换）",
+      "has_key": false,
+      "missing_env": [
+        "SILICONFLOW_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 3,
+      "models": [
+        {
+          "id": "Qwen/Qwen3-8B",
+          "context": 32768,
+          "quota": "部分小模型免费，有限速",
+          "lifetime": "长期免费（免费名单会轮换）",
+          "note": "缺少环境变量 SILICONFLOW_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "THUDM/glm-4-9b-chat",
+          "context": 32768,
+          "quota": "部分小模型免费，有限速",
+          "lifetime": "长期免费（免费名单会轮换）",
+          "note": "缺少环境变量 SILICONFLOW_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+          "context": 131072,
+          "quota": "部分小模型免费，有限速",
+          "lifetime": "长期免费（免费名单会轮换）",
+          "note": "缺少环境变量 SILICONFLOW_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "魔搭 ModelScope",
+      "env": "MODELSCOPE_KEY",
+      "base_url": "https://api-inference.modelscope.cn/v1",
+      "console": "https://modelscope.cn/my/myaccesstoken",
+      "quota": "每日 2000 次免费调用",
+      "lifetime": "长期免费",
+      "has_key": false,
+      "missing_env": [
+        "MODELSCOPE_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 3,
+      "models": [
+        {
+          "id": "Qwen/Qwen3-8B",
+          "context": 32768,
+          "quota": "每日 2000 次免费调用",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 MODELSCOPE_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+          "context": 65536,
+          "quota": "每日 2000 次免费调用",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 MODELSCOPE_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "Qwen/Qwen2.5-7B-Instruct",
+          "context": 32768,
+          "quota": "每日 2000 次免费调用",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 MODELSCOPE_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "腾讯混元 Hunyuan",
+      "env": "HUNYUAN_KEY",
+      "base_url": "https://api.hunyuan.cloud.tencent.com/v1",
+      "console": "https://console.cloud.tencent.com/hunyuan/api-key",
+      "quota": "新用户赠送免费额度",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "HUNYUAN_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "hunyuan-turbos-latest",
+          "context": 32768,
+          "quota": "新用户赠送免费额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 HUNYUAN_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "hunyuan-lite",
+          "context": 32768,
+          "quota": "新用户赠送免费额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 HUNYUAN_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "百度千帆 Qianfan",
+      "env": "QIANFAN_KEY",
+      "base_url": "https://qianfan.baidubce.com/v2",
+      "console": "https://console.bce.baidu.com/iam/#/iam/apikey/list",
+      "quota": "ERNIE Speed 系列免费",
+      "lifetime": "长期免费（限速）",
+      "has_key": false,
+      "missing_env": [
+        "QIANFAN_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "ernie-speed-128k",
+          "context": 131072,
+          "quota": "ERNIE Speed 系列免费",
+          "lifetime": "长期免费（限速）",
+          "note": "缺少环境变量 QIANFAN_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "ernie-4.5-turbo-128k",
+          "context": 131072,
+          "quota": "ERNIE Speed 系列免费",
+          "lifetime": "长期免费（限速）",
+          "note": "缺少环境变量 QIANFAN_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "火山方舟 Volcengine Ark",
+      "env": "VOLC_ARK_KEY",
+      "base_url": "https://ark.cn-beijing.volces.com/api/v3",
+      "console": "https://console.volcengine.com/ark",
+      "quota": "新用户每个模型 50 万 tokens 免费额度",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "VOLC_ARK_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "doubao-seed-1-6-250615",
+          "context": 262144,
+          "quota": "新用户每个模型 50 万 tokens 免费额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 VOLC_ARK_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "doubao-1-5-lite-32k-250115",
+          "context": 32768,
+          "quota": "新用户每个模型 50 万 tokens 免费额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 VOLC_ARK_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "讯飞星火 Spark",
+      "env": "SPARK_KEY",
+      "base_url": "https://spark-api-open.xf-yun.com/v1",
+      "console": "https://console.xfyun.cn/services/bmx1",
+      "quota": "Lite 版免费不限量（限速）",
+      "lifetime": "长期免费",
+      "has_key": false,
+      "missing_env": [
+        "SPARK_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "lite",
+          "context": 8192,
+          "quota": "Lite 版免费不限量（限速）",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 SPARK_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "generalv3.5",
+          "context": 8192,
+          "quota": "Lite 版免费不限量（限速）",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 SPARK_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "MiniMax",
+      "env": "MINIMAX_KEY",
+      "base_url": "https://api.minimax.chat/v1",
+      "console": "https://platform.minimaxi.com/user-center/basic-information/interface-key",
+      "quota": "注册赠送额度",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "MINIMAX_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "MiniMax-Text-01",
+          "context": 1000000,
+          "quota": "注册赠送额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 MINIMAX_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "abab6.5s-chat",
+          "context": 245760,
+          "quota": "注册赠送额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 MINIMAX_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "阶跃星辰 StepFun",
+      "env": "STEPFUN_KEY",
+      "base_url": "https://api.stepfun.com/v1",
+      "console": "https://platform.stepfun.com/interface-key",
+      "quota": "Flash 系列免费（限速）",
+      "lifetime": "长期免费",
+      "has_key": false,
+      "missing_env": [
+        "STEPFUN_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "step-1-flash",
+          "context": 8192,
+          "quota": "Flash 系列免费（限速）",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 STEPFUN_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "step-2-mini",
+          "context": 32768,
+          "quota": "Flash 系列免费（限速）",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 STEPFUN_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "零一万物 Yi",
+      "env": "YI_KEY",
+      "base_url": "https://api.lingyiwanwu.com/v1",
+      "console": "https://platform.lingyiwanwu.com/apikeys",
+      "quota": "注册赠送额度",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "YI_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 1,
+      "models": [
+        {
+          "id": "yi-lightning",
+          "context": 16384,
+          "quota": "注册赠送额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 YI_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "百川智能 Baichuan",
+      "env": "BAICHUAN_KEY",
+      "base_url": "https://api.baichuan-ai.com/v1",
+      "console": "https://platform.baichuan-ai.com/console/apikey",
+      "quota": "新用户赠送 tokens",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "BAICHUAN_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 1,
+      "models": [
+        {
+          "id": "Baichuan4-Turbo",
+          "context": 32768,
+          "quota": "新用户赠送 tokens",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 BAICHUAN_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "OpenRouter",
+      "env": "OPENROUTER_KEY",
+      "base_url": "https://openrouter.ai/api/v1",
+      "console": "https://openrouter.ai/keys",
+      "quota": "免费模型每日次数受限（随账户余额放宽）",
+      "lifetime": "长期免费（:free 名单会轮换）",
+      "has_key": false,
+      "missing_env": [
+        "OPENROUTER_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 3,
+      "models": [
+        {
+          "id": "meta-llama/llama-3.3-70b-instruct:free",
+          "context": 131072,
+          "quota": "免费模型每日次数受限（随账户余额放宽）",
+          "lifetime": "长期免费（:free 名单会轮换）",
+          "note": "缺少环境变量 OPENROUTER_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "deepseek/deepseek-r1:free",
+          "context": 163840,
+          "quota": "免费模型每日次数受限（随账户余额放宽）",
+          "lifetime": "长期免费（:free 名单会轮换）",
+          "note": "缺少环境变量 OPENROUTER_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "google/gemini-2.0-flash-exp:free",
+          "context": 1000000,
+          "quota": "免费模型每日次数受限（随账户余额放宽）",
+          "lifetime": "长期免费（:free 名单会轮换）",
+          "note": "缺少环境变量 OPENROUTER_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Groq",
+      "env": "GROQ_KEY",
+      "base_url": "https://api.groq.com/openai/v1",
+      "console": "https://console.groq.com/keys",
+      "quota": "免费层按 RPM/TPM/每日限额",
+      "lifetime": "长期免费",
+      "has_key": false,
+      "missing_env": [
+        "GROQ_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 3,
+      "models": [
+        {
+          "id": "llama-3.3-70b-versatile",
+          "context": 131072,
+          "quota": "免费层按 RPM/TPM/每日限额",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 GROQ_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "llama-3.1-8b-instant",
+          "context": 131072,
+          "quota": "免费层按 RPM/TPM/每日限额",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 GROQ_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "openai/gpt-oss-120b",
+          "context": 131072,
+          "quota": "免费层按 RPM/TPM/每日限额",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 GROQ_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Google Gemini",
+      "env": "GEMINI_KEY",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
+      "console": "https://aistudio.google.com/app/apikey",
+      "quota": "免费层按 RPM/RPD 限速",
+      "lifetime": "长期免费",
+      "has_key": false,
+      "missing_env": [
+        "GEMINI_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 3,
+      "models": [
+        {
+          "id": "gemini-2.5-flash",
+          "context": 1048576,
+          "quota": "免费层按 RPM/RPD 限速",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 GEMINI_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "gemini-2.5-flash-lite",
+          "context": 1048576,
+          "quota": "免费层按 RPM/RPD 限速",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 GEMINI_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "gemini-2.0-flash",
+          "context": 1048576,
+          "quota": "免费层按 RPM/RPD 限速",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 GEMINI_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Cerebras",
+      "env": "CEREBRAS_KEY",
+      "base_url": "https://api.cerebras.ai/v1",
+      "console": "https://cloud.cerebras.ai/",
+      "quota": "免费层每日 100 万 tokens",
+      "lifetime": "长期免费",
+      "has_key": false,
+      "missing_env": [
+        "CEREBRAS_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 3,
+      "models": [
+        {
+          "id": "llama3.3-70b",
+          "context": 131072,
+          "quota": "免费层每日 100 万 tokens",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 CEREBRAS_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "qwen-3-32b",
+          "context": 131072,
+          "quota": "免费层每日 100 万 tokens",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 CEREBRAS_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "gpt-oss-120b",
+          "context": 131072,
+          "quota": "免费层每日 100 万 tokens",
+          "lifetime": "长期免费",
+          "note": "缺少环境变量 CEREBRAS_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Mistral AI",
+      "env": "MISTRAL_KEY",
+      "base_url": "https://api.mistral.ai/v1",
+      "console": "https://console.mistral.ai/api-keys/",
+      "quota": "Experiment 免费层（需手机验证，限速）",
+      "lifetime": "长期免费（限速）",
+      "has_key": false,
+      "missing_env": [
+        "MISTRAL_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "mistral-small-latest",
+          "context": 131072,
+          "quota": "Experiment 免费层（需手机验证，限速）",
+          "lifetime": "长期免费（限速）",
+          "note": "缺少环境变量 MISTRAL_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "open-mistral-nemo",
+          "context": 131072,
+          "quota": "Experiment 免费层（需手机验证，限速）",
+          "lifetime": "长期免费（限速）",
+          "note": "缺少环境变量 MISTRAL_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Together AI",
+      "env": "TOGETHER_KEY",
+      "base_url": "https://api.together.xyz/v1",
+      "console": "https://api.together.xyz/settings/api-keys",
+      "quota": "新用户赠送额度 + 少量 free 模型",
+      "lifetime": "额度用尽即止（free 名单会轮换）",
+      "has_key": false,
+      "missing_env": [
+        "TOGETHER_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "meta-llama/Llama-Vision-Free",
+          "context": 131072,
+          "quota": "新用户赠送额度 + 少量 free 模型",
+          "lifetime": "额度用尽即止（free 名单会轮换）",
+          "note": "缺少环境变量 TOGETHER_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
+          "context": 131072,
+          "quota": "新用户赠送额度 + 少量 free 模型",
+          "lifetime": "额度用尽即止（free 名单会轮换）",
+          "note": "缺少环境变量 TOGETHER_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "NVIDIA NIM",
+      "env": "NVIDIA_KEY",
+      "base_url": "https://integrate.api.nvidia.com/v1",
+      "console": "https://build.nvidia.com/settings/api-keys",
+      "quota": "注册赠送 1000 credits",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "NVIDIA_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "deepseek-ai/deepseek-r1",
+          "context": 131072,
+          "quota": "注册赠送 1000 credits",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 NVIDIA_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "meta/llama-3.3-70b-instruct",
+          "context": 131072,
+          "quota": "注册赠送 1000 credits",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 NVIDIA_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "SambaNova",
+      "env": "SAMBANOVA_KEY",
+      "base_url": "https://api.sambanova.ai/v1",
+      "console": "https://cloud.sambanova.ai/apis",
+      "quota": "免费层限速",
+      "lifetime": "长期免费（限速）",
+      "has_key": false,
+      "missing_env": [
+        "SAMBANOVA_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "Meta-Llama-3.3-70B-Instruct",
+          "context": 131072,
+          "quota": "免费层限速",
+          "lifetime": "长期免费（限速）",
+          "note": "缺少环境变量 SAMBANOVA_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "DeepSeek-R1-Distill-Llama-70B",
+          "context": 131072,
+          "quota": "免费层限速",
+          "lifetime": "长期免费（限速）",
+          "note": "缺少环境变量 SAMBANOVA_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Hyperbolic",
+      "env": "HYPERBOLIC_KEY",
+      "base_url": "https://api.hyperbolic.xyz/v1",
+      "console": "https://app.hyperbolic.xyz/settings",
+      "quota": "注册赠送约 $1 额度",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "HYPERBOLIC_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "Qwen/Qwen3-235B-A22B",
+          "context": 131072,
+          "quota": "注册赠送约 $1 额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 HYPERBOLIC_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "meta-llama/Llama-3.3-70B-Instruct",
+          "context": 131072,
+          "quota": "注册赠送约 $1 额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 HYPERBOLIC_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Nebius AI Studio",
+      "env": "NEBIUS_KEY",
+      "base_url": "https://api.studio.nebius.com/v1",
+      "console": "https://studio.nebius.com/settings/api-keys",
+      "quota": "注册赠送试用额度",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "NEBIUS_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "Qwen/Qwen3-235B-A22B",
+          "context": 131072,
+          "quota": "注册赠送试用额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 NEBIUS_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "meta-llama/Llama-3.3-70B-Instruct",
+          "context": 131072,
+          "quota": "注册赠送试用额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 NEBIUS_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Novita AI",
+      "env": "NOVITA_KEY",
+      "base_url": "https://api.novita.ai/v3/openai",
+      "console": "https://novita.ai/settings/key-management",
+      "quota": "注册赠送试用额度",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "NOVITA_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "deepseek/deepseek-v3-0324",
+          "context": 131072,
+          "quota": "注册赠送试用额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 NOVITA_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "meta-llama/llama-3.3-70b-instruct",
+          "context": 131072,
+          "quota": "注册赠送试用额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 NOVITA_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Chutes",
+      "env": "CHUTES_KEY",
+      "base_url": "https://llm.chutes.ai/v1",
+      "console": "https://chutes.ai/app/api",
+      "quota": "注册赠送少量额度",
+      "lifetime": "额度用尽即止",
+      "has_key": false,
+      "missing_env": [
+        "CHUTES_KEY"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "deepseek-ai/DeepSeek-V3-0324",
+          "context": 131072,
+          "quota": "注册赠送少量额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 CHUTES_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "Qwen/Qwen3-32B",
+          "context": 131072,
+          "quota": "注册赠送少量额度",
+          "lifetime": "额度用尽即止",
+          "note": "缺少环境变量 CHUTES_KEY",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "GitHub Models",
+      "env": "GITHUB_MODELS_TOKEN",
+      "base_url": "https://models.inference.ai.azure.com",
+      "console": "https://github.com/settings/tokens",
+      "quota": "免费层按 RPM/RPD 限速",
+      "lifetime": "长期免费（限速）",
+      "has_key": false,
+      "missing_env": [
+        "GITHUB_MODELS_TOKEN"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "gpt-4o-mini",
+          "context": 131072,
+          "quota": "免费层按 RPM/RPD 限速",
+          "lifetime": "长期免费（限速）",
+          "note": "缺少环境变量 GITHUB_MODELS_TOKEN",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "Llama-3.3-70B-Instruct",
+          "context": 131072,
+          "quota": "免费层按 RPM/RPD 限速",
+          "lifetime": "长期免费（限速）",
+          "note": "缺少环境变量 GITHUB_MODELS_TOKEN",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    },
+    {
+      "name": "Cloudflare Workers AI",
+      "env": "CLOUDFLARE_API_TOKEN",
+      "base_url": "https://api.cloudflare.com/client/v4/accounts//ai/v1",
+      "console": "https://dash.cloudflare.com/profile/api-tokens",
+      "quota": "每日 10000 neurons 免费额度",
+      "lifetime": "长期免费（每日重置）",
+      "has_key": false,
+      "missing_env": [
+        "CLOUDFLARE_API_TOKEN",
+        "CLOUDFLARE_ACCOUNT_ID"
+      ],
+      "status": "skipped",
+      "available": 0,
+      "total": 2,
+      "models": [
+        {
+          "id": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+          "context": 24000,
+          "quota": "每日 10000 neurons 免费额度",
+          "lifetime": "长期免费（每日重置）",
+          "note": "缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        },
+        {
+          "id": "@cf/meta/llama-3.1-8b-instruct",
+          "context": 8000,
+          "quota": "每日 10000 neurons 免费额度",
+          "lifetime": "长期免费（每日重置）",
+          "note": "缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID",
+          "checked_at": "2026-09-30 17:47:26",
+          "status": "skipped",
+          "http": null,
+          "latency_ms": null
+        }
+      ]
+    }
+  ]
+}

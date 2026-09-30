@@ -1,0 +1,11 @@
+# 本地运行时生成的自定义模型池（可选，不提交）
+models.custom.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.idea/
+.vscode/
+.DS_Store

@@ -1,0 +1,29 @@
+{
+  "_说明": [
+    "复制本文件为 models.custom.json 后修改，update_list.py 会自动读取（也可用 --custom 指定路径）。",
+    "env 与内置模型池相同的条目：覆盖该平台的字段，models 按 id 追加或合并。",
+    "env 是新的：作为一个新平台追加。",
+    "auth 可选 bearer（默认）/ api-key / x-api-key；base_url 支持 {ENV_NAME} 占位符。",
+    "模型字段：id（必填）、context（token 数或 '128K' 这类字符串）、quota、lifetime、note。"
+  ],
+  "providers": [
+    {
+      "name": "智谱 AI (BigModel)",
+      "env": "ZHIPU_KEY",
+      "models": [
+        { "id": "glm-4-flashx", "context": 128000, "note": "示例：给已有平台追加一个模型" }
+      ]
+    },
+    {
+      "name": "我的自建中转",
+      "env": "MY_PROXY_KEY",
+      "base_url": "https://my-proxy.example.com/v1",
+      "console": "https://my-proxy.example.com/keys",
+      "quota": "自建，按自身额度",
+      "lifetime": "自建，自行维护",
+      "models": [
+        { "id": "my-custom-model", "context": 32768 }
+      ]
+    }
+  ]
+}

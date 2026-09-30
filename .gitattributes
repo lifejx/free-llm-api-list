@@ -1,0 +1,2 @@
+# Actions 在 Linux 上生成文件，本地在 Windows 上跑；统一按 LF 存储，避免换行符来回抖动
+* text=auto eol=lf
