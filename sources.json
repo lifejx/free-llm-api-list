@@ -1,0 +1,55 @@
+{
+  "external": {},
+  "docs": {
+    "https://docs.bigmodel.cn/cn/api/rate-limit": {
+      "name": "智谱限流",
+      "hash": "430c0a55c6a0bb7d",
+      "size": 3102,
+      "last_changed": "",
+      "first_seen": "2026-10-01 02:37",
+      "checked_at": "2026-10-01 02:37"
+    },
+    "https://docs.bigmodel.cn/cn/guide/start/pricing": {
+      "name": "智谱价格",
+      "hash": "896541251b60d374",
+      "size": 8412,
+      "last_changed": "",
+      "first_seen": "2026-10-01 02:37",
+      "checked_at": "2026-10-01 02:37"
+    },
+    "https://platform.kimi.com/docs/pricing/limits": {
+      "name": "Kimi 限流",
+      "hash": "2d292911473dc845",
+      "size": 1755,
+      "last_changed": "",
+      "first_seen": "2026-10-01 02:37",
+      "checked_at": "2026-10-01 02:37"
+    },
+    "https://platform.minimaxi.com/docs/guides/rate-limits.md": {
+      "name": "MiniMax 限流",
+      "hash": "fb23b03749f9d7fd",
+      "size": 2912,
+      "last_changed": "",
+      "first_seen": "2026-10-01 02:37",
+      "checked_at": "2026-10-01 02:37"
+    },
+    "https://api-docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation": {
+      "name": "硅基流动限流",
+      "hash": "fd04b6783498fa1b",
+      "size": 3749,
+      "last_changed": "",
+      "first_seen": "2026-10-01 02:37",
+      "checked_at": "2026-10-01 02:37"
+    },
+    "https://platform.baichuan-ai.com/docs-v2/rate-limit": {
+      "name": "百川限流",
+      "hash": "ac92f812280625fb",
+      "size": 291,
+      "last_changed": "",
+      "first_seen": "2026-10-01 02:37",
+      "checked_at": "2026-10-01 02:37"
+    }
+  },
+  "updated_at": "2026-10-01 02:39:05",
+  "note": "外部清单的模型 ID 快照 + 官方文档页的内容摘要。由 update_list.py 自动维护，用来发现「别家清单变了」和「官方政策页改了」。"
+}

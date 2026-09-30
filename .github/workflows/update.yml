@@ -77,10 +77,10 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 保证四个产出文件都存在，避免 pathspec 报错
+          # 保证产出文件都存在，避免 pathspec 报错
           touch README.md free_llm_api.csv status.json history.jsonl uptime.jsonl
 
-          git add -- README.md free_llm_api.csv status.json history.jsonl uptime.jsonl models.auto.json
+          git add -- README.md free_llm_api.csv status.json history.jsonl uptime.jsonl models.auto.json sources.json
 
           if git diff --cached --quiet; then
             echo "本次没有变化，跳过提交。"

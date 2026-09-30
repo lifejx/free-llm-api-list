@@ -9,3 +9,6 @@ venv/
 .idea/
 .vscode/
 .DS_Store
+
+# 政策核实的工作目录（不进仓库）
+research/

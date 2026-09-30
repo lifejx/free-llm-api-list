@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 import random
@@ -42,6 +43,7 @@ import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
+from html import unescape as html_unescape
 from pathlib import Path
 
 # --------------------------------------------------------------------------- #
@@ -104,351 +106,23 @@ QUOTA_HINTS = (
 #   base_url: 支持 {ENV_NAME} 占位符，从环境变量取值
 # --------------------------------------------------------------------------- #
 
-PROVIDER_POOL: list[dict] = [
-    {
-        "name": "DeepSeek 深度求索",
-        "env": "DEEPSEEK_KEY",
-        "base_url": "https://api.deepseek.com/v1",
-        "console": "https://platform.deepseek.com/api_keys",
-        "quota": "注册赠送测试额度，用完后按量计费",
-        "lifetime": "额度用尽即止（非长期免费）",
-        "models": [
-            {"id": "deepseek-chat", "context": 128000},
-            {"id": "deepseek-reasoner", "context": 128000},
-        ],
-    },
-    {
-        "name": "智谱 AI (BigModel)",
-        "env": "ZHIPU_KEY",
-        "base_url": "https://open.bigmodel.cn/api/paas/v4",
-        "console": "https://open.bigmodel.cn/usercenter/apikeys",
-        "quota": "Flash 系列免费，有限速",
-        "lifetime": "长期免费",
-        "models": [
-            {"id": "glm-4-flash", "context": 128000},
-            {"id": "glm-4.5-flash", "context": 128000},
-            {"id": "glm-4v-flash", "context": 8192, "note": "视觉模型"},
-        ],
-    },
-    {
-        "name": "月之暗面 Kimi",
-        "env": "MOONSHOT_KEY",
-        "base_url": "https://api.moonshot.cn/v1",
-        "console": "https://platform.moonshot.cn/console/api-keys",
-        "quota": "新用户赠送额度",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "kimi-k2-0905-preview", "context": 262144},
-            {"id": "moonshot-v1-8k", "context": 8192},
-        ],
-    },
-    {
-        "name": "阿里云百炼 DashScope",
-        "env": "DASHSCOPE_KEY",
-        "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-        "console": "https://bailian.console.aliyun.com/",
-        "quota": "新用户每个模型 100 万 tokens 免费额度",
-        "lifetime": "自开通起 180 天有效",
-        "models": [
-            {"id": "qwen-turbo", "context": 1000000},
-            {"id": "qwen-plus", "context": 131072},
-            {"id": "qwen-long", "context": 10000000},
-        ],
-    },
-    {
-        "name": "硅基流动 SiliconFlow",
-        "env": "SILICONFLOW_KEY",
-        "base_url": "https://api.siliconflow.cn/v1",
-        "console": "https://cloud.siliconflow.cn/account/ak",
-        "quota": "部分小模型免费，有限速",
-        "lifetime": "长期免费（免费名单会轮换）",
-        "models": [
-            {"id": "Qwen/Qwen3-8B", "context": 32768},
-            {"id": "THUDM/glm-4-9b-chat", "context": 32768},
-            {"id": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B", "context": 131072},
-        ],
-    },
-    {
-        "name": "魔搭 ModelScope",
-        "env": "MODELSCOPE_KEY",
-        "base_url": "https://api-inference.modelscope.cn/v1",
-        "console": "https://modelscope.cn/my/myaccesstoken",
-        "quota": "每日 2000 次免费调用",
-        "lifetime": "长期免费",
-        "models": [
-            {"id": "Qwen/Qwen3-8B", "context": 32768},
-            {"id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B", "context": 65536},
-            {"id": "Qwen/Qwen2.5-7B-Instruct", "context": 32768},
-        ],
-    },
-    {
-        "name": "腾讯混元 Hunyuan",
-        "env": "HUNYUAN_KEY",
-        "base_url": "https://api.hunyuan.cloud.tencent.com/v1",
-        "console": "https://console.cloud.tencent.com/hunyuan/api-key",
-        "quota": "新用户赠送免费额度",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "hunyuan-turbos-latest", "context": 32768},
-            {"id": "hunyuan-lite", "context": 32768},
-        ],
-    },
-    {
-        "name": "百度千帆 Qianfan",
-        "env": "QIANFAN_KEY",
-        "base_url": "https://qianfan.baidubce.com/v2",
-        "console": "https://console.bce.baidu.com/iam/#/iam/apikey/list",
-        "quota": "ERNIE Speed 系列免费",
-        "lifetime": "长期免费（限速）",
-        "models": [
-            {"id": "ernie-speed-128k", "context": 131072},
-            {"id": "ernie-4.5-turbo-128k", "context": 131072},
-        ],
-    },
-    {
-        "name": "火山方舟 Volcengine Ark",
-        "env": "VOLC_ARK_KEY",
-        "base_url": "https://ark.cn-beijing.volces.com/api/v3",
-        "console": "https://console.volcengine.com/ark",
-        "quota": "新用户每个模型 50 万 tokens 免费额度",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "doubao-seed-1-6-250615", "context": 262144},
-            {"id": "doubao-1-5-lite-32k-250115", "context": 32768},
-        ],
-    },
-    {
-        "name": "讯飞星火 Spark",
-        "env": "SPARK_KEY",
-        "base_url": "https://spark-api-open.xf-yun.com/v1",
-        "console": "https://console.xfyun.cn/services/bmx1",
-        "quota": "Lite 版免费不限量（限速）",
-        "lifetime": "长期免费",
-        "models": [
-            {"id": "lite", "context": 8192},
-            {"id": "generalv3.5", "context": 8192},
-        ],
-    },
-    {
-        "name": "MiniMax",
-        "env": "MINIMAX_KEY",
-        "base_url": "https://api.minimax.chat/v1",
-        "console": "https://platform.minimaxi.com/user-center/basic-information/interface-key",
-        "quota": "注册赠送额度",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "MiniMax-Text-01", "context": 1000000},
-            {"id": "abab6.5s-chat", "context": 245760},
-        ],
-    },
-    {
-        "name": "阶跃星辰 StepFun",
-        "env": "STEPFUN_KEY",
-        "base_url": "https://api.stepfun.com/v1",
-        "console": "https://platform.stepfun.com/interface-key",
-        "quota": "Flash 系列免费（限速）",
-        "lifetime": "长期免费",
-        "models": [
-            {"id": "step-1-flash", "context": 8192},
-            {"id": "step-2-mini", "context": 32768},
-        ],
-    },
-    {
-        "name": "零一万物 Yi",
-        "env": "YI_KEY",
-        "base_url": "https://api.lingyiwanwu.com/v1",
-        "console": "https://platform.lingyiwanwu.com/apikeys",
-        "quota": "注册赠送额度",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "yi-lightning", "context": 16384},
-        ],
-    },
-    {
-        "name": "百川智能 Baichuan",
-        "env": "BAICHUAN_KEY",
-        "base_url": "https://api.baichuan-ai.com/v1",
-        "console": "https://platform.baichuan-ai.com/console/apikey",
-        "quota": "新用户赠送 tokens",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "Baichuan4-Turbo", "context": 32768},
-        ],
-    },
-    {
-        "name": "OpenRouter",
-        "env": "OPENROUTER_KEY",
-        "base_url": "https://openrouter.ai/api/v1",
-        "console": "https://openrouter.ai/keys",
-        "quota": "免费模型每日次数受限（随账户余额放宽）",
-        "lifetime": "长期免费（:free 名单会轮换）",
-        "models": [
-            {"id": "meta-llama/llama-3.3-70b-instruct:free", "context": 131072},
-            {"id": "deepseek/deepseek-r1:free", "context": 163840},
-            {"id": "google/gemini-2.0-flash-exp:free", "context": 1000000},
-        ],
-    },
-    {
-        "name": "Groq",
-        "env": "GROQ_KEY",
-        "base_url": "https://api.groq.com/openai/v1",
-        "console": "https://console.groq.com/keys",
-        "quota": "免费层按 RPM/TPM/每日限额",
-        "lifetime": "长期免费",
-        "models": [
-            {"id": "llama-3.3-70b-versatile", "context": 131072},
-            {"id": "llama-3.1-8b-instant", "context": 131072},
-            {"id": "openai/gpt-oss-120b", "context": 131072},
-        ],
-    },
-    {
-        "name": "Google Gemini",
-        "env": "GEMINI_KEY",
-        "base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
-        "console": "https://aistudio.google.com/app/apikey",
-        "quota": "免费层按 RPM/RPD 限速",
-        "lifetime": "长期免费",
-        "models": [
-            {"id": "gemini-2.5-flash", "context": 1048576},
-            {"id": "gemini-2.5-flash-lite", "context": 1048576},
-            {"id": "gemini-2.0-flash", "context": 1048576},
-        ],
-    },
-    {
-        "name": "Cerebras",
-        "env": "CEREBRAS_KEY",
-        "base_url": "https://api.cerebras.ai/v1",
-        "console": "https://cloud.cerebras.ai/",
-        "quota": "免费层每日 100 万 tokens",
-        "lifetime": "长期免费",
-        "models": [
-            {"id": "llama3.3-70b", "context": 131072},
-            {"id": "qwen-3-32b", "context": 131072},
-            {"id": "gpt-oss-120b", "context": 131072},
-        ],
-    },
-    {
-        "name": "Mistral AI",
-        "env": "MISTRAL_KEY",
-        "base_url": "https://api.mistral.ai/v1",
-        "console": "https://console.mistral.ai/api-keys/",
-        "quota": "Experiment 免费层（需手机验证，限速）",
-        "lifetime": "长期免费（限速）",
-        "models": [
-            {"id": "mistral-small-latest", "context": 131072},
-            {"id": "open-mistral-nemo", "context": 131072},
-        ],
-    },
-    {
-        "name": "Together AI",
-        "env": "TOGETHER_KEY",
-        "base_url": "https://api.together.xyz/v1",
-        "console": "https://api.together.xyz/settings/api-keys",
-        "quota": "新用户赠送额度 + 少量 free 模型",
-        "lifetime": "额度用尽即止（free 名单会轮换）",
-        "models": [
-            {"id": "meta-llama/Llama-Vision-Free", "context": 131072},
-            {"id": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free", "context": 131072},
-        ],
-    },
-    {
-        "name": "NVIDIA NIM",
-        "env": "NVIDIA_KEY",
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "console": "https://build.nvidia.com/settings/api-keys",
-        "quota": "注册赠送 1000 credits",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "deepseek-ai/deepseek-r1", "context": 131072},
-            {"id": "meta/llama-3.3-70b-instruct", "context": 131072},
-        ],
-    },
-    {
-        "name": "SambaNova",
-        "env": "SAMBANOVA_KEY",
-        "base_url": "https://api.sambanova.ai/v1",
-        "console": "https://cloud.sambanova.ai/apis",
-        "quota": "免费层限速",
-        "lifetime": "长期免费（限速）",
-        "models": [
-            {"id": "Meta-Llama-3.3-70B-Instruct", "context": 131072},
-            {"id": "DeepSeek-R1-Distill-Llama-70B", "context": 131072},
-        ],
-    },
-    {
-        "name": "Hyperbolic",
-        "env": "HYPERBOLIC_KEY",
-        "base_url": "https://api.hyperbolic.xyz/v1",
-        "console": "https://app.hyperbolic.xyz/settings",
-        "quota": "注册赠送约 $1 额度",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "Qwen/Qwen3-235B-A22B", "context": 131072},
-            {"id": "meta-llama/Llama-3.3-70B-Instruct", "context": 131072},
-        ],
-    },
-    {
-        "name": "Nebius AI Studio",
-        "env": "NEBIUS_KEY",
-        "base_url": "https://api.studio.nebius.com/v1",
-        "console": "https://studio.nebius.com/settings/api-keys",
-        "quota": "注册赠送试用额度",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "Qwen/Qwen3-235B-A22B", "context": 131072},
-            {"id": "meta-llama/Llama-3.3-70B-Instruct", "context": 131072},
-        ],
-    },
-    {
-        "name": "Novita AI",
-        "env": "NOVITA_KEY",
-        "base_url": "https://api.novita.ai/v3/openai",
-        "console": "https://novita.ai/settings/key-management",
-        "quota": "注册赠送试用额度",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "deepseek/deepseek-v3-0324", "context": 131072},
-            {"id": "meta-llama/llama-3.3-70b-instruct", "context": 131072},
-        ],
-    },
-    {
-        "name": "Chutes",
-        "env": "CHUTES_KEY",
-        "base_url": "https://llm.chutes.ai/v1",
-        "console": "https://chutes.ai/app/api",
-        "quota": "注册赠送少量额度",
-        "lifetime": "额度用尽即止",
-        "models": [
-            {"id": "deepseek-ai/DeepSeek-V3-0324", "context": 131072},
-            {"id": "Qwen/Qwen3-32B", "context": 131072},
-        ],
-    },
-    {
-        "name": "GitHub Models",
-        "env": "GITHUB_MODELS_TOKEN",
-        "base_url": "https://models.inference.ai.azure.com",
-        "console": "https://github.com/settings/tokens",
-        "quota": "免费层按 RPM/RPD 限速",
-        "lifetime": "长期免费（限速）",
-        "models": [
-            {"id": "gpt-4o-mini", "context": 131072},
-            {"id": "Llama-3.3-70B-Instruct", "context": 131072},
-        ],
-    },
-    {
-        "name": "Cloudflare Workers AI",
-        "env": "CLOUDFLARE_API_TOKEN",
-        "requires": ["CLOUDFLARE_ACCOUNT_ID"],
-        "base_url": "https://api.cloudflare.com/client/v4/accounts/{CLOUDFLARE_ACCOUNT_ID}/ai/v1",
-        "console": "https://dash.cloudflare.com/profile/api-tokens",
-        "quota": "每日 10000 neurons 免费额度",
-        "lifetime": "长期免费（每日重置）",
-        "models": [
-            {"id": "@cf/meta/llama-3.3-70b-instruct-fp8-fast", "context": 24000},
-            {"id": "@cf/meta/llama-3.1-8b-instruct", "context": 8000},
-        ],
-    },
-]
+POOL_FILE = "providers.json"
+
+
+def load_pool(path: Path | None = None) -> list[dict]:
+    """平台与模型清单放在 providers.json 里，人工维护时不用改代码。
+
+    文件里的每个平台可以带一个 policy 字段（免费性质、限流、申请门槛、来源 URL），
+    这些数据来自 2026-09-30 的官方核实，会原样出现在 README / CSV / status.json 里。
+    """
+    target = path or (ROOT / POOL_FILE)
+    if not target.exists():
+        raise SystemExit(f"找不到平台清单：{target}（它应该和本脚本放在同一目录）")
+    data = json.loads(target.read_text(encoding="utf-8"))
+    providers = data.get("providers") if isinstance(data, dict) else data
+    if not isinstance(providers, list) or not providers:
+        raise SystemExit(f"{target} 里没有可用的 providers 数组")
+    return providers
 
 
 # --------------------------------------------------------------------------- #
@@ -650,7 +324,7 @@ def probe_platform(base_url: str, first_model: str, provider: dict, timeout: flo
     这就足以证明「服务在线、地址没变」，而且完全不需要真实密钥。
     """
     result = probe(base_url, {"id": first_model}, BOGUS_KEY, provider,
-                   timeout=min(timeout, 20.0), retries=0)
+                   timeout=timeout, retries=0)
     status = result["status"]
     http = result.get("http")
     note = result.get("note", "")
@@ -826,7 +500,7 @@ def load_auto_pool(path: Path) -> dict:
 def save_auto_pool(path: Path, pool: dict, adopted_note: str) -> None:
     write_json(path, {
         "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，"
-                "连续 3 轮实测失败会自动剔除。人工请改 PROVIDER_POOL 或 models.custom.json。",
+                "连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
         "last_action": adopted_note,
         "updated_at": datetime.now(CST).strftime("%Y-%m-%d %H:%M:%S"),
         "providers": pool,
@@ -957,8 +631,8 @@ def analyze_discovery(results: list[dict], catalogs: dict[str, dict],
 
 
 def build_providers(custom_path: Path | None, only: list[str]) -> list[dict]:
-    """内置模型池 + 自定义模型池合并，并按 --only 过滤。"""
-    providers: list[dict] = json.loads(json.dumps(PROVIDER_POOL, ensure_ascii=False))
+    """平台清单（providers.json）+ 自定义模型池合并，并按 --only 过滤。"""
+    providers: list[dict] = json.loads(json.dumps(load_pool(), ensure_ascii=False))
 
     if custom_path:
         if not custom_path.exists():
@@ -1025,8 +699,7 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
             "requires": provider.get("requires", []),
             "base_url": base_url or provider.get("base_url", ""),
             "console": provider.get("console", ""),
-            "quota": provider.get("quota", ""),
-            "lifetime": provider.get("lifetime", ""),
+            "policy": provider.get("policy") or {},
             "has_key": not missing,
             "missing_env": missing,
             "probe": "skipped",
@@ -1040,8 +713,6 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
             entry["models"].append({
                 "id": model["id"],
                 "context": model.get("context", provider.get("context", "")),
-                "quota": model.get("quota", provider.get("quota", "")),
-                "lifetime": model.get("lifetime", provider.get("lifetime", "")),
                 "note": model.get("note", ""),
                 "auto": bool(model.get("auto")),
                 "source": "自动发现" if model.get("auto") else "人工登记",
@@ -1118,8 +789,6 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
             entry["models"].append({
                 "id": rec["model"],
                 "context": rec.get("context", ""),
-                "quota": entry.get("quota", ""),
-                "lifetime": entry.get("lifetime", ""),
                 "note": f"自动发现（{rec['basis']}）",
                 "auto": True,
                 "source": "自动发现",
@@ -1179,6 +848,203 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
         entry["confirmed"] = sum(1 for s in statuses if s in ("ok", "catalog_only"))
         entry["total"] = len(statuses)
     return results, catalogs, discovery
+
+
+# --------------------------------------------------------------------------- #
+# 可选的 SOCKS5 代理支持
+#   中国大陆本地直连国外平台常被 TLS 重置；把 socket.create_connection 接管掉，
+#   urllib 和 ssl 都不用改。GitHub Actions 上直连即可，不需要开。
+# --------------------------------------------------------------------------- #
+
+def socks5_socket(proxy_host: str, proxy_port: int, dest_host: str, dest_port: int,
+                  timeout: float) -> socket.socket:
+    """手写 SOCKS5 握手，避免引入 PySocks 依赖。"""
+    sock = socket.create_connection((proxy_host, proxy_port), timeout)
+    sock.settimeout(timeout)
+    sock.sendall(b"\x05\x01\x00")                     # 版本 5，一种方法：无认证
+    if sock.recv(2) != b"\x05\x00":
+        sock.close()
+        raise OSError("SOCKS5 代理拒绝无认证连接")
+    host = dest_host.encode("idna")
+    sock.sendall(b"\x05\x01\x00\x03" + bytes([len(host)]) + host
+                 + int(dest_port).to_bytes(2, "big"))
+    head = sock.recv(4)
+    if len(head) < 4 or head[1] != 0:
+        sock.close()
+        raise OSError(f"SOCKS5 连接失败（返回码 {head[1] if len(head) > 1 else '?'}）")
+    atyp = head[3]
+    if atyp == 1:
+        sock.recv(4)
+    elif atyp == 3:
+        sock.recv(sock.recv(1)[0])
+    elif atyp == 4:
+        sock.recv(16)
+    sock.recv(2)
+    return sock
+
+
+def enable_socks_proxy(proxy: str) -> str:
+    """把 socket.create_connection 接管成走 SOCKS5。返回一句话说明，便于日志确认。"""
+    match = re.match(r"socks5h?://([^:/]+):(\d+)", (proxy or "").strip())
+    if not match:
+        return ""
+    proxy_host, proxy_port = match.group(1), int(match.group(2))
+    original = socket.create_connection
+
+    def patched(address, *args, **kwargs):
+        host, port = address[0], address[1]
+        if host in ("127.0.0.1", "localhost", "::1"):
+            return original(address, *args, **kwargs)
+        timeout = kwargs.get("timeout")
+        if timeout is None and args:
+            timeout = args[0]
+        return socks5_socket(proxy_host, proxy_port, host, port, timeout or 30)
+
+    socket.create_connection = patched
+    return f"已启用 SOCKS5 代理 {proxy_host}:{proxy_port}（本地地址仍直连）"
+
+
+# --------------------------------------------------------------------------- #
+# 外部清单源 与 官方文档变更检测
+#   政策数字很难解析，但「页面变了」很容易检测 —— 存一个内容摘要就够。
+#   页面一变就报警，然后人工去看，把「永远追不上」变成「只在变化时追」。
+# --------------------------------------------------------------------------- #
+
+EXTERNAL_SOURCES = [
+    {"name": "Cline 模型目录", "url": "https://api.cline.bot/api/v1/models",
+     "note": "Cline 用量计费通道的目录；实测与 OpenRouter 一致（464 个），用来交叉验证"},
+]
+
+DOC_WATCH = [
+    {"name": "OpenRouter 限流", "url": "https://openrouter.ai/docs/api_reference/limits"},
+    {"name": "Groq 限流", "url": "https://console.groq.com/docs/rate-limits"},
+    {"name": "Gemini 限流", "url": "https://ai.google.dev/gemini-api/docs/rate-limits"},
+    {"name": "Gemini 定价", "url": "https://ai.google.dev/gemini-api/docs/pricing"},
+    {"name": "Cerebras 限流", "url": "https://inference-docs.cerebras.ai/support/rate-limits"},
+    {"name": "Cloudflare 定价", "url": "https://developers.cloudflare.com/workers-ai/platform/pricing/"},
+    {"name": "SambaNova 限流", "url": "https://docs.sambanova.ai/docs/en/models/rate-limits"},
+    {"name": "Mistral 价格", "url": "https://mistral.ai/pricing"},
+    {"name": "Cline 免费模型", "url": "https://docs.cline.bot/getting-started/free-models.md"},
+    {"name": "智谱限流", "url": "https://docs.bigmodel.cn/cn/api/rate-limit"},
+    {"name": "智谱价格", "url": "https://docs.bigmodel.cn/cn/guide/start/pricing"},
+    {"name": "Kimi 限流", "url": "https://platform.kimi.com/docs/pricing/limits"},
+    {"name": "MiniMax 限流", "url": "https://platform.minimaxi.com/docs/guides/rate-limits.md"},
+    {"name": "硅基流动限流", "url": "https://api-docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation"},
+    {"name": "阶跃星辰定价", "url": "https://platform.stepfun.com/docs/pricing/details"},
+    {"name": "百川限流", "url": "https://platform.baichuan-ai.com/docs-v2/rate-limit"},
+]
+
+SOURCES_FILE = "sources.json"
+
+
+def fetch_raw(url: str, timeout: float) -> tuple[bool, str, str]:
+    """返回（成功, 内容, 说明）。"""
+    request = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as resp:
+            return True, resp.read(4 * 1024 * 1024).decode("utf-8", "replace"), ""
+    except urllib.error.HTTPError as exc:
+        return False, "", f"HTTP {exc.code}"
+    except Exception as exc:  # noqa: BLE001
+        return False, "", shorten(f"{type(exc).__name__}: {exc}")
+
+
+def text_digest(text: str) -> tuple[str, int]:
+    """归一化后取内容摘要：去掉脚本/样式/标签和多余空白，降低噪声。"""
+    body = re.sub(r"<script.*?</script>|<style.*?</style>", " ", text, flags=re.S | re.I)
+    body = html_unescape(re.sub(r"<[^>]+>", " ", body))
+    body = re.sub(r"\s+", " ", body).strip()
+    return hashlib.sha1(body.encode("utf-8", "replace")).hexdigest()[:16], len(body)
+
+
+def load_sources(path: Path) -> dict:
+    data = read_json(path)
+    if not isinstance(data, dict):
+        return {"external": {}, "docs": {}}
+    data.setdefault("external", {})
+    data.setdefault("docs", {})
+    return data
+
+
+def check_external_sources(state: dict, timeout: float, workers: int) -> tuple[dict, list[dict]]:
+    """抓外部清单，和上次的模型 ID 列表对比。"""
+    report: list[dict] = []
+    if not EXTERNAL_SOURCES:
+        return state, report
+
+    def job(src):
+        ok, body, note = fetch_raw(src["url"], timeout)
+        if not ok:
+            return src, None, None, note
+        try:
+            data = json.loads(body)
+        except ValueError:
+            return src, None, None, "返回的不是 JSON"
+        items = data.get("data") if isinstance(data, dict) else data
+        if not isinstance(items, list):
+            return src, None, None, "结构无法识别"
+        ids = sorted(str(m.get("id")) for m in items
+                     if isinstance(m, dict) and m.get("id"))
+        return src, ids, hashlib.sha1("\n".join(ids).encode()).hexdigest()[:16], ""
+
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+        for src, ids, digest, note in pool.map(job, EXTERNAL_SOURCES):
+            old = state["external"].get(src["url"]) or {}
+            rec = {"name": src["name"], "url": src["url"], "note": src.get("note", ""),
+                   "count": len(ids) if ids else 0, "added": [], "removed": [],
+                   "changed": False, "error": note,
+                   "checked_at": datetime.now(CST).strftime("%Y-%m-%d %H:%M")}
+            if ids is not None:
+                old_ids = set(old.get("ids") or [])
+                if old_ids:
+                    rec["added"] = sorted(set(ids) - old_ids)
+                    rec["removed"] = sorted(old_ids - set(ids))
+                    rec["changed"] = bool(rec["added"] or rec["removed"])
+                state["external"][src["url"]] = {
+                    "name": src["name"], "count": len(ids), "hash": digest,
+                    "ids": ids, "checked_at": rec["checked_at"], "note": src.get("note", ""),
+                }
+            report.append(rec)
+    return state, report
+
+
+def check_doc_watch(state: dict, timeout: float, workers: int) -> tuple[dict, list[dict]]:
+    """抓文档页，比对内容摘要；变了就记一笔。"""
+    report: list[dict] = []
+    if not DOC_WATCH:
+        return state, report
+    now = datetime.now(CST).strftime("%Y-%m-%d %H:%M")
+
+    def job(doc):
+        ok, body, note = fetch_raw(doc["url"], timeout)
+        if not ok:
+            return doc, None, 0, note
+        digest, size = text_digest(body)
+        return doc, digest, size, ""
+
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+        for doc, digest, size, note in pool.map(job, DOC_WATCH):
+            old = state["docs"].get(doc["url"]) or {}
+            rec = {"name": doc["name"], "url": doc["url"], "changed": False,
+                   "last_changed": old.get("last_changed", ""), "size": size,
+                   "first_seen": old.get("first_seen", now), "error": note}
+            if digest is not None:
+                if old.get("hash") and old["hash"] != digest:
+                    rec["changed"] = True
+                    rec["last_changed"] = now
+                elif not old.get("hash"):
+                    rec["last_changed"] = ""      # 第一次见到，算基线，不算变更
+                else:
+                    rec["last_changed"] = old.get("last_changed", "")
+                state["docs"][doc["url"]] = {
+                    "name": doc["name"], "hash": digest, "size": size,
+                    "last_changed": rec["last_changed"],
+                    "first_seen": rec["first_seen"], "checked_at": now,
+                }
+            else:
+                rec["last_changed"] = old.get("last_changed", "")
+            report.append(rec)
+    return state, report
 
 
 # --------------------------------------------------------------------------- #
@@ -1249,18 +1115,30 @@ def write_csv(path: Path, providers: list[dict]) -> None:
     # utf-8-sig：让 Excel 双击打开不乱码；lineterminator 用 \n 保持跨平台一致
     with path.open("w", newline="", encoding="utf-8-sig") as fh:
         writer = csv.writer(fh, lineterminator="\n")
-        writer.writerow(["平台", "接口探活", "密钥变量名", "模型ID", "来源", "BaseURL", "上下文",
-                         "额度类型", "预期有效期", "状态", "状态码", "延迟(ms)", "备注", "检测时间"])
+        writer.writerow(["平台", "接口探活", "免费性质", "RPM", "RPD", "TPM", "TPD", "重置",
+                         "手机号", "实名认证", "外币卡", "政策来源数", "政策核实日",
+                         "密钥变量名", "模型ID", "来源", "BaseURL", "上下文",
+                         "状态", "状态码", "延迟(ms)", "备注", "检测时间"])
         for provider in providers:
             probe = PROBE_META.get(provider.get("probe", "skipped"), PROBE_META["skipped"])
             probe_text = f"{probe['icon']} {probe['label']}"
+            pol = provider.get("policy") or {}
+            lm = pol.get("limits") or {}
+            sg = pol.get("signup") or {}
+            signup_cn = {"required": "需要", "not_required": "不需要", "unknown": "未知"}
             for model in provider["models"]:
                 meta = STATUS_META.get(model["status"], STATUS_META["unknown"])
                 writer.writerow([
-                    provider["name"], probe_text, provider["env"], model["id"],
+                    provider["name"], probe_text, pol.get("free_kind", "-"),
+                    lm.get("rpm", "-"), lm.get("rpd", "-"), lm.get("tpm", "-"), lm.get("tpd", "-"),
+                    lm.get("reset", "-"),
+                    signup_cn.get(sg.get("phone"), "-"),
+                    signup_cn.get(sg.get("realname"), "-"),
+                    signup_cn.get(sg.get("foreign_card"), "-"),
+                    len(pol.get("sources") or []), pol.get("verified_at", "-"),
+                    provider["env"], model["id"],
                     model.get("source", "人工登记"), provider["base_url"],
-                    fmt_context(model.get("context")), model.get("quota", ""),
-                    model.get("lifetime", ""), f"{meta['icon']} {meta['label']}",
+                    fmt_context(model.get("context")), f"{meta['icon']} {meta['label']}",
                     model.get("http") if model.get("http") is not None else "-",
                     model.get("latency_ms") if model.get("latency_ms") is not None else "-",
                     model.get("note", ""), model.get("checked_at", ""),
@@ -1378,9 +1256,10 @@ def summarize_uptime(records: list[dict], providers: list[dict]) -> dict:
 def render_readme(providers: list[dict], summary: dict, changes: list[dict],
                   generated_at: datetime, elapsed: float, cron: str, history: list[dict],
                   discovery: dict | None = None, adopt_mode: str = "safe",
-                  uptime: dict | None = None) -> str:
+                  uptime: dict | None = None, sources_report: dict | None = None) -> str:
     discovery = discovery or {}
     uptime = uptime or {}
+    sources_report = sources_report or {}
     ok_providers = [p for p in providers if p["status"] == "ok"]
     first_base = ok_providers[0]["base_url"] if ok_providers else "https://api.example.com/v1"
     first_model = ok_providers[0]["models"][0]["id"] if ok_providers else "model-id"
@@ -1446,8 +1325,8 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
 
     add("## 平台总览")
     add("")
-    add("| 平台 | 接口探活 | 模型状态 | 密钥变量 | 目录 | 额度类型 | 申请地址 |")
-    add("| --- | --- | --- | --- | ---: | --- | --- |")
+    add("| 平台 | 接口探活 | 模型状态 | 免费性质 | 密钥变量 | 目录 | 申请地址 |")
+    add("| --- | --- | --- | --- | --- | ---: | --- |")
     for provider in providers:
         console = f"[控制台]({provider['console']})" if provider["console"] else "-"
         probe = PROBE_META.get(provider.get("probe", "skipped"), PROBE_META["skipped"])
@@ -1456,11 +1335,39 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
             catalog_cell = f"{cat['count']}" + ("（公开）" if cat.get("public") else "")
         else:
             catalog_cell = "-"
+        kind = (provider.get("policy") or {}).get("free_kind", "-")
         add(f"| {provider['name']} | {probe['icon']} {probe['label']} | "
             f"{status_cell(provider['status'])} {provider['available']}/{provider['total']} | "
-            f"`{provider['env']}` | {catalog_cell} | "
-            f"{provider.get('quota', '')} | {console} |")
+            f"{kind} | "
+            f"`{provider['env']}` | {catalog_cell} | {console} |")
     add("")
+
+    # ---------------- 免费政策与限流（官方核实数据） ----------------
+    with_policy = [p for p in providers if (p.get("policy") or {}).get("limits")]
+    if with_policy:
+        add("## 免费政策与限流")
+        add("")
+        add("这一节是**人工核实的官方数据**，不是实测值 —— 全部来自研究员实际读到的官方页面，")
+        add("查不到的一律写「未公布」。核实日期见末列，来源链接在 `providers.json` 里。")
+        add("")
+        add("| 平台 | 免费性质 | RPM | RPD | TPM | TPD | 并发 | 重置 | 闲时/忙时 | 手机号 | 实名 | 外币卡 | 置信度 | 核实日 |")
+        add("| --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | :-: | :-: | :-: | :-: | --- |")
+        need = {"required": "✅", "not_required": "—", "unknown": "?"}
+        for p in sorted(with_policy, key=lambda x: (x.get("policy") or {}).get("free_kind", "")):
+            pol = p["policy"]
+            lm = pol.get("limits") or {}
+            sg = pol.get("signup") or {}
+            add(f"| {p['name']} | {pol.get('free_kind', '-')} | "
+                f"{lm.get('rpm', '-')} | {lm.get('rpd', '-')} | {lm.get('tpm', '-')} | "
+                f"{lm.get('tpd', '-')} | {lm.get('concurrency', '-')} | "
+                f"{lm.get('reset', '-')} | {lm.get('time_window', '-')} | "
+                f"{need.get(sg.get('phone'), '?')} | {need.get(sg.get('realname'), '?')} | "
+                f"{need.get(sg.get('foreign_card'), '?')} | {pol.get('confidence', '?')} | "
+                f"{pol.get('verified_at', '-')} |")
+        add("")
+        add("> 门槛列：✅ = 需要，— = 不需要，? = 官方页面未说明。")
+        add("> 「未公布」不代表没有限制 —— 大部分平台的限速数字只在登录后的控制台可见。")
+        add("")
 
     # ---------------- 自动发现 ----------------
     adopted = discovery.get("newly_adopted") or discovery.get("adopted") or []
@@ -1532,6 +1439,69 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
         add("> 只有配上密钥才能参与自动发现；没配密钥的平台本轮不产生任何发现。")
         add("")
 
+    # ---------------- 外部清单与官方文档变更 ----------------
+    ext = sources_report.get("external") or []
+    docs = sources_report.get("docs") or []
+    if ext or docs:
+        add("## 外部清单与官方文档变更")
+        add("")
+        add("政策数字很难自动解析，但**「页面变了」很容易检测**。这一节只做变更提醒，不做解读。")
+        add("")
+
+    if ext:
+        add("### 别家清单的变化")
+        add("")
+        add("| 来源 | 模型数 | 本轮变化 |")
+        add("| --- | ---: | --- |")
+        for rec in ext:
+            if rec.get("error"):
+                cell = f"抓取失败：{rec['error']}"
+            elif rec.get("changed"):
+                bits = []
+                if rec.get("added"):
+                    bits.append(f"➕ {len(rec['added'])} 个")
+                if rec.get("removed"):
+                    bits.append(f"➖ {len(rec['removed'])} 个")
+                cell = "、".join(bits)
+                sample = (rec.get("added") or [])[:3] or (rec.get("removed") or [])[:3]
+                if sample:
+                    cell += "：" + "、".join(f"`{x}`" for x in sample)
+            else:
+                cell = "无变化"
+            add(f"| {rec['name']} | {rec.get('count', 0)} | {cell} |")
+        add("")
+        for rec in ext:
+            if rec.get("note"):
+                add(f"> {rec['name']}：{rec['note']}")
+        if any(r.get("note") for r in ext):
+            add("")
+
+    if docs:
+        changed = [r for r in docs if r.get("changed")]
+        add("### 官方文档页变更提醒")
+        add("")
+        if changed:
+            add("**这些页面本轮内容变了，政策可能已经调整，建议去看一眼：**")
+            add("")
+            add("| 页面 | 变更时间 | 链接 |")
+            add("| --- | --- | --- |")
+            for rec in changed:
+                add(f"| {rec['name']} | {rec.get('last_changed', '-')} | [打开]({rec['url']}) |")
+            add("")
+        else:
+            add(f"本轮 {len(docs)} 个官方页面都没有变化。")
+            add("")
+        failed = [r for r in docs if r.get("error")]
+        fresh = [r for r in docs if not r.get("last_changed") and not r.get("error")]
+        if fresh:
+            add(f"> 有 {len(fresh)} 个页面是第一次抓取，本轮只建立基线，不算变更。")
+        if failed:
+            add(f"> 有 {len(failed)} 个页面本轮抓取失败（{', '.join(r['name'] for r in failed[:5])}"
+                f"{' 等' if len(failed) > 5 else ''}），不影响其他检测。")
+        add("")
+        add(f"共监控 {len(docs)} 个页面，摘要存放在 `sources.json`。")
+        add("")
+
     # ---------------- 可用性时间线 ----------------
     up_rows = uptime.get("providers") or []
     if uptime.get("records", 0) >= 3:
@@ -1555,14 +1525,13 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
 
     add("## 模型明细")
     add("")
-    add("| 平台 | 模型 ID | 来源 | 上下文 | 额度类型 | 预期有效期 | 状态 | HTTP | 延迟 | 备注 |")
-    add("| --- | --- | --- | ---: | --- | --- | --- | ---: | ---: | --- |")
+    add("| 平台 | 模型 ID | 来源 | 上下文 | 状态 | HTTP | 延迟 | 备注 |")
+    add("| --- | --- | --- | ---: | --- | ---: | ---: | --- |")
     for provider in providers:
         for model in provider["models"]:
             note = (model.get("note", "") or "").replace("|", "\\|")
             add(f"| {provider['name']} | `{model['id']}` | {model.get('source', '人工登记')} | "
                 f"{fmt_context(model.get('context'))} | "
-                f"{model.get('quota', '')} | {model.get('lifetime', '')} | "
                 f"{status_cell(model['status'])} | "
                 f"{model.get('http') if model.get('http') is not None else '-'} | "
                 f"{fmt_ms(model.get('latency_ms')) if model.get('latency_ms') is not None else '-'} | "
@@ -1619,6 +1588,10 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
     add("   自动收进来的模型如果连续 3 轮实测失败，会被自动剔除（自净）。")
     add("4. **逐模型实测**：对**配了密钥**的平台，每个模型发一条 `max_tokens=1` 的极短请求，")
     add("   几乎不消耗免费额度，按返回码判定可用性。")
+    add("5. **看外部清单**：拉一份别家维护的模型目录（目前是 Cline 的），和上一轮比对，")
+    add("   有增删就记下来 —— 用别人的清单当传感器。")
+    add("6. **盯官方文档**：把十几个官方限流/定价页抓一遍，**只比对内容摘要，不解析数字**。")
+    add("   页面一变就报警，然后人工去看一眼。政策数字难解析，但「页面变了」很容易检测。")
     add("")
     add("然后把结果写成 README / CSV / status.json，状态有变化时追加 history.jsonl，最后 commit & push。")
     add("")
@@ -1629,14 +1602,16 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
     add("| `README.md` | 本文件，可读表格版，GitHub 直接预览 |")
     add("| `free_llm_api.csv` | 可下载表格（带 BOM，Excel 双击不乱码） |")
     add("| `status.json` | 结构化数据，供程序调用（例如自动切换代理） |")
+    add("| `providers.json` | 平台与模型清单 + 官方核实的政策数据（人工维护，改清单不用碰代码） |")
     add("| `models.auto.json` | **脚本自己维护**的自动纳管模型池（确证免费的才进，连续失败自动剔除） |")
+    add("| `sources.json` | 外部清单的模型 ID 快照 + 官方文档页的内容摘要（用来做变更检测） |")
     add("| `history.jsonl` | 状态**变化**历史，一行一次变更快照 |")
     add("")
     add("三层模型池的关系：")
     add("")
     add("| 文件 | 谁写 | 作用 |")
     add("| --- | --- | --- |")
-    add("| `update_list.py` 里的 `PROVIDER_POOL` | 人工 | 骨架：平台地址、申请入口、免费额度说明 |")
+    add("| `providers.json` | 人工 | 骨架：平台地址、申请入口、模型清单、官方政策数据 |")
     add("| `models.custom.json` | 人工 | 你自己增删的模型（可选，默认没有这个文件） |")
     add("| `models.auto.json` | **脚本** | 自动发现的模型，不用管它，它会自己长也会自己瘦 |")
     add("")
@@ -1659,7 +1634,7 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
     add("- 同 `env` 的条目：覆盖该平台字段，`models` 按 `id` 追加或合并")
     add("- 新 `env` 的条目：作为新平台追加")
     add("")
-    add("也可以直接改 `update_list.py` 顶部的 `PROVIDER_POOL`，格式一目了然。")
+    add("也可以直接改 `providers.json` —— 平台与模型清单已经和代码分开了，改清单不用碰脚本。")
     add("")
     add("### 本地运行")
     add("")
@@ -1687,7 +1662,7 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
     add("| --- | --- |")
     add("| 全部显示 ⏭️ 无法判断 | 没配密钥，且该平台目录不公开 —— 这是正常的，平台级「接口探活」仍然有效 |")
     add("| 平台是 🟢 但模型全是 🔑 | 接口活着，是密钥不对（复制错了、被吊销、或没开通对应模型） |")
-    add("| 平台是 ❌ 接口已失效 | 该平台的接口路径返回 404，可能已下线或改地址，需要改 `PROVIDER_POOL` 里的 `base_url` |")
+    add("| 平台是 ❌ 接口已失效 | 该平台的接口路径返回 404，可能已下线或改地址，需要改 `providers.json` 里的 `base_url` |")
     add("| 某个模型 ⚪ 目录中已消失 | 平台目录里查不到这个 ID 了；看「相近的 ID」列，多半只是改了名 |")
     add("| 一直是 ⚠️ 限流 | 免费额度确实用完了（或账号在共享 IP 上被限速），等下个周期再看 |")
     add("| 自动纳入了奇怪的模型 | 把 `--adopt` 改成 `off` 或 `safe`，并在 `models.auto.json` 里删掉它 |")
@@ -1730,7 +1705,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                         help="只检测指定平台，逗号分隔的密钥变量名，例如 ZHIPU_KEY,GROQ_KEY")
     parser.add_argument("--custom", default="models.custom.json",
                         help="自定义模型池文件（默认 models.custom.json，不存在则忽略）")
-    parser.add_argument("--timeout", type=float, default=30.0, help="单次请求超时秒数，默认 30")
+    parser.add_argument("--timeout", type=float, default=45.0,
+                        help="单次请求超时秒数，默认 45（部分平台 TLS 握手就要 20 秒以上）")
     parser.add_argument("--retries", type=int, default=2, help="网络错误/5xx 重试次数，默认 2")
     parser.add_argument("--workers", type=int, default=6, help="并发数，默认 6")
     parser.add_argument("--out-dir", default=".", help="输出目录，默认脚本所在目录")
@@ -1748,6 +1724,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                         help="每个平台每轮最多自动纳入多少个模型，默认 20")
     parser.add_argument("--auto-file", default="models.auto.json",
                         help="自动纳管的模型池文件，默认 models.auto.json")
+    parser.add_argument("--proxy", default=os.environ.get("FREE_LLM_PROXY", ""),
+                        help="可选 SOCKS5 代理，形如 socks5h://127.0.0.1:10808。"
+                             "中国大陆本地直连国外平台常被重置时用得上；Actions 上不需要")
+    parser.add_argument("--sources-file", default=SOURCES_FILE,
+                        help="外部清单与文档摘要的状态文件，默认 sources.json")
+    parser.add_argument("--docs", action=argparse.BooleanOptionalAction, default=True,
+                        help="是否检测官方文档页有没有变化，默认开启")
     return parser.parse_args(argv)
 
 
@@ -1764,6 +1747,10 @@ def main(argv: list[str] | None = None) -> int:
     if not out_dir.is_absolute():
         out_dir = ROOT / out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    if args.proxy:
+        note = enable_socks_proxy(args.proxy)
+        log(note or f"代理地址无法识别，已忽略：{args.proxy}")
 
     custom_path = None
     if args.custom:
@@ -1801,11 +1788,34 @@ def main(argv: list[str] | None = None) -> int:
     json_path = out_dir / "status.json"
     history_path = out_dir / "history.jsonl"
     uptime_path = out_dir / "uptime.jsonl"
+    sources_path = Path(args.sources_file)
+    if not sources_path.is_absolute():
+        sources_path = ROOT / sources_path
 
     previous = read_json(json_path)
     started = time.perf_counter()
     generated_at = datetime.now(CST)
     checked_at = generated_at.strftime("%Y-%m-%d %H:%M:%S")
+
+    # ---- 外部清单源 + 官方文档变更检测 ----
+    sources_state = load_sources(sources_path)
+    sources_state, external_report = check_external_sources(
+        sources_state, args.timeout, args.workers)
+    if args.docs:
+        sources_state, doc_report = check_doc_watch(sources_state, args.timeout, args.workers)
+    else:
+        doc_report = []
+    sources_state["updated_at"] = checked_at
+    sources_state["note"] = ("外部清单的模型 ID 快照 + 官方文档页的内容摘要。"
+                             "由 update_list.py 自动维护，用来发现「别家清单变了」和「官方政策页改了」。")
+    write_json(sources_path, sources_state)
+    changed_src = [r for r in external_report if r.get("changed")]
+    changed_doc = [r for r in doc_report if r.get("changed")]
+    if changed_src:
+        log(f"外部清单有变化：{len(changed_src)} 个")
+    if changed_doc:
+        log(f"官方文档页有变化：{len(changed_doc)} 个 —— {', '.join(r['name'] for r in changed_doc)}")
+    source_report = {"external": external_report, "docs": doc_report}
 
     results, catalogs, discovery = check_providers(
         providers, args.timeout, args.retries, args.workers, checked_at,
@@ -1871,6 +1881,7 @@ def main(argv: list[str] | None = None) -> int:
         "summary": summary,
         "changes": changes,
         "uptime": uptime_summary,
+        "sources": source_report,
         "discovery": {
             "newly_adopted": newly,
             "adopted": discovery.get("newly_adopted", []),
@@ -1883,7 +1894,7 @@ def main(argv: list[str] | None = None) -> int:
         "providers": [
             {
                 "name": p["name"], "env": p["env"], "base_url": p["base_url"],
-                "console": p["console"], "quota": p["quota"], "lifetime": p["lifetime"],
+                "console": p["console"], "policy": p.get("policy") or {},
                 "has_key": p["has_key"], "missing_env": p["missing_env"],
                 "probe": p["probe"], "probe_http": p["probe_http"], "probe_note": p["probe_note"],
                 "catalog": p["catalog"],
@@ -1896,7 +1907,8 @@ def main(argv: list[str] | None = None) -> int:
     }
 
     readme = render_readme(results, summary, changes, generated_at, elapsed,
-                           args.cron, history, discovery, args.adopt, uptime_summary)
+                           args.cron, history, discovery, args.adopt, uptime_summary,
+                           source_report)
     write_text_lf(readme_path, readme)
     write_csv(csv_path, results)
     write_json(json_path, payload)
