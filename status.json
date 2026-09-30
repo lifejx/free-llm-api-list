@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-30T09:47:26Z",
-  "generated_at_cst": "2026-09-30 17:47:26",
+  "generated_at": "2026-09-30T11:17:01Z",
+  "generated_at_cst": "2026-09-30 19:17:01",
   "elapsed_seconds": 0.0,
   "cron": "0 */4 * * *",
   "summary": {
@@ -42,7 +42,7 @@
           "quota": "注册赠送测试额度，用完后按量计费",
           "lifetime": "额度用尽即止（非长期免费）",
           "note": "缺少环境变量 DEEPSEEK_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -53,7 +53,7 @@
           "quota": "注册赠送测试额度，用完后按量计费",
           "lifetime": "额度用尽即止（非长期免费）",
           "note": "缺少环境变量 DEEPSEEK_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -81,7 +81,7 @@
           "quota": "Flash 系列免费，有限速",
           "lifetime": "长期免费",
           "note": "缺少环境变量 ZHIPU_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -92,7 +92,7 @@
           "quota": "Flash 系列免费，有限速",
           "lifetime": "长期免费",
           "note": "缺少环境变量 ZHIPU_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -103,7 +103,7 @@
           "quota": "Flash 系列免费，有限速",
           "lifetime": "长期免费",
           "note": "缺少环境变量 ZHIPU_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -131,7 +131,7 @@
           "quota": "新用户赠送额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 MOONSHOT_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -142,7 +142,7 @@
           "quota": "新用户赠送额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 MOONSHOT_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -170,7 +170,7 @@
           "quota": "新用户每个模型 100 万 tokens 免费额度",
           "lifetime": "自开通起 180 天有效",
           "note": "缺少环境变量 DASHSCOPE_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -181,7 +181,7 @@
           "quota": "新用户每个模型 100 万 tokens 免费额度",
           "lifetime": "自开通起 180 天有效",
           "note": "缺少环境变量 DASHSCOPE_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -192,7 +192,7 @@
           "quota": "新用户每个模型 100 万 tokens 免费额度",
           "lifetime": "自开通起 180 天有效",
           "note": "缺少环境变量 DASHSCOPE_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -220,7 +220,7 @@
           "quota": "部分小模型免费，有限速",
           "lifetime": "长期免费（免费名单会轮换）",
           "note": "缺少环境变量 SILICONFLOW_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -231,7 +231,7 @@
           "quota": "部分小模型免费，有限速",
           "lifetime": "长期免费（免费名单会轮换）",
           "note": "缺少环境变量 SILICONFLOW_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -242,7 +242,7 @@
           "quota": "部分小模型免费，有限速",
           "lifetime": "长期免费（免费名单会轮换）",
           "note": "缺少环境变量 SILICONFLOW_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -270,7 +270,7 @@
           "quota": "每日 2000 次免费调用",
           "lifetime": "长期免费",
           "note": "缺少环境变量 MODELSCOPE_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -281,7 +281,7 @@
           "quota": "每日 2000 次免费调用",
           "lifetime": "长期免费",
           "note": "缺少环境变量 MODELSCOPE_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -292,7 +292,7 @@
           "quota": "每日 2000 次免费调用",
           "lifetime": "长期免费",
           "note": "缺少环境变量 MODELSCOPE_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -320,7 +320,7 @@
           "quota": "新用户赠送免费额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 HUNYUAN_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -331,7 +331,7 @@
           "quota": "新用户赠送免费额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 HUNYUAN_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -359,7 +359,7 @@
           "quota": "ERNIE Speed 系列免费",
           "lifetime": "长期免费（限速）",
           "note": "缺少环境变量 QIANFAN_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -370,7 +370,7 @@
           "quota": "ERNIE Speed 系列免费",
           "lifetime": "长期免费（限速）",
           "note": "缺少环境变量 QIANFAN_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -398,7 +398,7 @@
           "quota": "新用户每个模型 50 万 tokens 免费额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 VOLC_ARK_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -409,7 +409,7 @@
           "quota": "新用户每个模型 50 万 tokens 免费额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 VOLC_ARK_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -437,7 +437,7 @@
           "quota": "Lite 版免费不限量（限速）",
           "lifetime": "长期免费",
           "note": "缺少环境变量 SPARK_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -448,7 +448,7 @@
           "quota": "Lite 版免费不限量（限速）",
           "lifetime": "长期免费",
           "note": "缺少环境变量 SPARK_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -476,7 +476,7 @@
           "quota": "注册赠送额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 MINIMAX_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -487,7 +487,7 @@
           "quota": "注册赠送额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 MINIMAX_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -515,7 +515,7 @@
           "quota": "Flash 系列免费（限速）",
           "lifetime": "长期免费",
           "note": "缺少环境变量 STEPFUN_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -526,7 +526,7 @@
           "quota": "Flash 系列免费（限速）",
           "lifetime": "长期免费",
           "note": "缺少环境变量 STEPFUN_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -554,7 +554,7 @@
           "quota": "注册赠送额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 YI_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -582,7 +582,7 @@
           "quota": "新用户赠送 tokens",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 BAICHUAN_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -610,7 +610,7 @@
           "quota": "免费模型每日次数受限（随账户余额放宽）",
           "lifetime": "长期免费（:free 名单会轮换）",
           "note": "缺少环境变量 OPENROUTER_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -621,7 +621,7 @@
           "quota": "免费模型每日次数受限（随账户余额放宽）",
           "lifetime": "长期免费（:free 名单会轮换）",
           "note": "缺少环境变量 OPENROUTER_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -632,7 +632,7 @@
           "quota": "免费模型每日次数受限（随账户余额放宽）",
           "lifetime": "长期免费（:free 名单会轮换）",
           "note": "缺少环境变量 OPENROUTER_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -660,7 +660,7 @@
           "quota": "免费层按 RPM/TPM/每日限额",
           "lifetime": "长期免费",
           "note": "缺少环境变量 GROQ_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -671,7 +671,7 @@
           "quota": "免费层按 RPM/TPM/每日限额",
           "lifetime": "长期免费",
           "note": "缺少环境变量 GROQ_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -682,7 +682,7 @@
           "quota": "免费层按 RPM/TPM/每日限额",
           "lifetime": "长期免费",
           "note": "缺少环境变量 GROQ_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -710,7 +710,7 @@
           "quota": "免费层按 RPM/RPD 限速",
           "lifetime": "长期免费",
           "note": "缺少环境变量 GEMINI_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -721,7 +721,7 @@
           "quota": "免费层按 RPM/RPD 限速",
           "lifetime": "长期免费",
           "note": "缺少环境变量 GEMINI_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -732,7 +732,7 @@
           "quota": "免费层按 RPM/RPD 限速",
           "lifetime": "长期免费",
           "note": "缺少环境变量 GEMINI_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -760,7 +760,7 @@
           "quota": "免费层每日 100 万 tokens",
           "lifetime": "长期免费",
           "note": "缺少环境变量 CEREBRAS_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -771,7 +771,7 @@
           "quota": "免费层每日 100 万 tokens",
           "lifetime": "长期免费",
           "note": "缺少环境变量 CEREBRAS_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -782,7 +782,7 @@
           "quota": "免费层每日 100 万 tokens",
           "lifetime": "长期免费",
           "note": "缺少环境变量 CEREBRAS_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -810,7 +810,7 @@
           "quota": "Experiment 免费层（需手机验证，限速）",
           "lifetime": "长期免费（限速）",
           "note": "缺少环境变量 MISTRAL_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -821,7 +821,7 @@
           "quota": "Experiment 免费层（需手机验证，限速）",
           "lifetime": "长期免费（限速）",
           "note": "缺少环境变量 MISTRAL_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -849,7 +849,7 @@
           "quota": "新用户赠送额度 + 少量 free 模型",
           "lifetime": "额度用尽即止（free 名单会轮换）",
           "note": "缺少环境变量 TOGETHER_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -860,7 +860,7 @@
           "quota": "新用户赠送额度 + 少量 free 模型",
           "lifetime": "额度用尽即止（free 名单会轮换）",
           "note": "缺少环境变量 TOGETHER_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -888,7 +888,7 @@
           "quota": "注册赠送 1000 credits",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 NVIDIA_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -899,7 +899,7 @@
           "quota": "注册赠送 1000 credits",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 NVIDIA_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -927,7 +927,7 @@
           "quota": "免费层限速",
           "lifetime": "长期免费（限速）",
           "note": "缺少环境变量 SAMBANOVA_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -938,7 +938,7 @@
           "quota": "免费层限速",
           "lifetime": "长期免费（限速）",
           "note": "缺少环境变量 SAMBANOVA_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -966,7 +966,7 @@
           "quota": "注册赠送约 $1 额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 HYPERBOLIC_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -977,7 +977,7 @@
           "quota": "注册赠送约 $1 额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 HYPERBOLIC_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1005,7 +1005,7 @@
           "quota": "注册赠送试用额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 NEBIUS_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1016,7 +1016,7 @@
           "quota": "注册赠送试用额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 NEBIUS_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1044,7 +1044,7 @@
           "quota": "注册赠送试用额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 NOVITA_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1055,7 +1055,7 @@
           "quota": "注册赠送试用额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 NOVITA_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1083,7 +1083,7 @@
           "quota": "注册赠送少量额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 CHUTES_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1094,7 +1094,7 @@
           "quota": "注册赠送少量额度",
           "lifetime": "额度用尽即止",
           "note": "缺少环境变量 CHUTES_KEY",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1122,7 +1122,7 @@
           "quota": "免费层按 RPM/RPD 限速",
           "lifetime": "长期免费（限速）",
           "note": "缺少环境变量 GITHUB_MODELS_TOKEN",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1133,7 +1133,7 @@
           "quota": "免费层按 RPM/RPD 限速",
           "lifetime": "长期免费（限速）",
           "note": "缺少环境变量 GITHUB_MODELS_TOKEN",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1162,7 +1162,7 @@
           "quota": "每日 10000 neurons 免费额度",
           "lifetime": "长期免费（每日重置）",
           "note": "缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
@@ -1173,7 +1173,7 @@
           "quota": "每日 10000 neurons 免费额度",
           "lifetime": "长期免费（每日重置）",
           "note": "缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID",
-          "checked_at": "2026-09-30 17:47:26",
+          "checked_at": "2026-09-30 19:17:01",
           "status": "skipped",
           "http": null,
           "latency_ms": null
