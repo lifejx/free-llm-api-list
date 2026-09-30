@@ -85,6 +85,15 @@ PROBE_META: dict[str, dict[str, str]] = {
 
 PROBE_ORDER = ["online", "open", "unstable", "gone", "unreachable", "unknown", "skipped"]
 
+# 中国大陆用户拿到一个可用 key 的现实难度（官方核实，不是猜的）
+DIFFICULTY_META: dict[str, dict[str, str]] = {
+    "easy":    {"icon": "🟢", "label": "容易",     "desc": "注册即用，境内直接调用"},
+    "medium":  {"icon": "🟡", "label": "要点技巧", "desc": "需要实名/邮箱/特定注册路径，但仍可搞定"},
+    "hard":    {"icon": "🟠", "label": "较难",     "desc": "需要非中国出口或外币卡"},
+    "blocked": {"icon": "⛔", "label": "不可用",   "desc": "官方按国家/地区封锁中国大陆"},
+    "unknown": {"icon": "❔", "label": "未知",     "desc": "官方页面未说明"},
+}
+
 # 探活专用的无效密钥（不是任何平台的真实密钥，只用来触发鉴权错误）
 BOGUS_KEY = "sk-invalid-probe-not-a-real-key-000000"
 
@@ -1325,8 +1334,8 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
 
     add("## 平台总览")
     add("")
-    add("| 平台 | 接口探活 | 模型状态 | 免费性质 | 密钥变量 | 目录 | 申请地址 |")
-    add("| --- | --- | --- | --- | --- | ---: | --- |")
+    add("| 平台 | 接口探活 | 模型状态 | 免费性质 | 大陆可用性 | 密钥变量 | 目录 | 申请地址 |")
+    add("| --- | --- | --- | --- | --- | --- | ---: | --- |")
     for provider in providers:
         console = f"[控制台]({provider['console']})" if provider["console"] else "-"
         probe = PROBE_META.get(provider.get("probe", "skipped"), PROBE_META["skipped"])
@@ -1335,10 +1344,14 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
             catalog_cell = f"{cat['count']}" + ("（公开）" if cat.get("public") else "")
         else:
             catalog_cell = "-"
-        kind = (provider.get("policy") or {}).get("free_kind", "-")
+        pol = provider.get("policy") or {}
+        kind = pol.get("free_kind", "-")
+        diff = (pol.get("access") or {}).get("difficulty_cn")
+        diff_cell = (f"{DIFFICULTY_META[diff]['icon']} {DIFFICULTY_META[diff]['label']}"
+                     if diff in DIFFICULTY_META else "-")
         add(f"| {provider['name']} | {probe['icon']} {probe['label']} | "
             f"{status_cell(provider['status'])} {provider['available']}/{provider['total']} | "
-            f"{kind} | "
+            f"{kind} | {diff_cell} | "
             f"`{provider['env']}` | {catalog_cell} | {console} |")
     add("")
 
@@ -1368,6 +1381,40 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
         add("> 门槛列：✅ = 需要，— = 不需要，? = 官方页面未说明。")
         add("> 「未公布」不代表没有限制 —— 大部分平台的限速数字只在登录后的控制台可见。")
         add("")
+
+    # ---------------- 中国大陆可用性 ----------------
+    with_access = [p for p in providers if (p.get("policy") or {}).get("access")]
+    if with_access:
+        add("## 中国大陆可用性")
+        add("")
+        add("这一节回答的是「**身在墙内能不能拿到并调用它**」，数据来自官方条款与实测。")
+        add("对我们来说，**地区封锁和非中国出口往往比外币卡更早成为障碍**。")
+        add("")
+        add("| 平台 | 拿到密钥的难度 | 原因 | 封锁大陆 | 需非中国出口 | 拿免费额度要绑卡 |")
+        add("| --- | --- | --- | :-: | :-: | :-: |")
+        yn = {"yes": "⛔ 是", "no": "—", "unknown": "?"}
+        rank = {"easy": 0, "medium": 1, "hard": 2, "blocked": 3, "unknown": 4}
+        for p in sorted(with_access,
+                        key=lambda x: rank.get(((x["policy"]["access"]) or {}).get("difficulty_cn"), 9)):
+            acc = p["policy"]["access"]
+            diff = acc.get("difficulty_cn")
+            cell = (f"{DIFFICULTY_META[diff]['icon']} {DIFFICULTY_META[diff]['label']}"
+                    if diff in DIFFICULTY_META else "-")
+            region = acc.get("region") or {}
+            pay = acc.get("payment") or {}
+            reason = (acc.get("difficulty_reason") or "").replace("|", "\\|")
+            if len(reason) > 60:
+                reason = reason[:59] + "…"
+            add(f"| {p['name']} | {cell} | {reason} | "
+                f"{yn.get(region.get('blocks_china'), '?')} | "
+                f"{yn.get(region.get('needs_non_cn_ip'), '?')} | "
+                f"{yn.get(pay.get('card_required_to_get_free'), '?')} |")
+        add("")
+        blocked = [p["name"] for p in with_access
+                   if (p["policy"]["access"] or {}).get("difficulty_cn") == "blocked"]
+        if blocked:
+            add(f"> ⛔ **官方按国家/地区封锁中国大陆**：{'、'.join(blocked)}。这不是「难申请」，是根本进不去。")
+            add("")
 
     # ---------------- 自动发现 ----------------
     adopted = discovery.get("newly_adopted") or discovery.get("adopted") or []
