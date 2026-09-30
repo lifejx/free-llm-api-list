@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
   "last_action": "本轮新纳入 0 个，剔除 0 个",
-  "updated_at": "2026-10-01 02:39:37",
+  "updated_at": "2026-10-01 02:53:16",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -10,7 +10,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "dots-studio/dots-3-note-preview:free": {
         "context": 512000,
@@ -18,7 +18,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "google/gemma-4-26b-a4b-it:free": {
         "context": 262144,
@@ -26,7 +26,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "google/gemma-4-31b-it:free": {
         "context": 262144,
@@ -34,7 +34,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "inclusionai/ling-3.0-flash-sante:free": {
         "context": 262144,
@@ -42,7 +42,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "liquid/lfm-2.5-2.6b:free": {
         "context": 65536,
@@ -50,7 +50,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
         "context": 256000,
@@ -58,7 +58,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "nvidia/nemotron-3-super-120b-a12b:free": {
         "context": 262144,
@@ -66,7 +66,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "nvidia/nemotron-3-ultra-550b-a55b:free": {
         "context": 1000000,
@@ -74,7 +74,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "nvidia/nemotron-3.5-lightning:free": {
         "context": 1000000,
@@ -82,7 +82,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "openrouter/free": {
         "context": 200000,
@@ -98,7 +98,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "poolside/laguna-xs-2.1:free": {
         "context": 262144,
@@ -106,7 +106,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "qwen/qwen3.8-27b:free": {
         "context": 262144,
@@ -122,7 +122,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "thinkingmachines/inkling-small:free": {
         "context": 1048576,
@@ -130,7 +130,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "thinkingmachines/inkling:free": {
         "context": 1048576,
@@ -138,7 +138,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       }
     },
     "NOVITA_KEY": {
@@ -148,7 +148,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "dev/glm46": {
         "context": 256000,
@@ -156,7 +156,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "catalog_only"
       },
       "inclusionai/ling-3.0-flash-sante": {
         "context": 262144,

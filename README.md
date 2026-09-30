@@ -3,10 +3,10 @@
 自动巡检各大平台免费大模型接口的可用性，每 4 小时更新一次。
 密钥只存放在 GitHub Secrets 中，脚本不落地、不外传，仓库里只留下状态结果。
 
-- **最后更新**：2026-10-01 01:39:43 (北京时间 UTC+8)
-- **本次耗时**：5.2 秒　|　**巡检频率**：`0 */4 * * *`
-- **实测可用**：**0 / 83**（未配密钥但目录已确认存在 🔵 23 个）　|　**已配置平台**：0 / 28
-- **接口探活**：27 个平台已探活（🟢 在线 23，❌ 失效 2，📡 不通 1）　|　**可读目录**：6 个平台（其中 6 个无需密钥）
+- **最后更新**：2026-10-01 02:53:04 (北京时间 UTC+8)
+- **本次耗时**：12.4 秒　|　**巡检频率**：`0 */4 * * *`
+- **实测可用**：**0 / 88**（未配密钥但目录已确认存在 🔵 34 个）　|　**已配置平台**：0 / 24
+- **接口探活**：23 个平台已探活（🟢 在线 21，❌ 失效 0，📡 不通 0）　|　**可读目录**：5 个平台（其中 5 个无需密钥）
 
 > 这套清单是**自己维护自己**的：平台接口死活靠「匿名探活」（用一个无效密钥试，
 > 401 说明服务活着），模型增删靠拉平台公开的 `/models` 目录，
@@ -15,61 +15,149 @@
 | 状态 | 数量 | 说明 |
 | --- | ---: | --- |
 | ✅ 正常可用 | 0 | 用你的密钥实测返回 200 |
-| 🔵 目录已确认 | 23 | 未配密钥，但平台公开目录中确认该模型存在 |
+| 🔵 目录已确认 | 34 | 未配密钥，但平台公开目录中确认该模型存在 |
 | ⚠️ 限流/额度耗尽 | 0 | 返回 429 或提示配额/余额不足 |
 | 🟠 请求被拒 | 0 | 返回 400，参数或模型不被支持 |
 | 🔑 密钥失效/无权限 | 0 | 返回 401/403，密钥无效或权限变更 |
-| ⚪ 目录中已消失 | 12 | 公开目录里查不到它了，疑似已下架 |
+| ⚪ 目录中已消失 | 1 | 公开目录里查不到它了，疑似已下架 |
 | ❌ 模型已下架 | 0 | 返回 404，模型 ID 不存在 |
 | 🌐 服务端异常 | 0 | 返回 5xx，平台侧故障 |
 | 📡 网络超时/不可达 | 0 | 连接失败或超时 |
 | ❔ 未知状态 | 0 | 其他返回码 |
-| ⏭️ 无法判断 | 48 | 未配密钥，且平台目录不公开，无从判断 |
+| ⏭️ 无法判断 | 53 | 未配密钥，且平台目录不公开，无从判断 |
 
 **平台级「接口探活」**（不需要任何密钥，用无效密钥试出来的）：
 
 | 探活结果 | 平台数 | 说明 |
 | --- | ---: | --- |
-| 🟢 接口在线 | 23 | 鉴权层正常拒绝了无效密钥，说明服务活着、地址没变 |
-| 🔓 无需密钥 | 0 | 无效密钥竟然返回 200，接口可能不校验密钥 |
+| 🟢 接口在线 | 21 | 鉴权层正常拒绝了无效密钥，说明服务活着、地址没变 |
+| 🔓 无需密钥 | 1 | 无效密钥竟然返回 200，接口可能不校验密钥 |
 | 🟠 接口异常 | 1 | 能连上，但返回 5xx / 410 等服务端错误 |
-| ❌ 接口已失效 | 2 | 返回 404，路径变更或服务已下线 |
-| 📡 域名不通 | 1 | 连接失败或超时 |
+| ❌ 接口已失效 | 0 | 返回 404，路径变更或服务已下线 |
+| 📡 域名不通 | 0 | 连接失败或超时 |
 | ❔ 探活异常 | 0 | 返回码无法归类 |
 | ⏭️ 未探活 | 1 | 缺少必要环境变量，或本次关闭了探活 |
 
+## 本次状态变化
+
+| 平台 | 模型 | 变化 |
+| --- | --- | --- |
+| 智谱 AI (BigModel) | `glm-4.7-flash` | new → ⏭️ 无法判断 |
+| 智谱 AI (BigModel) | `glm-4-flash-250414` | new → ⏭️ 无法判断 |
+| 智谱 AI (BigModel) | `glm-z1-flash` | new → ⏭️ 无法判断 |
+| 月之暗面 Kimi | `kimi-k3` | new → ⏭️ 无法判断 |
+| 月之暗面 Kimi | `kimi-k2.5` | new → ⏭️ 无法判断 |
+| 月之暗面 Kimi | `kimi-k2.7-code` | new → ⏭️ 无法判断 |
+| 阿里云百炼 DashScope | `qwen3.8-max` | new → ⏭️ 无法判断 |
+| 阿里云百炼 DashScope | `qwen3.8-flash` | new → ⏭️ 无法判断 |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` | new → ⏭️ 无法判断 |
+| 硅基流动 SiliconFlow | `THUDM/GLM-Z1-9B-0414` | new → ⏭️ 无法判断 |
+| 魔搭 ModelScope | `Qwen/Qwen3.8-27B` | new → 🔵 目录已确认 |
+| 魔搭 ModelScope | `deepseek-ai/DeepSeek-V4.1-Flash` | new → 🔵 目录已确认 |
+| 魔搭 ModelScope | `ZhipuAI/GLM-4.7-Flash` | new → 🔵 目录已确认 |
+| 魔搭 ModelScope | `stepfun-ai/Step-3.7-Flash` | new → 🔵 目录已确认 |
+| 腾讯混元 / TokenHub | `hy4-preview` | new → ⏭️ 无法判断 |
+| 腾讯混元 / TokenHub | `hy3-preview` | new → ⏭️ 无法判断 |
+| 百度千帆 Qianfan | `ERNIE-4.5-Turbo-128K` | new → ⏭️ 无法判断 |
+| 百度千帆 Qianfan | `ERNIE-4.5-Turbo-32K` | new → ⏭️ 无法判断 |
+| 百度千帆 Qianfan | `DeepSeek-R1` | new → ⏭️ 无法判断 |
+| 百度千帆 Qianfan | `Kimi-K2-Instruct` | new → ⏭️ 无法判断 |
+| 火山方舟 Volcengine Ark | `doubao-seed-2-1-pro-260628` | new → ⏭️ 无法判断 |
+| 火山方舟 Volcengine Ark | `doubao-seed-2-1-lite-260915` | new → ⏭️ 无法判断 |
+| 火山方舟 Volcengine Ark | `doubao-seed-2-1-turbo-260628` | new → ⏭️ 无法判断 |
+| MiniMax | `MiniMax-M3` | new → ⏭️ 无法判断 |
+| MiniMax | `MiniMax-M2.7` | new → ⏭️ 无法判断 |
+| MiniMax | `MiniMax-M2.5` | new → ⏭️ 无法判断 |
+| 阶跃星辰 StepFun | `step-gui` | new → ⏭️ 无法判断 |
+| 零一万物 Yi | `yi-vision-v2` | new → ⏭️ 无法判断 |
+| 百川智能 Baichuan | `Baichuan-M3-Plus` | new → ⏭️ 无法判断 |
+| Groq | `openai/gpt-oss-20b` | new → ⏭️ 无法判断 |
+| Groq | `qwen/qwen3.8-27b` | new → ⏭️ 无法判断 |
+| Google Gemini | `gemini-3.8-flash` | new → ⏭️ 无法判断 |
+| Google Gemini | `gemini-3.5-flash` | new → ⏭️ 无法判断 |
+| Google Gemini | `gemini-3.1-flash-lite` | new → ⏭️ 无法判断 |
+| Cerebras | `qwen-3.8-27b` | new → ⏭️ 无法判断 |
+| Mistral AI | `mistral-small-2603` | new → ⏭️ 无法判断 |
+| Mistral AI | `mistral-moderation-2603` | new → ⏭️ 无法判断 |
+| Together AI | `Prism-ML/Ternary-Bonsai-27B` | new → ⏭️ 无法判断 |
+| Together AI | `together/Tev1-4B-experimental` | new → ⏭️ 无法判断 |
+| NVIDIA NIM | `deepseek-ai/deepseek-v4.1-flash` | new → 🔵 目录已确认 |
+| NVIDIA NIM | `z-ai/glm-5-3` | new → ⚪ 目录中已消失 |
+| NVIDIA NIM | `moonshotai/kimi-k3` | new → 🔵 目录已确认 |
+| NVIDIA NIM | `nvidia/nemotron-3-ultra-550b-a55b` | new → 🔵 目录已确认 |
+| NVIDIA NIM | `openai/gpt-oss-20b` | new → 🔵 目录已确认 |
+| SambaNova (SambaCloud) | `DeepSeek-V3.2` | new → 🔵 目录已确认 |
+| SambaNova (SambaCloud) | `DeepSeek-V3.1` | new → 🔵 目录已确认 |
+| SambaNova (SambaCloud) | `gpt-oss-120b` | new → 🔵 目录已确认 |
+| Nebius Token Factory | `moonshotai/Kimi-K2.5` | new → ⏭️ 无法判断 |
+| Novita AI | `inclusionai/ling-3.0-flash-vl` | new → 🔵 目录已确认 |
+| Cloudflare Workers AI | `@cf/qwen/qwen3.8-27b` | new → ⏭️ 无法判断 |
+| Cloudflare Workers AI | `@cf/openai/gpt-oss-120b` | new → ⏭️ 无法判断 |
+| Cloudflare Workers AI | `@cf/zai-org/glm-4.7-flash` | new → ⏭️ 无法判断 |
+
 ## 平台总览
 
-| 平台 | 接口探活 | 模型状态 | 密钥变量 | 目录 | 额度类型 | 申请地址 |
-| --- | --- | --- | --- | ---: | --- | --- |
-| DeepSeek 深度求索 | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `DEEPSEEK_KEY` | - | 注册赠送测试额度，用完后按量计费 | [控制台](https://platform.deepseek.com/api_keys) |
-| 智谱 AI (BigModel) | 🟢 接口在线 | ⏭️ 无法判断 0/3 | `ZHIPU_KEY` | - | Flash 系列免费，有限速 | [控制台](https://open.bigmodel.cn/usercenter/apikeys) |
-| 月之暗面 Kimi | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `MOONSHOT_KEY` | - | 新用户赠送额度 | [控制台](https://platform.moonshot.cn/console/api-keys) |
-| 阿里云百炼 DashScope | 🟢 接口在线 | ⏭️ 无法判断 0/3 | `DASHSCOPE_KEY` | - | 新用户每个模型 100 万 tokens 免费额度 | [控制台](https://bailian.console.aliyun.com/) |
-| 硅基流动 SiliconFlow | 🟢 接口在线 | ⏭️ 无法判断 0/3 | `SILICONFLOW_KEY` | - | 部分小模型免费，有限速 | [控制台](https://cloud.siliconflow.cn/account/ak) |
-| 魔搭 ModelScope | 🟢 接口在线 | ⚪ 目录中已消失 0/3 | `MODELSCOPE_KEY` | 35（公开） | 每日 2000 次免费调用 | [控制台](https://modelscope.cn/my/myaccesstoken) |
-| 腾讯混元 Hunyuan | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `HUNYUAN_KEY` | - | 新用户赠送免费额度 | [控制台](https://console.cloud.tencent.com/hunyuan/api-key) |
-| 百度千帆 Qianfan | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `QIANFAN_KEY` | - | ERNIE Speed 系列免费 | [控制台](https://console.bce.baidu.com/iam/#/iam/apikey/list) |
-| 火山方舟 Volcengine Ark | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `VOLC_ARK_KEY` | - | 新用户每个模型 50 万 tokens 免费额度 | [控制台](https://console.volcengine.com/ark) |
-| 讯飞星火 Spark | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `SPARK_KEY` | - | Lite 版免费不限量（限速） | [控制台](https://console.xfyun.cn/services/bmx1) |
-| MiniMax | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `MINIMAX_KEY` | - | 注册赠送额度 | [控制台](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
-| 阶跃星辰 StepFun | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `STEPFUN_KEY` | - | Flash 系列免费（限速） | [控制台](https://platform.stepfun.com/interface-key) |
-| 零一万物 Yi | 🟠 接口异常 | ⏭️ 无法判断 0/1 | `YI_KEY` | - | 注册赠送额度 | [控制台](https://platform.lingyiwanwu.com/apikeys) |
-| 百川智能 Baichuan | 🟢 接口在线 | ⏭️ 无法判断 0/1 | `BAICHUAN_KEY` | - | 新用户赠送 tokens | [控制台](https://platform.baichuan-ai.com/console/apikey) |
-| OpenRouter | 🟢 接口在线 | 🔵 目录已确认 0/20 | `OPENROUTER_KEY` | 464（公开） | 免费模型每日次数受限（随账户余额放宽） | [控制台](https://openrouter.ai/keys) |
-| Groq | 🟢 接口在线 | ⏭️ 无法判断 0/3 | `GROQ_KEY` | - | 免费层按 RPM/TPM/每日限额 | [控制台](https://console.groq.com/keys) |
-| Google Gemini | 🟢 接口在线 | ⏭️ 无法判断 0/3 | `GEMINI_KEY` | - | 免费层按 RPM/RPD 限速 | [控制台](https://aistudio.google.com/app/apikey) |
-| Cerebras | 🟢 接口在线 | ⏭️ 无法判断 0/3 | `CEREBRAS_KEY` | - | 免费层每日 100 万 tokens | [控制台](https://cloud.cerebras.ai/) |
-| Mistral AI | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `MISTRAL_KEY` | - | Experiment 免费层（需手机验证，限速） | [控制台](https://console.mistral.ai/api-keys/) |
-| Together AI | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `TOGETHER_KEY` | - | 新用户赠送额度 + 少量 free 模型 | [控制台](https://api.together.xyz/settings/api-keys) |
-| NVIDIA NIM | ❌ 接口已失效 | ⚪ 目录中已消失 0/2 | `NVIDIA_KEY` | 81（公开） | 注册赠送 1000 credits | [控制台](https://build.nvidia.com/settings/api-keys) |
-| SambaNova | 🟢 接口在线 | 🔵 目录已确认 0/2 | `SAMBANOVA_KEY` | 7（公开） | 免费层限速 | [控制台](https://cloud.sambanova.ai/apis) |
-| Hyperbolic | ❌ 接口已失效 | ⏭️ 无法判断 0/2 | `HYPERBOLIC_KEY` | - | 注册赠送约 $1 额度 | [控制台](https://app.hyperbolic.xyz/settings) |
-| Nebius AI Studio | 🟢 接口在线 | ⏭️ 无法判断 0/2 | `NEBIUS_KEY` | - | 注册赠送试用额度 | [控制台](https://studio.nebius.com/settings/api-keys) |
-| Novita AI | 🟢 接口在线 | 🔵 目录已确认 0/6 | `NOVITA_KEY` | 120（公开） | 注册赠送试用额度 | [控制台](https://novita.ai/settings/key-management) |
-| Chutes | 🟢 接口在线 | ⚪ 目录中已消失 0/2 | `CHUTES_KEY` | 14（公开） | 注册赠送少量额度 | [控制台](https://chutes.ai/app/api) |
-| GitHub Models | 📡 域名不通 | ⏭️ 无法判断 0/2 | `GITHUB_MODELS_TOKEN` | - | 免费层按 RPM/RPD 限速 | [控制台](https://github.com/settings/tokens) |
-| Cloudflare Workers AI | ⏭️ 未探活 | ⏭️ 无法判断 0/2 | `CLOUDFLARE_API_TOKEN` | - | 每日 10000 neurons 免费额度 | [控制台](https://dash.cloudflare.com/profile/api-tokens) |
+| 平台 | 接口探活 | 模型状态 | 免费性质 | 密钥变量 | 目录 | 申请地址 |
+| --- | --- | --- | --- | --- | ---: | --- |
+| 智谱 AI (BigModel) | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | `ZHIPU_KEY` | - | [控制台](https://open.bigmodel.cn/usercenter/apikeys) |
+| 月之暗面 Kimi | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | `MOONSHOT_KEY` | - | [控制台](https://platform.kimi.com/console/api-keys) |
+| 阿里云百炼 DashScope | 🟢 接口在线 | ⏭️ 无法判断 0/5 | 一次性赠送 | `DASHSCOPE_KEY` | - | [控制台](https://bailian.console.aliyun.com/) |
+| 硅基流动 SiliconFlow | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | `SILICONFLOW_KEY` | - | [控制台](https://cloud.siliconflow.cn/account/ak) |
+| 魔搭 ModelScope | 🟢 接口在线 | 🔵 目录已确认 0/4 | 长期免费 | `MODELSCOPE_KEY` | 35（公开） | [控制台](https://modelscope.cn/my/myaccesstoken) |
+| 腾讯混元 / TokenHub | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | `HUNYUAN_KEY` | - | [控制台](https://console.cloud.tencent.com/hunyuan/api-key) |
+| 百度千帆 Qianfan | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 一次性赠送 | `QIANFAN_KEY` | - | [控制台](https://console.bce.baidu.com/iam/) |
+| 火山方舟 Volcengine Ark | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | `VOLC_ARK_KEY` | - | [控制台](https://console.volcengine.com/ark) |
+| 讯飞星火 Spark | 🟢 接口在线 | ⏭️ 无法判断 0/1 | 长期免费 | `SPARK_KEY` | - | [控制台](https://console.xfyun.cn/services/bmx1) |
+| MiniMax | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | `MINIMAX_KEY` | - | [控制台](https://platform.minimaxi.com/) |
+| 阶跃星辰 StepFun | 🟢 接口在线 | ⏭️ 无法判断 0/1 | 长期免费 | `STEPFUN_KEY` | - | [控制台](https://platform.stepfun.com/interface-key) |
+| 零一万物 Yi | 🟠 接口异常 | ⏭️ 无法判断 0/2 | 未知 | `YI_KEY` | - | [控制台](https://platform.lingyiwanwu.com/apikeys) |
+| 百川智能 Baichuan | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | `BAICHUAN_KEY` | - | [控制台](https://platform.baichuan-ai.com/console/apikey) |
+| OpenRouter | 🟢 接口在线 | 🔵 目录已确认 0/17 | 长期免费 | `OPENROUTER_KEY` | 464（公开） | [控制台](https://openrouter.ai/keys) |
+| Groq | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 长期免费 | `GROQ_KEY` | - | [控制台](https://console.groq.com/keys) |
+| Google Gemini | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | `GEMINI_KEY` | - | [控制台](https://aistudio.google.com/app/apikey) |
+| Cerebras | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | `CEREBRAS_KEY` | - | [控制台](https://cloud.cerebras.ai/) |
+| Mistral AI | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 长期免费 | `MISTRAL_KEY` | - | [控制台](https://console.mistral.ai/api-keys/) |
+| Together AI | 🔓 无需密钥 | ⏭️ 无法判断 0/2 | 长期免费 | `TOGETHER_KEY` | - | [控制台](https://api.together.xyz/settings/api-keys) |
+| NVIDIA NIM | 🟢 接口在线 | 🔵 目录已确认 0/5 | 长期免费 | `NVIDIA_KEY` | 81（公开） | [控制台](https://build.nvidia.com/settings/api-keys) |
+| SambaNova (SambaCloud) | 🟢 接口在线 | 🔵 目录已确认 0/4 | 长期免费 | `SAMBANOVA_KEY` | 7（公开） | [控制台](https://cloud.sambanova.ai/apis) |
+| Nebius Token Factory | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | `NEBIUS_KEY` | - | [控制台](https://tokenfactory.nebius.com/) |
+| Novita AI | 🟢 接口在线 | 🔵 目录已确认 0/5 | 长期免费 | `NOVITA_KEY` | 120（公开） | [控制台](https://novita.ai/settings/key-management) |
+| Cloudflare Workers AI | ⏭️ 未探活 | ⏭️ 无法判断 0/4 | 长期免费 | `CLOUDFLARE_API_TOKEN` | - | [控制台](https://dash.cloudflare.com/profile/api-tokens) |
+
+## 免费政策与限流
+
+这一节是**人工核实的官方数据**，不是实测值 —— 全部来自研究员实际读到的官方页面，
+查不到的一律写「未公布」。核实日期见末列，来源链接在 `providers.json` 里。
+
+| 平台 | 免费性质 | RPM | RPD | TPM | TPD | 并发 | 重置 | 闲时/忙时 | 手机号 | 实名 | 外币卡 | 置信度 | 核实日 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | :-: | :-: | :-: | :-: | --- |
+| 月之暗面 Kimi | 一次性赠送 | 3 | 未公布 | 500000 | 1500000 | 1 | 未公布 | 无 | ✅ | ✅ | — | partial | 2026-09-30 |
+| 阿里云百炼 DashScope | 一次性赠送 | 1200（qwen-turbo、qwen-long，华北2北京）；30000（qwen-plus，华北2北京） | 未公布 | 5000000（qwen-plus、qwen-turbo，华北2北京）；3000000（qwen-long，华北2北京） | 未公布 | 未公布 | 未公布（免费额度有效期为 90 天、官方明确不支持补发/延期/重置；OAuth 免费额度为每天 2000 次，重置时刻未公布） | 官方未公布免费额度层面的闲时/忙时差异；但模型价格页显示部分模型改按峰谷定价：忙时为北京时间 8:00-22:00、闲时为北京时间 22:00-次日 8:00（如 deepseek-v4.1-flash、deepseek-v4-pro-0813、deepseek-v4-flash-0731），只影响单价、不影响免费额度是否存在 | ✅ | — | — | verified | 2026-09-30 |
+| 腾讯混元 / TokenHub | 一次性赠送 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布（非按日重置：免费额度为一次性资源包，自开通服务之日起 1 年内有效，过期作废） | 无 | ? | ✅ | ? | verified | 2026-09-30 |
+| 百度千帆 Qianfan | 一次性赠送 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布（免费额度非按日重置：自开通起 3 个月内有效；速率配额按分钟窗口，官方文档仅说明剩余配额「如果配额用完，将会在 0-60s 后刷新」） | 无（免费额度不区分闲忙时；但按量后付费价格区分忙时 8:00-22:00 与闲时 22:00-次日 8:00，闲时更便宜） | ? | ✅ | ? | partial | 2026-09-30 |
+| 火山方舟 Volcengine Ark | 一次性赠送 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 不重置（一次性免费额度，用尽后服务暂停/需开通付费） | 无 | ? | ✅ | ? | partial | 2026-09-30 |
+| MiniMax | 一次性赠送 | 20 | 未公布 | 1000000 | 未公布 | 未公布 | 未公布 | 无 | ✅ | ? | ? | partial | 2026-09-30 |
+| 百川智能 Baichuan | 一次性赠送 | 120 | 300 | 未公布 | 未公布 | 未公布 | 未公布 | 无 | ✅ | ✅ | ? | verified | 2026-09-30 |
+| Cerebras | 一次性赠送 | 5 | 未公布 | 30000（uncached TPM）/ 90000（total TPM） | 1000000 | 未公布 | 无固定重置时刻：官方 Quota Replenishment 说明额度用 token bucketing 算法连续补充（Available quota = min(Rate limit, Rate limit + replenished tokens by time − current usage)），不按固定间隔清零 | 无 | ? | ? | ✅ | verified | 2026-09-30 |
+| Nebius Token Factory | 一次性赠送 | 60 | 未公布 | 400000 | 未公布 | 未公布 | 未公布（配额持续补充；动态限流按滚动 15 分钟窗口评估并调整） | 无 | ? | ? | ✅ | partial | 2026-09-30 |
+| 零一万物 Yi | 未知 | 4 | 未公布 | 32000 | 未公布 | 未公布 | 未公布 | 无 | ✅ | ✅ | ? | partial | 2026-09-30 |
+| 智谱 AI (BigModel) | 长期免费 | 未公布 | 未公布 | 未公布 | 未公布 | 数值未公布，需登录控制台查看。官方速率限制页明确「不同模型设有独立的并发限制」，且并发上限与「用户权益等级」相关，请到控制台「速率限制」页查看本账号各模型的可调用速率；并发定义为同一时刻正在处理中的请求数量。GLM Coding Plan 用户按套餐等级（Lite/Pro/Max）统一并发，低峰期动态提升。 | 未公布 | 有（但无数值）。官方说明：高峰期若账户短时间发起大量并发请求并超出该模型并发上限，平台按账户维度限流；此外平台级过载（某模型访问量激增、底层算力高负载、维护/扩容/异常恢复）会触发全局保护，与单一账户行为无关。错误码 1308 提示限额会在 next_flush_time 重置，但未公布具体时刻与时区。 | ✅ | — | ? | verified | 2026-09-30 |
+| 硅基流动 SiliconFlow | 长期免费 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 无 | — | ✅ | ? | partial | 2026-09-30 |
+| 魔搭 ModelScope | 长期免费 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 无 | ✅ | ✅ | ? | partial | 2026-09-30 |
+| 讯飞星火 Spark | 长期免费 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 无 | ? | ✅ | ? | partial | 2026-09-30 |
+| 阶跃星辰 StepFun | 长期免费 | 100 | 未公布 | 500000 | 未公布 | 5 | 未公布 | 无 | ✅ | ✅ | ? | verified | 2026-09-30 |
+| OpenRouter | 长期免费 | 未公布 | 50 | 未公布 | 未公布 | 未公布 | 每日按 UTC 自然日重置（官方 docs 原文：free_model_daily_requests 统计 current UTC day；usage_weekly 为 current UTC week, starting Monday） | 无 | ? | ? | — | partial | 2026-09-30 |
+| Groq | 长期免费 | 30 | 1000 | 8000 | 200000 | 未公布 | 未公布 | 无 | ? | ? | — | verified | 2026-09-30 |
+| Google Gemini | 长期免费 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | RPD（每日请求数）额度在太平洋时间午夜重置（原文：Requests per day (RPD) quotas reset at midnight Pacific time） | 无 | ? | ? | ? | partial | 2026-09-30 |
+| Mistral AI | 长期免费 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 无 | ? | ? | — | partial | 2026-09-30 |
+| Together AI | 长期免费 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 未公布 | 无 | ? | ? | ✅ | partial | 2026-09-30 |
+| NVIDIA NIM | 长期免费 | 40 | 10000 | 未公布 | 未公布 | 未公布 | 未公布 | 无 | ? | ? | ? | partial | 2026-09-30 |
+| SambaNova (SambaCloud) | 长期免费 | 20 | 20 | 未公布 | 200000 | 未公布 | 未公布 | 无 | ? | ? | — | verified | 2026-09-30 |
+| Novita AI | 长期免费 | 30 | 未公布 | 50000000 | 未公布 | 未公布 | 未公布 | 无 | — | ? | ? | partial | 2026-09-30 |
+| Cloudflare Workers AI | 长期免费 | 300 | 未公布 | 未公布 | 未公布 | 未公布 | 每日 00:00 UTC | 无 | ? | ? | — | verified | 2026-09-30 |
+
+> 门槛列：✅ = 需要，— = 不需要，? = 官方页面未说明。
+> 「未公布」不代表没有限制 —— 大部分平台的限速数字只在登录后的控制台可见。
 
 ## 自动发现
 
@@ -81,27 +169,21 @@
 
 > 当前自动纳入模式：**safe**（`safe` = 只收机器确证免费的；`aggressive` = 名字像的也收；`off` = 只记候选）
 
-### 候选（未自动纳入，共 38 个）
+### 候选（未自动纳入，共 32 个）
 
 名字看起来是免费档、但平台没给出可机器核对的定价信息，所以只列在这里。
 想收进来就把对应 `id` 加到 `models.custom.json`，或者手动跑 `--adopt aggressive`。
 
 | 平台 | 模型 | 依据 | 上下文 |
 | --- | --- | --- | ---: |
-| Chutes | `Nemotron-3-Nano-Omni-30B-TEE` | 疑似免费 | 131K |
-| Chutes | `Qwen/Qwen3.5-397B-A17B-TEE` | 疑似免费 | 262K |
-| Chutes | `Qwen/Qwen3.6-27B-TEE` | 疑似免费 | 262K |
-| Chutes | `Qwen/Qwen3.8-27B-TEE` | 疑似免费 | 262K |
-| Chutes | `deepseek-ai/DeepSeek-V4-Flash-0731-TEE` | 疑似免费 | 1M |
-| Chutes | `google/gemma-4-31B-turbo-TEE` | 疑似免费 | 131K |
 | NVIDIA NIM | `adept/fuyu-8b` | 疑似免费 |  |
 | NVIDIA NIM | `aisingapore/sea-lion-7b-instruct` | 疑似免费 |  |
 | NVIDIA NIM | `deepseek-ai/deepseek-coder-6.7b-instruct` | 疑似免费 |  |
-| NVIDIA NIM | `deepseek-ai/deepseek-v4.1-flash` | 疑似免费 |  |
 | NVIDIA NIM | `google/codegemma-1.1-7b` | 疑似免费 |  |
 | NVIDIA NIM | `google/codegemma-7b` | 疑似免费 |  |
 | NVIDIA NIM | `google/diffusiongemma-26b-a4b-it` | 疑似免费 |  |
 | NVIDIA NIM | `google/gemma-3-4b-it` | 疑似免费 |  |
+| NVIDIA NIM | `ibm/granite-3.0-3b-a800m-instruct` | 疑似免费 |  |
 | Novita AI | `Sao10K/L3-8B-Stheno-v3.2` | 疑似免费 | 8K |
 | Novita AI | `baidu/ernie-4.5-21B-a3b` | 疑似免费 | 120K |
 | Novita AI | `baidu/ernie-4.5-vl-424b-a47b` | 疑似免费 | 123K |
@@ -118,95 +200,158 @@
 | OpenRouter | `bytedance-seed/seed-2-1-turbo` | 疑似免费 | 262K |
 | OpenRouter | `bytedance-seed/seed-2.0-lite` | 疑似免费 | 262K |
 | OpenRouter | `bytedance/ui-tars-1.5-7b` | 疑似免费 | 128K |
-| … | 其余 8 个已截断 | | |
+| 魔搭 ModelScope | `OpenGVLab/InternVL3_5-241B-A28B` | 疑似免费 |  |
+| 魔搭 ModelScope | `PaddlePaddle/ERNIE-4.5-0.3B-PT` | 疑似免费 |  |
+| 魔搭 ModelScope | `PaddlePaddle/ERNIE-4.5-21B-A3B-PT` | 疑似免费 |  |
+| 魔搭 ModelScope | `PaddlePaddle/ERNIE-4.5-300B-A47B-PT` | 疑似免费 |  |
+| 魔搭 ModelScope | `PaddlePaddle/ERNIE-4.5-VL-28B-A3B-PT` | 疑似免费 |  |
+| 魔搭 ModelScope | `Qwen/Qwen3.5-27B` | 疑似免费 |  |
+| … | 其余 2 个已截断 | | |
+
+## 外部清单与官方文档变更
+
+政策数字很难自动解析，但**「页面变了」很容易检测**。这一节只做变更提醒，不做解读。
+
+### 别家清单的变化
+
+| 来源 | 模型数 | 本轮变化 |
+| --- | ---: | --- |
+| Cline 模型目录 | 464 | 无变化 |
+
+> Cline 模型目录：Cline 用量计费通道的目录；实测与 OpenRouter 一致（464 个），用来交叉验证
+
+### 官方文档页变更提醒
+
+本轮 16 个官方页面都没有变化。
+
+> 有 15 个页面是第一次抓取，本轮只建立基线，不算变更。
+> 有 1 个页面本轮抓取失败（阶跃星辰定价），不影响其他检测。
+
+共监控 16 个页面，摘要存放在 `sources.json`。
+
+## 可用性时间线（自动累积）
+
+已累积 **3** 次巡检（2026-09-30 19:57 起）。这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。
+
+| 平台 | 巡检轮次 | 实测成功累计 | 限流(429)累计 | 探活异常 | 最容易限流的时段 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| CHUTES_KEY | 2 | 0 | 0 | 0 | - |
+| Cerebras | 3 | 0 | 0 | 0 | - |
+| Cloudflare Workers AI | 3 | 0 | 0 | 0 | - |
+| DEEPSEEK_KEY | 2 | 0 | 0 | 0 | - |
+| GITHUB_MODELS_TOKEN | 2 | 0 | 0 | 2 | - |
+| Google Gemini | 3 | 0 | 0 | 0 | - |
+| Groq | 3 | 0 | 0 | 0 | - |
+| HYPERBOLIC_KEY | 2 | 0 | 0 | 2 | - |
+| MiniMax | 3 | 0 | 0 | 0 | - |
+| Mistral AI | 3 | 0 | 0 | 0 | - |
+| NVIDIA NIM | 3 | 0 | 0 | 2 | - |
+| Nebius Token Factory | 3 | 0 | 0 | 0 | - |
+| Novita AI | 3 | 0 | 0 | 0 | - |
+| OpenRouter | 3 | 0 | 0 | 0 | - |
+| SambaNova (SambaCloud) | 3 | 0 | 0 | 0 | - |
+| Together AI | 3 | 0 | 0 | 0 | - |
+| 智谱 AI (BigModel) | 3 | 0 | 0 | 0 | - |
+| 月之暗面 Kimi | 3 | 0 | 0 | 0 | - |
+| 火山方舟 Volcengine Ark | 3 | 0 | 0 | 0 | - |
+| 百川智能 Baichuan | 3 | 0 | 0 | 0 | - |
+
+> **没配密钥的平台，限流列会一直是 0** —— 429 只有真正调用时才会出现，
+> 匿名探活看不到它。想让这一节有数据，配一个密钥就行。
+> 时段按北京时间（UTC+8）统计，每 4 小时一个采样点，数据越攒越准。
 
 ## 模型明细
 
-| 平台 | 模型 ID | 来源 | 上下文 | 额度类型 | 预期有效期 | 状态 | HTTP | 延迟 | 备注 |
-| --- | --- | --- | ---: | --- | --- | --- | ---: | ---: | --- |
-| DeepSeek 深度求索 | `deepseek-chat` | 人工登记 | 128K | 注册赠送测试额度，用完后按量计费 | 额度用尽即止（非长期免费） | ⏭️ 无法判断 | - | - | 缺少环境变量 DEEPSEEK_KEY |
-| DeepSeek 深度求索 | `deepseek-reasoner` | 人工登记 | 128K | 注册赠送测试额度，用完后按量计费 | 额度用尽即止（非长期免费） | ⏭️ 无法判断 | - | - | 缺少环境变量 DEEPSEEK_KEY |
-| 智谱 AI (BigModel) | `glm-4-flash` | 人工登记 | 128K | Flash 系列免费，有限速 | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 ZHIPU_KEY |
-| 智谱 AI (BigModel) | `glm-4.5-flash` | 人工登记 | 128K | Flash 系列免费，有限速 | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 ZHIPU_KEY |
-| 智谱 AI (BigModel) | `glm-4v-flash` | 人工登记 | 8K | Flash 系列免费，有限速 | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 ZHIPU_KEY |
-| 月之暗面 Kimi | `kimi-k2-0905-preview` | 人工登记 | 262K | 新用户赠送额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 MOONSHOT_KEY |
-| 月之暗面 Kimi | `moonshot-v1-8k` | 人工登记 | 8K | 新用户赠送额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 MOONSHOT_KEY |
-| 阿里云百炼 DashScope | `qwen-turbo` | 人工登记 | 1M | 新用户每个模型 100 万 tokens 免费额度 | 自开通起 180 天有效 | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
-| 阿里云百炼 DashScope | `qwen-plus` | 人工登记 | 131K | 新用户每个模型 100 万 tokens 免费额度 | 自开通起 180 天有效 | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
-| 阿里云百炼 DashScope | `qwen-long` | 人工登记 | 10M | 新用户每个模型 100 万 tokens 免费额度 | 自开通起 180 天有效 | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
-| 硅基流动 SiliconFlow | `Qwen/Qwen3-8B` | 人工登记 | 32K | 部分小模型免费，有限速 | 长期免费（免费名单会轮换） | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
-| 硅基流动 SiliconFlow | `THUDM/glm-4-9b-chat` | 人工登记 | 32K | 部分小模型免费，有限速 | 长期免费（免费名单会轮换） | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
-| 硅基流动 SiliconFlow | `deepseek-ai/DeepSeek-R1-0528-Qwen3-8B` | 人工登记 | 131K | 部分小模型免费，有限速 | 长期免费（免费名单会轮换） | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
-| 魔搭 ModelScope | `Qwen/Qwen3-8B` | 人工登记 | 32K | 每日 2000 次免费调用 | 长期免费 | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| 魔搭 ModelScope | `deepseek-ai/DeepSeek-R1-Distill-Qwen-7B` | 人工登记 | 65K | 每日 2000 次免费调用 | 长期免费 | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| 魔搭 ModelScope | `Qwen/Qwen2.5-7B-Instruct` | 人工登记 | 32K | 每日 2000 次免费调用 | 长期免费 | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| 腾讯混元 Hunyuan | `hunyuan-turbos-latest` | 人工登记 | 32K | 新用户赠送免费额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 HUNYUAN_KEY |
-| 腾讯混元 Hunyuan | `hunyuan-lite` | 人工登记 | 32K | 新用户赠送免费额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 HUNYUAN_KEY |
-| 百度千帆 Qianfan | `ernie-speed-128k` | 人工登记 | 131K | ERNIE Speed 系列免费 | 长期免费（限速） | ⏭️ 无法判断 | - | - | 缺少环境变量 QIANFAN_KEY |
-| 百度千帆 Qianfan | `ernie-4.5-turbo-128k` | 人工登记 | 131K | ERNIE Speed 系列免费 | 长期免费（限速） | ⏭️ 无法判断 | - | - | 缺少环境变量 QIANFAN_KEY |
-| 火山方舟 Volcengine Ark | `doubao-seed-1-6-250615` | 人工登记 | 262K | 新用户每个模型 50 万 tokens 免费额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 VOLC_ARK_KEY |
-| 火山方舟 Volcengine Ark | `doubao-1-5-lite-32k-250115` | 人工登记 | 32K | 新用户每个模型 50 万 tokens 免费额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 VOLC_ARK_KEY |
-| 讯飞星火 Spark | `lite` | 人工登记 | 8K | Lite 版免费不限量（限速） | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 SPARK_KEY |
-| 讯飞星火 Spark | `generalv3.5` | 人工登记 | 8K | Lite 版免费不限量（限速） | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 SPARK_KEY |
-| MiniMax | `MiniMax-Text-01` | 人工登记 | 1M | 注册赠送额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 MINIMAX_KEY |
-| MiniMax | `abab6.5s-chat` | 人工登记 | 245K | 注册赠送额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 MINIMAX_KEY |
-| 阶跃星辰 StepFun | `step-1-flash` | 人工登记 | 8K | Flash 系列免费（限速） | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 STEPFUN_KEY |
-| 阶跃星辰 StepFun | `step-2-mini` | 人工登记 | 32K | Flash 系列免费（限速） | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 STEPFUN_KEY |
-| 零一万物 Yi | `yi-lightning` | 人工登记 | 16K | 注册赠送额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 YI_KEY |
-| 百川智能 Baichuan | `Baichuan4-Turbo` | 人工登记 | 32K | 新用户赠送 tokens | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 BAICHUAN_KEY |
-| OpenRouter | `meta-llama/llama-3.3-70b-instruct:free` | 人工登记 | 131K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| OpenRouter | `deepseek/deepseek-r1:free` | 人工登记 | 163K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| OpenRouter | `google/gemini-2.0-flash-exp:free` | 人工登记 | 1M | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| OpenRouter | `cohere/north-mini-code:free` | 自动发现 | 256K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `dots-studio/dots-3-note-preview:free` | 自动发现 | 512K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `google/gemma-4-26b-a4b-it:free` | 自动发现 | 262K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `google/gemma-4-31b-it:free` | 自动发现 | 262K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `inclusionai/ling-3.0-flash-sante:free` | 自动发现 | 262K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `liquid/lfm-2.5-2.6b:free` | 自动发现 | 65K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 自动发现 | 256K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `nvidia/nemotron-3-super-120b-a12b:free` | 自动发现 | 262K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `nvidia/nemotron-3-ultra-550b-a55b:free` | 自动发现 | 1M | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `nvidia/nemotron-3.5-lightning:free` | 自动发现 | 1M | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `openrouter/free` | 自动发现 | 200K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `poolside/laguna-s-2.1:free` | 自动发现 | 262K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `poolside/laguna-xs-2.1:free` | 自动发现 | 262K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `qwen/qwen3.8-27b:free` | 自动发现 | 262K | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `stealth/space-bunny-alpha` | 自动发现 | 1M | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `thinkingmachines/inkling-small:free` | 自动发现 | 1M | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| OpenRouter | `thinkingmachines/inkling:free` | 自动发现 | 1M | 免费模型每日次数受限（随账户余额放宽） | 长期免费（:free 名单会轮换） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| Groq | `llama-3.3-70b-versatile` | 人工登记 | 131K | 免费层按 RPM/TPM/每日限额 | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 GROQ_KEY |
-| Groq | `llama-3.1-8b-instant` | 人工登记 | 131K | 免费层按 RPM/TPM/每日限额 | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 GROQ_KEY |
-| Groq | `openai/gpt-oss-120b` | 人工登记 | 131K | 免费层按 RPM/TPM/每日限额 | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 GROQ_KEY |
-| Google Gemini | `gemini-2.5-flash` | 人工登记 | 1M | 免费层按 RPM/RPD 限速 | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 GEMINI_KEY |
-| Google Gemini | `gemini-2.5-flash-lite` | 人工登记 | 1M | 免费层按 RPM/RPD 限速 | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 GEMINI_KEY |
-| Google Gemini | `gemini-2.0-flash` | 人工登记 | 1M | 免费层按 RPM/RPD 限速 | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 GEMINI_KEY |
-| Cerebras | `llama3.3-70b` | 人工登记 | 131K | 免费层每日 100 万 tokens | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 CEREBRAS_KEY |
-| Cerebras | `qwen-3-32b` | 人工登记 | 131K | 免费层每日 100 万 tokens | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 CEREBRAS_KEY |
-| Cerebras | `gpt-oss-120b` | 人工登记 | 131K | 免费层每日 100 万 tokens | 长期免费 | ⏭️ 无法判断 | - | - | 缺少环境变量 CEREBRAS_KEY |
-| Mistral AI | `mistral-small-latest` | 人工登记 | 131K | Experiment 免费层（需手机验证，限速） | 长期免费（限速） | ⏭️ 无法判断 | - | - | 缺少环境变量 MISTRAL_KEY |
-| Mistral AI | `open-mistral-nemo` | 人工登记 | 131K | Experiment 免费层（需手机验证，限速） | 长期免费（限速） | ⏭️ 无法判断 | - | - | 缺少环境变量 MISTRAL_KEY |
-| Together AI | `meta-llama/Llama-Vision-Free` | 人工登记 | 131K | 新用户赠送额度 + 少量 free 模型 | 额度用尽即止（free 名单会轮换） | ⏭️ 无法判断 | - | - | 缺少环境变量 TOGETHER_KEY |
-| Together AI | `deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free` | 人工登记 | 131K | 新用户赠送额度 + 少量 free 模型 | 额度用尽即止（free 名单会轮换） | ⏭️ 无法判断 | - | - | 缺少环境变量 TOGETHER_KEY |
-| NVIDIA NIM | `deepseek-ai/deepseek-r1` | 人工登记 | 131K | 注册赠送 1000 credits | 额度用尽即止 | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| NVIDIA NIM | `meta/llama-3.3-70b-instruct` | 人工登记 | 131K | 注册赠送 1000 credits | 额度用尽即止 | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| SambaNova | `Meta-Llama-3.3-70B-Instruct` | 人工登记 | 131K | 免费层限速 | 长期免费（限速） | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| SambaNova | `DeepSeek-R1-Distill-Llama-70B` | 人工登记 | 131K | 免费层限速 | 长期免费（限速） | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| Hyperbolic | `Qwen/Qwen3-235B-A22B` | 人工登记 | 131K | 注册赠送约 $1 额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 HYPERBOLIC_KEY |
-| Hyperbolic | `meta-llama/Llama-3.3-70B-Instruct` | 人工登记 | 131K | 注册赠送约 $1 额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 HYPERBOLIC_KEY |
-| Nebius AI Studio | `Qwen/Qwen3-235B-A22B` | 人工登记 | 131K | 注册赠送试用额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 NEBIUS_KEY |
-| Nebius AI Studio | `meta-llama/Llama-3.3-70B-Instruct` | 人工登记 | 131K | 注册赠送试用额度 | 额度用尽即止 | ⏭️ 无法判断 | - | - | 缺少环境变量 NEBIUS_KEY |
-| Novita AI | `deepseek/deepseek-v3-0324` | 人工登记 | 131K | 注册赠送试用额度 | 额度用尽即止 | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| Novita AI | `meta-llama/llama-3.3-70b-instruct` | 人工登记 | 131K | 注册赠送试用额度 | 额度用尽即止 | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| Novita AI | `bunny` | 自动发现 | 262K | 注册赠送试用额度 | 额度用尽即止 | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| Novita AI | `dev/glm46` | 自动发现 | 256K | 注册赠送试用额度 | 额度用尽即止 | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| Novita AI | `inclusionai/ling-3.0-flash-sante` | 自动发现 | 262K | 注册赠送试用额度 | 额度用尽即止 | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| Novita AI | `inclusionai/ling-3.1-flash` | 自动发现 | 262K | 注册赠送试用额度 | 额度用尽即止 | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
-| Chutes | `deepseek-ai/DeepSeek-V3-0324` | 人工登记 | 131K | 注册赠送少量额度 | 额度用尽即止 | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| Chutes | `Qwen/Qwen3-32B` | 人工登记 | 131K | 注册赠送少量额度 | 额度用尽即止 | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
-| GitHub Models | `gpt-4o-mini` | 人工登记 | 131K | 免费层按 RPM/RPD 限速 | 长期免费（限速） | ⏭️ 无法判断 | - | - | 缺少环境变量 GITHUB_MODELS_TOKEN |
-| GitHub Models | `Llama-3.3-70B-Instruct` | 人工登记 | 131K | 免费层按 RPM/RPD 限速 | 长期免费（限速） | ⏭️ 无法判断 | - | - | 缺少环境变量 GITHUB_MODELS_TOKEN |
-| Cloudflare Workers AI | `@cf/meta/llama-3.3-70b-instruct-fp8-fast` | 人工登记 | 24K | 每日 10000 neurons 免费额度 | 长期免费（每日重置） | ⏭️ 无法判断 | - | - | 缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID |
-| Cloudflare Workers AI | `@cf/meta/llama-3.1-8b-instruct` | 人工登记 | 8K | 每日 10000 neurons 免费额度 | 长期免费（每日重置） | ⏭️ 无法判断 | - | - | 缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID |
+| 平台 | 模型 ID | 来源 | 上下文 | 状态 | HTTP | 延迟 | 备注 |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| 智谱 AI (BigModel) | `glm-4.7-flash` | 人工登记 | 200K | ⏭️ 无法判断 | - | - | 缺少环境变量 ZHIPU_KEY |
+| 智谱 AI (BigModel) | `glm-4-flash-250414` | 人工登记 | 128K | ⏭️ 无法判断 | - | - | 缺少环境变量 ZHIPU_KEY |
+| 智谱 AI (BigModel) | `glm-z1-flash` | 人工登记 | 128K | ⏭️ 无法判断 | - | - | 缺少环境变量 ZHIPU_KEY |
+| 智谱 AI (BigModel) | `glm-4v-flash` | 人工登记 | 16K | ⏭️ 无法判断 | - | - | 缺少环境变量 ZHIPU_KEY |
+| 月之暗面 Kimi | `kimi-k3` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 MOONSHOT_KEY |
+| 月之暗面 Kimi | `kimi-k2.5` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 MOONSHOT_KEY |
+| 月之暗面 Kimi | `kimi-k2.7-code` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 MOONSHOT_KEY |
+| 阿里云百炼 DashScope | `qwen3.8-max` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
+| 阿里云百炼 DashScope | `qwen3.8-flash` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
+| 阿里云百炼 DashScope | `qwen-plus` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
+| 阿里云百炼 DashScope | `qwen-turbo` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
+| 阿里云百炼 DashScope | `qwen-long` | 人工登记 | 10M | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3-8B` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
+| 硅基流动 SiliconFlow | `deepseek-ai/DeepSeek-R1-0528-Qwen3-8B` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
+| 硅基流动 SiliconFlow | `THUDM/GLM-Z1-9B-0414` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
+| 魔搭 ModelScope | `Qwen/Qwen3.8-27B` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| 魔搭 ModelScope | `deepseek-ai/DeepSeek-V4.1-Flash` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| 魔搭 ModelScope | `ZhipuAI/GLM-4.7-Flash` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| 魔搭 ModelScope | `stepfun-ai/Step-3.7-Flash` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| 腾讯混元 / TokenHub | `hy4-preview` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 HUNYUAN_KEY |
+| 腾讯混元 / TokenHub | `hy3-preview` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 HUNYUAN_KEY |
+| 百度千帆 Qianfan | `ERNIE-4.5-Turbo-128K` | 人工登记 | 131K | ⏭️ 无法判断 | - | - | 缺少环境变量 QIANFAN_KEY |
+| 百度千帆 Qianfan | `ERNIE-4.5-Turbo-32K` | 人工登记 | 32K | ⏭️ 无法判断 | - | - | 缺少环境变量 QIANFAN_KEY |
+| 百度千帆 Qianfan | `DeepSeek-R1` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 QIANFAN_KEY |
+| 百度千帆 Qianfan | `Kimi-K2-Instruct` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 QIANFAN_KEY |
+| 火山方舟 Volcengine Ark | `doubao-seed-2-1-pro-260628` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 VOLC_ARK_KEY |
+| 火山方舟 Volcengine Ark | `doubao-seed-2-1-lite-260915` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 VOLC_ARK_KEY |
+| 火山方舟 Volcengine Ark | `doubao-seed-2-1-turbo-260628` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 VOLC_ARK_KEY |
+| 讯飞星火 Spark | `lite` | 人工登记 | 8K | ⏭️ 无法判断 | - | - | 缺少环境变量 SPARK_KEY |
+| MiniMax | `MiniMax-M3` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 MINIMAX_KEY |
+| MiniMax | `MiniMax-M2.7` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 MINIMAX_KEY |
+| MiniMax | `MiniMax-M2.5` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 MINIMAX_KEY |
+| 阶跃星辰 StepFun | `step-gui` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 STEPFUN_KEY |
+| 零一万物 Yi | `yi-lightning` | 人工登记 | 16K | ⏭️ 无法判断 | - | - | 缺少环境变量 YI_KEY |
+| 零一万物 Yi | `yi-vision-v2` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 YI_KEY |
+| 百川智能 Baichuan | `Baichuan4-Turbo` | 人工登记 | 32K | ⏭️ 无法判断 | - | - | 缺少环境变量 BAICHUAN_KEY |
+| 百川智能 Baichuan | `Baichuan-M3-Plus` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 BAICHUAN_KEY |
+| OpenRouter | `openrouter/free` | 人工登记 | 200K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `qwen/qwen3.8-27b:free` | 人工登记 | 262K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `cohere/north-mini-code:free` | 自动发现 | 256K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `dots-studio/dots-3-note-preview:free` | 自动发现 | 512K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `google/gemma-4-26b-a4b-it:free` | 自动发现 | 262K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `google/gemma-4-31b-it:free` | 自动发现 | 262K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `inclusionai/ling-3.0-flash-sante:free` | 自动发现 | 262K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `liquid/lfm-2.5-2.6b:free` | 自动发现 | 65K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 自动发现 | 256K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `nvidia/nemotron-3-super-120b-a12b:free` | 自动发现 | 262K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `nvidia/nemotron-3-ultra-550b-a55b:free` | 自动发现 | 1M | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `nvidia/nemotron-3.5-lightning:free` | 自动发现 | 1M | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `poolside/laguna-s-2.1:free` | 自动发现 | 262K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `poolside/laguna-xs-2.1:free` | 自动发现 | 262K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `stealth/space-bunny-alpha` | 自动发现 | 1M | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `thinkingmachines/inkling-small:free` | 自动发现 | 1M | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| OpenRouter | `thinkingmachines/inkling:free` | 自动发现 | 1M | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| Groq | `openai/gpt-oss-120b` | 人工登记 | 131K | ⏭️ 无法判断 | - | - | 缺少环境变量 GROQ_KEY |
+| Groq | `openai/gpt-oss-20b` | 人工登记 | 131K | ⏭️ 无法判断 | - | - | 缺少环境变量 GROQ_KEY |
+| Groq | `qwen/qwen3.8-27b` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 GROQ_KEY |
+| Google Gemini | `gemini-3.8-flash` | 人工登记 | 1M | ⏭️ 无法判断 | - | - | 缺少环境变量 GEMINI_KEY |
+| Google Gemini | `gemini-3.5-flash` | 人工登记 | 1M | ⏭️ 无法判断 | - | - | 缺少环境变量 GEMINI_KEY |
+| Google Gemini | `gemini-3.1-flash-lite` | 人工登记 | 1M | ⏭️ 无法判断 | - | - | 缺少环境变量 GEMINI_KEY |
+| Google Gemini | `gemini-2.5-flash` | 人工登记 | 1M | ⏭️ 无法判断 | - | - | 缺少环境变量 GEMINI_KEY |
+| Cerebras | `gpt-oss-120b` | 人工登记 | 131K | ⏭️ 无法判断 | - | - | 缺少环境变量 CEREBRAS_KEY |
+| Cerebras | `qwen-3.8-27b` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 CEREBRAS_KEY |
+| Mistral AI | `mistral-small-2603` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 MISTRAL_KEY |
+| Mistral AI | `mistral-moderation-2603` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 MISTRAL_KEY |
+| Together AI | `Prism-ML/Ternary-Bonsai-27B` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 TOGETHER_KEY |
+| Together AI | `together/Tev1-4B-experimental` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 TOGETHER_KEY |
+| NVIDIA NIM | `deepseek-ai/deepseek-v4.1-flash` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| NVIDIA NIM | `z-ai/glm-5-3` | 人工登记 |  | ⚪ 目录中已消失 | - | - | 平台公开目录里已经找不到这个模型了 |
+| NVIDIA NIM | `moonshotai/kimi-k3` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| NVIDIA NIM | `nvidia/nemotron-3-ultra-550b-a55b` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| NVIDIA NIM | `openai/gpt-oss-20b` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| SambaNova (SambaCloud) | `DeepSeek-V3.2` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| SambaNova (SambaCloud) | `DeepSeek-V3.1` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| SambaNova (SambaCloud) | `Meta-Llama-3.3-70B-Instruct` | 人工登记 | 131K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| SambaNova (SambaCloud) | `gpt-oss-120b` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| Nebius Token Factory | `Qwen/Qwen3-235B-A22B` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 NEBIUS_KEY |
+| Nebius Token Factory | `moonshotai/Kimi-K2.5` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 NEBIUS_KEY |
+| Novita AI | `inclusionai/ling-3.1-flash` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| Novita AI | `inclusionai/ling-3.0-flash-sante` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| Novita AI | `inclusionai/ling-3.0-flash-vl` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| Novita AI | `bunny` | 自动发现 | 262K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| Novita AI | `dev/glm46` | 自动发现 | 256K | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
+| Cloudflare Workers AI | `@cf/meta/llama-3.3-70b-instruct-fp8-fast` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID |
+| Cloudflare Workers AI | `@cf/qwen/qwen3.8-27b` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID |
+| Cloudflare Workers AI | `@cf/openai/gpt-oss-120b` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID |
+| Cloudflare Workers AI | `@cf/zai-org/glm-4.7-flash` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID |
 
 ## 客户端配置示例
 
@@ -262,6 +407,10 @@ GitHub Actions 每 4 小时启动一次云环境，运行 `update_list.py`，全
    自动收进来的模型如果连续 3 轮实测失败，会被自动剔除（自净）。
 4. **逐模型实测**：对**配了密钥**的平台，每个模型发一条 `max_tokens=1` 的极短请求，
    几乎不消耗免费额度，按返回码判定可用性。
+5. **看外部清单**：拉一份别家维护的模型目录（目前是 Cline 的），和上一轮比对，
+   有增删就记下来 —— 用别人的清单当传感器。
+6. **盯官方文档**：把十几个官方限流/定价页抓一遍，**只比对内容摘要，不解析数字**。
+   页面一变就报警，然后人工去看一眼。政策数字难解析，但「页面变了」很容易检测。
 
 然后把结果写成 README / CSV / status.json，状态有变化时追加 history.jsonl，最后 commit & push。
 
@@ -272,14 +421,16 @@ GitHub Actions 每 4 小时启动一次云环境，运行 `update_list.py`，全
 | `README.md` | 本文件，可读表格版，GitHub 直接预览 |
 | `free_llm_api.csv` | 可下载表格（带 BOM，Excel 双击不乱码） |
 | `status.json` | 结构化数据，供程序调用（例如自动切换代理） |
+| `providers.json` | 平台与模型清单 + 官方核实的政策数据（人工维护，改清单不用碰代码） |
 | `models.auto.json` | **脚本自己维护**的自动纳管模型池（确证免费的才进，连续失败自动剔除） |
+| `sources.json` | 外部清单的模型 ID 快照 + 官方文档页的内容摘要（用来做变更检测） |
 | `history.jsonl` | 状态**变化**历史，一行一次变更快照 |
 
 三层模型池的关系：
 
 | 文件 | 谁写 | 作用 |
 | --- | --- | --- |
-| `update_list.py` 里的 `PROVIDER_POOL` | 人工 | 骨架：平台地址、申请入口、免费额度说明 |
+| `providers.json` | 人工 | 骨架：平台地址、申请入口、模型清单、官方政策数据 |
 | `models.custom.json` | 人工 | 你自己增删的模型（可选，默认没有这个文件） |
 | `models.auto.json` | **脚本** | 自动发现的模型，不用管它，它会自己长也会自己瘦 |
 
@@ -301,7 +452,7 @@ GitHub Actions 每 4 小时启动一次云环境，运行 `update_list.py`，全
 - 同 `env` 的条目：覆盖该平台字段，`models` 按 `id` 追加或合并
 - 新 `env` 的条目：作为新平台追加
 
-也可以直接改 `update_list.py` 顶部的 `PROVIDER_POOL`，格式一目了然。
+也可以直接改 `providers.json` —— 平台与模型清单已经和代码分开了，改清单不用碰脚本。
 
 ### 本地运行
 
@@ -328,7 +479,7 @@ $env:ZHIPU_KEY="xxxx"; python update_list.py --only ZHIPU_KEY  # Windows PowerSh
 | --- | --- |
 | 全部显示 ⏭️ 无法判断 | 没配密钥，且该平台目录不公开 —— 这是正常的，平台级「接口探活」仍然有效 |
 | 平台是 🟢 但模型全是 🔑 | 接口活着，是密钥不对（复制错了、被吊销、或没开通对应模型） |
-| 平台是 ❌ 接口已失效 | 该平台的接口路径返回 404，可能已下线或改地址，需要改 `PROVIDER_POOL` 里的 `base_url` |
+| 平台是 ❌ 接口已失效 | 该平台的接口路径返回 404，可能已下线或改地址，需要改 `providers.json` 里的 `base_url` |
 | 某个模型 ⚪ 目录中已消失 | 平台目录里查不到这个 ID 了；看「相近的 ID」列，多半只是改了名 |
 | 一直是 ⚠️ 限流 | 免费额度确实用完了（或账号在共享 IP 上被限速），等下个周期再看 |
 | 自动纳入了奇怪的模型 | 把 `--adopt` 改成 `off` 或 `safe`，并在 `models.auto.json` 里删掉它 |
