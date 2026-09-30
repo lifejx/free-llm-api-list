@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 PROVIDER_POOL 或 models.custom.json。",
   "last_action": "本轮新纳入 0 个，剔除 0 个",
-  "updated_at": "2026-09-30 19:57:20",
+  "updated_at": "2026-10-01 01:39:48",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
