@@ -1280,10 +1280,107 @@ def status_cell(status: str) -> str:
     return f"{meta['icon']} {meta['label']}"
 
 
+# --------------------------------------------------------------------------- #
+# 可用性时间线 uptime.jsonl
+#   每轮巡检追加一行，用来回答文档回答不了的问题：
+#   「哪个平台在哪个时段容易被限流」「额度大概几点重置」
+# --------------------------------------------------------------------------- #
+
+UPTIME_KEEP = 2190            # 每 4 小时一轮 => 约一年
+PROBE_SHORT = {"online": "on", "open": "op", "unstable": "un", "gone": "go",
+               "unreachable": "ur", "unknown": "uk", "skipped": "sk"}
+PROBE_SHORT_BACK = {v: k for k, v in PROBE_SHORT.items()}
+
+
+def load_uptime(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    out: list[dict] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            try:
+                out.append(json.loads(line))
+            except ValueError:
+                continue
+    return out
+
+
+def append_uptime(path: Path, record: dict, keep: int = UPTIME_KEEP) -> None:
+    lines: list[str] = []
+    if path.exists():
+        lines = [ln for ln in path.read_text(encoding="utf-8").splitlines() if ln.strip()]
+    lines.append(json.dumps(record, ensure_ascii=False, separators=(",", ":")))
+    write_text_lf(path, "\n".join(lines[-keep:]) + "\n")
+
+
+def build_uptime_record(results: list[dict], generated_at: datetime) -> dict:
+    """一行一次巡检。每平台记：探活状态 + 限流数 + 实测成功数 + 目录确认数 + 目录消失数 + 密钥错误数。"""
+    providers: dict[str, list] = {}
+    for entry in results:
+        counts = {"rl": 0, "ok": 0, "co": 0, "ms": 0, "au": 0}
+        for model in entry["models"]:
+            status = model["status"]
+            if status == "ok":
+                counts["ok"] += 1
+            elif status == "rate_limited":
+                counts["rl"] += 1
+            elif status == "auth_error":
+                counts["au"] += 1
+            elif status in ("missing", "not_found"):
+                counts["ms"] += 1
+            elif status == "catalog_only":
+                counts["co"] += 1
+        providers[entry["env"]] = [
+            PROBE_SHORT.get(entry.get("probe", "skipped"), "uk"),
+            counts["rl"], counts["ok"], counts["co"], counts["ms"], counts["au"],
+        ]
+    return {"t": generated_at.strftime("%Y-%m-%d %H:%M"),
+            "h": generated_at.hour, "w": generated_at.weekday(),
+            "p": providers}
+
+
+def summarize_uptime(records: list[dict], providers: list[dict]) -> dict:
+    """按平台聚合时间线：巡检轮次、限流累计、实测成功累计、最容易限流的时段。"""
+    name_of = {p["env"]: p["name"] for p in providers}
+    agg: dict[str, dict] = {}
+    for rec in records:
+        hour = rec.get("h")
+        for env, val in (rec.get("p") or {}).items():
+            if not isinstance(val, list) or len(val) < 6:
+                continue
+            a = agg.setdefault(env, {"runs": 0, "rl": 0, "ok": 0, "co": 0, "ms": 0,
+                                     "au": 0, "bad_probe": 0, "hours": {}})
+            a["runs"] += 1
+            a["rl"] += val[1]
+            a["ok"] += val[2]
+            a["co"] += val[3]
+            a["ms"] += val[4]
+            a["au"] += val[5]
+            if PROBE_SHORT_BACK.get(val[0], "unknown") in ("gone", "unreachable", "unstable", "unknown"):
+                a["bad_probe"] += 1
+            if val[1]:
+                a["hours"][hour] = a["hours"].get(hour, 0) + val[1]
+
+    rows = []
+    for env, a in agg.items():
+        peak = max(a["hours"].items(), key=lambda kv: kv[1])[0] if a["hours"] else None
+        rows.append({"env": env, "name": name_of.get(env, env), "runs": a["runs"],
+                     "rate_limited": a["rl"], "ok": a["ok"], "catalog_only": a["co"],
+                     "missing": a["ms"], "auth_error": a["au"],
+                     "probe_bad": a["bad_probe"], "peak_hour": peak})
+    rows.sort(key=lambda r: (-r["rate_limited"], -r["ok"], r["name"]))
+    return {"records": len(records),
+            "since": records[0].get("t", "") if records else "",
+            "until": records[-1].get("t", "") if records else "",
+            "providers": rows}
+
+
 def render_readme(providers: list[dict], summary: dict, changes: list[dict],
                   generated_at: datetime, elapsed: float, cron: str, history: list[dict],
-                  discovery: dict | None = None, adopt_mode: str = "safe") -> str:
+                  discovery: dict | None = None, adopt_mode: str = "safe",
+                  uptime: dict | None = None) -> str:
     discovery = discovery or {}
+    uptime = uptime or {}
     ok_providers = [p for p in providers if p["status"] == "ok"]
     first_base = ok_providers[0]["base_url"] if ok_providers else "https://api.example.com/v1"
     first_model = ok_providers[0]["models"][0]["id"] if ok_providers else "model-id"
@@ -1433,6 +1530,27 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
         add("")
         add("> 目录不公开的平台（智谱、Kimi、硅基流动等需要密钥才能读 `/models`）")
         add("> 只有配上密钥才能参与自动发现；没配密钥的平台本轮不产生任何发现。")
+        add("")
+
+    # ---------------- 可用性时间线 ----------------
+    up_rows = uptime.get("providers") or []
+    if uptime.get("records", 0) >= 3:
+        add("## 可用性时间线（自动累积）")
+        add("")
+        add(f"已累积 **{uptime['records']}** 次巡检（{uptime.get('since', '')} 起）。"
+            "这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。")
+        add("")
+        add("| 平台 | 巡检轮次 | 实测成功累计 | 限流(429)累计 | 探活异常 | 最容易限流的时段 |")
+        add("| --- | ---: | ---: | ---: | ---: | --- |")
+        for row in up_rows[:20]:
+            peak = (f"{row['peak_hour']:02d}:00 前后"
+                    if row.get("peak_hour") is not None else "-")
+            add(f"| {row['name']} | {row['runs']} | {row['ok']} | {row['rate_limited']} | "
+                f"{row['probe_bad']} | {peak} |")
+        add("")
+        add("> **没配密钥的平台，限流列会一直是 0** —— 429 只有真正调用时才会出现，")
+        add("> 匿名探活看不到它。想让这一节有数据，配一个密钥就行。")
+        add("> 时段按北京时间（UTC+8）统计，每 4 小时一个采样点，数据越攒越准。")
         add("")
 
     add("## 模型明细")
@@ -1682,6 +1800,7 @@ def main(argv: list[str] | None = None) -> int:
     csv_path = out_dir / "free_llm_api.csv"
     json_path = out_dir / "status.json"
     history_path = out_dir / "history.jsonl"
+    uptime_path = out_dir / "uptime.jsonl"
 
     previous = read_json(json_path)
     started = time.perf_counter()
@@ -1736,6 +1855,13 @@ def main(argv: list[str] | None = None) -> int:
                 except ValueError:
                     continue
 
+    # ---- 时间线：每轮追加一行，累积「哪个时段容易限流」 ----
+    uptime_records = load_uptime(uptime_path)
+    uptime_record = build_uptime_record(results, generated_at)
+    uptime_records.append(uptime_record)
+    append_uptime(uptime_path, uptime_record)
+    uptime_summary = summarize_uptime(uptime_records, results)
+
     payload = {
         "generated_at": generated_at.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "generated_at_cst": checked_at,
@@ -1744,6 +1870,7 @@ def main(argv: list[str] | None = None) -> int:
         "adopt_mode": args.adopt,
         "summary": summary,
         "changes": changes,
+        "uptime": uptime_summary,
         "discovery": {
             "newly_adopted": newly,
             "adopted": discovery.get("newly_adopted", []),
@@ -1769,7 +1896,7 @@ def main(argv: list[str] | None = None) -> int:
     }
 
     readme = render_readme(results, summary, changes, generated_at, elapsed,
-                           args.cron, history, discovery, args.adopt)
+                           args.cron, history, discovery, args.adopt, uptime_summary)
     write_text_lf(readme_path, readme)
     write_csv(csv_path, results)
     write_json(json_path, payload)
