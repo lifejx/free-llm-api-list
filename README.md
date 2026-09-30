@@ -3,8 +3,8 @@
 自动巡检各大平台免费大模型接口的可用性，每 4 小时更新一次。
 密钥只存放在 GitHub Secrets 中，脚本不落地、不外传，仓库里只留下状态结果。
 
-- **最后更新**：2026-10-01 02:53:04 (北京时间 UTC+8)
-- **本次耗时**：12.4 秒　|　**巡检频率**：`0 */4 * * *`
+- **最后更新**：2026-10-01 03:29:50 (北京时间 UTC+8)
+- **本次耗时**：11.1 秒　|　**巡检频率**：`0 */4 * * *`
 - **实测可用**：**0 / 88**（未配密钥但目录已确认存在 🔵 34 个）　|　**已配置平台**：0 / 24
 - **接口探活**：23 个平台已探活（🟢 在线 21，❌ 失效 0，📡 不通 0）　|　**可读目录**：5 个平台（其中 5 个无需密钥）
 
@@ -38,91 +38,34 @@
 | ❔ 探活异常 | 0 | 返回码无法归类 |
 | ⏭️ 未探活 | 1 | 缺少必要环境变量，或本次关闭了探活 |
 
-## 本次状态变化
-
-| 平台 | 模型 | 变化 |
-| --- | --- | --- |
-| 智谱 AI (BigModel) | `glm-4.7-flash` | new → ⏭️ 无法判断 |
-| 智谱 AI (BigModel) | `glm-4-flash-250414` | new → ⏭️ 无法判断 |
-| 智谱 AI (BigModel) | `glm-z1-flash` | new → ⏭️ 无法判断 |
-| 月之暗面 Kimi | `kimi-k3` | new → ⏭️ 无法判断 |
-| 月之暗面 Kimi | `kimi-k2.5` | new → ⏭️ 无法判断 |
-| 月之暗面 Kimi | `kimi-k2.7-code` | new → ⏭️ 无法判断 |
-| 阿里云百炼 DashScope | `qwen3.8-max` | new → ⏭️ 无法判断 |
-| 阿里云百炼 DashScope | `qwen3.8-flash` | new → ⏭️ 无法判断 |
-| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` | new → ⏭️ 无法判断 |
-| 硅基流动 SiliconFlow | `THUDM/GLM-Z1-9B-0414` | new → ⏭️ 无法判断 |
-| 魔搭 ModelScope | `Qwen/Qwen3.8-27B` | new → 🔵 目录已确认 |
-| 魔搭 ModelScope | `deepseek-ai/DeepSeek-V4.1-Flash` | new → 🔵 目录已确认 |
-| 魔搭 ModelScope | `ZhipuAI/GLM-4.7-Flash` | new → 🔵 目录已确认 |
-| 魔搭 ModelScope | `stepfun-ai/Step-3.7-Flash` | new → 🔵 目录已确认 |
-| 腾讯混元 / TokenHub | `hy4-preview` | new → ⏭️ 无法判断 |
-| 腾讯混元 / TokenHub | `hy3-preview` | new → ⏭️ 无法判断 |
-| 百度千帆 Qianfan | `ERNIE-4.5-Turbo-128K` | new → ⏭️ 无法判断 |
-| 百度千帆 Qianfan | `ERNIE-4.5-Turbo-32K` | new → ⏭️ 无法判断 |
-| 百度千帆 Qianfan | `DeepSeek-R1` | new → ⏭️ 无法判断 |
-| 百度千帆 Qianfan | `Kimi-K2-Instruct` | new → ⏭️ 无法判断 |
-| 火山方舟 Volcengine Ark | `doubao-seed-2-1-pro-260628` | new → ⏭️ 无法判断 |
-| 火山方舟 Volcengine Ark | `doubao-seed-2-1-lite-260915` | new → ⏭️ 无法判断 |
-| 火山方舟 Volcengine Ark | `doubao-seed-2-1-turbo-260628` | new → ⏭️ 无法判断 |
-| MiniMax | `MiniMax-M3` | new → ⏭️ 无法判断 |
-| MiniMax | `MiniMax-M2.7` | new → ⏭️ 无法判断 |
-| MiniMax | `MiniMax-M2.5` | new → ⏭️ 无法判断 |
-| 阶跃星辰 StepFun | `step-gui` | new → ⏭️ 无法判断 |
-| 零一万物 Yi | `yi-vision-v2` | new → ⏭️ 无法判断 |
-| 百川智能 Baichuan | `Baichuan-M3-Plus` | new → ⏭️ 无法判断 |
-| Groq | `openai/gpt-oss-20b` | new → ⏭️ 无法判断 |
-| Groq | `qwen/qwen3.8-27b` | new → ⏭️ 无法判断 |
-| Google Gemini | `gemini-3.8-flash` | new → ⏭️ 无法判断 |
-| Google Gemini | `gemini-3.5-flash` | new → ⏭️ 无法判断 |
-| Google Gemini | `gemini-3.1-flash-lite` | new → ⏭️ 无法判断 |
-| Cerebras | `qwen-3.8-27b` | new → ⏭️ 无法判断 |
-| Mistral AI | `mistral-small-2603` | new → ⏭️ 无法判断 |
-| Mistral AI | `mistral-moderation-2603` | new → ⏭️ 无法判断 |
-| Together AI | `Prism-ML/Ternary-Bonsai-27B` | new → ⏭️ 无法判断 |
-| Together AI | `together/Tev1-4B-experimental` | new → ⏭️ 无法判断 |
-| NVIDIA NIM | `deepseek-ai/deepseek-v4.1-flash` | new → 🔵 目录已确认 |
-| NVIDIA NIM | `z-ai/glm-5-3` | new → ⚪ 目录中已消失 |
-| NVIDIA NIM | `moonshotai/kimi-k3` | new → 🔵 目录已确认 |
-| NVIDIA NIM | `nvidia/nemotron-3-ultra-550b-a55b` | new → 🔵 目录已确认 |
-| NVIDIA NIM | `openai/gpt-oss-20b` | new → 🔵 目录已确认 |
-| SambaNova (SambaCloud) | `DeepSeek-V3.2` | new → 🔵 目录已确认 |
-| SambaNova (SambaCloud) | `DeepSeek-V3.1` | new → 🔵 目录已确认 |
-| SambaNova (SambaCloud) | `gpt-oss-120b` | new → 🔵 目录已确认 |
-| Nebius Token Factory | `moonshotai/Kimi-K2.5` | new → ⏭️ 无法判断 |
-| Novita AI | `inclusionai/ling-3.0-flash-vl` | new → 🔵 目录已确认 |
-| Cloudflare Workers AI | `@cf/qwen/qwen3.8-27b` | new → ⏭️ 无法判断 |
-| Cloudflare Workers AI | `@cf/openai/gpt-oss-120b` | new → ⏭️ 无法判断 |
-| Cloudflare Workers AI | `@cf/zai-org/glm-4.7-flash` | new → ⏭️ 无法判断 |
-
 ## 平台总览
 
-| 平台 | 接口探活 | 模型状态 | 免费性质 | 密钥变量 | 目录 | 申请地址 |
-| --- | --- | --- | --- | --- | ---: | --- |
-| 智谱 AI (BigModel) | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | `ZHIPU_KEY` | - | [控制台](https://open.bigmodel.cn/usercenter/apikeys) |
-| 月之暗面 Kimi | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | `MOONSHOT_KEY` | - | [控制台](https://platform.kimi.com/console/api-keys) |
-| 阿里云百炼 DashScope | 🟢 接口在线 | ⏭️ 无法判断 0/5 | 一次性赠送 | `DASHSCOPE_KEY` | - | [控制台](https://bailian.console.aliyun.com/) |
-| 硅基流动 SiliconFlow | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | `SILICONFLOW_KEY` | - | [控制台](https://cloud.siliconflow.cn/account/ak) |
-| 魔搭 ModelScope | 🟢 接口在线 | 🔵 目录已确认 0/4 | 长期免费 | `MODELSCOPE_KEY` | 35（公开） | [控制台](https://modelscope.cn/my/myaccesstoken) |
-| 腾讯混元 / TokenHub | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | `HUNYUAN_KEY` | - | [控制台](https://console.cloud.tencent.com/hunyuan/api-key) |
-| 百度千帆 Qianfan | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 一次性赠送 | `QIANFAN_KEY` | - | [控制台](https://console.bce.baidu.com/iam/) |
-| 火山方舟 Volcengine Ark | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | `VOLC_ARK_KEY` | - | [控制台](https://console.volcengine.com/ark) |
-| 讯飞星火 Spark | 🟢 接口在线 | ⏭️ 无法判断 0/1 | 长期免费 | `SPARK_KEY` | - | [控制台](https://console.xfyun.cn/services/bmx1) |
-| MiniMax | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | `MINIMAX_KEY` | - | [控制台](https://platform.minimaxi.com/) |
-| 阶跃星辰 StepFun | 🟢 接口在线 | ⏭️ 无法判断 0/1 | 长期免费 | `STEPFUN_KEY` | - | [控制台](https://platform.stepfun.com/interface-key) |
-| 零一万物 Yi | 🟠 接口异常 | ⏭️ 无法判断 0/2 | 未知 | `YI_KEY` | - | [控制台](https://platform.lingyiwanwu.com/apikeys) |
-| 百川智能 Baichuan | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | `BAICHUAN_KEY` | - | [控制台](https://platform.baichuan-ai.com/console/apikey) |
-| OpenRouter | 🟢 接口在线 | 🔵 目录已确认 0/17 | 长期免费 | `OPENROUTER_KEY` | 464（公开） | [控制台](https://openrouter.ai/keys) |
-| Groq | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 长期免费 | `GROQ_KEY` | - | [控制台](https://console.groq.com/keys) |
-| Google Gemini | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | `GEMINI_KEY` | - | [控制台](https://aistudio.google.com/app/apikey) |
-| Cerebras | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | `CEREBRAS_KEY` | - | [控制台](https://cloud.cerebras.ai/) |
-| Mistral AI | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 长期免费 | `MISTRAL_KEY` | - | [控制台](https://console.mistral.ai/api-keys/) |
-| Together AI | 🔓 无需密钥 | ⏭️ 无法判断 0/2 | 长期免费 | `TOGETHER_KEY` | - | [控制台](https://api.together.xyz/settings/api-keys) |
-| NVIDIA NIM | 🟢 接口在线 | 🔵 目录已确认 0/5 | 长期免费 | `NVIDIA_KEY` | 81（公开） | [控制台](https://build.nvidia.com/settings/api-keys) |
-| SambaNova (SambaCloud) | 🟢 接口在线 | 🔵 目录已确认 0/4 | 长期免费 | `SAMBANOVA_KEY` | 7（公开） | [控制台](https://cloud.sambanova.ai/apis) |
-| Nebius Token Factory | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | `NEBIUS_KEY` | - | [控制台](https://tokenfactory.nebius.com/) |
-| Novita AI | 🟢 接口在线 | 🔵 目录已确认 0/5 | 长期免费 | `NOVITA_KEY` | 120（公开） | [控制台](https://novita.ai/settings/key-management) |
-| Cloudflare Workers AI | ⏭️ 未探活 | ⏭️ 无法判断 0/4 | 长期免费 | `CLOUDFLARE_API_TOKEN` | - | [控制台](https://dash.cloudflare.com/profile/api-tokens) |
+| 平台 | 接口探活 | 模型状态 | 免费性质 | 大陆可用性 | 密钥变量 | 目录 | 申请地址 |
+| --- | --- | --- | --- | --- | --- | ---: | --- |
+| 智谱 AI (BigModel) | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | 🟢 容易 | `ZHIPU_KEY` | - | [控制台](https://open.bigmodel.cn/usercenter/apikeys) |
+| 月之暗面 Kimi | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | 🟡 要点技巧 | `MOONSHOT_KEY` | - | [控制台](https://platform.kimi.com/console/api-keys) |
+| 阿里云百炼 DashScope | 🟢 接口在线 | ⏭️ 无法判断 0/5 | 一次性赠送 | 🟢 容易 | `DASHSCOPE_KEY` | - | [控制台](https://bailian.console.aliyun.com/) |
+| 硅基流动 SiliconFlow | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | 🟢 容易 | `SILICONFLOW_KEY` | - | [控制台](https://cloud.siliconflow.cn/account/ak) |
+| 魔搭 ModelScope | 🟢 接口在线 | 🔵 目录已确认 0/4 | 长期免费 | 🟡 要点技巧 | `MODELSCOPE_KEY` | 35（公开） | [控制台](https://modelscope.cn/my/myaccesstoken) |
+| 腾讯混元 / TokenHub | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | 🟢 容易 | `HUNYUAN_KEY` | - | [控制台](https://console.cloud.tencent.com/hunyuan/api-key) |
+| 百度千帆 Qianfan | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 一次性赠送 | 🟢 容易 | `QIANFAN_KEY` | - | [控制台](https://console.bce.baidu.com/iam/) |
+| 火山方舟 Volcengine Ark | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | 🟢 容易 | `VOLC_ARK_KEY` | - | [控制台](https://console.volcengine.com/ark) |
+| 讯飞星火 Spark | 🟢 接口在线 | ⏭️ 无法判断 0/1 | 长期免费 | 🟢 容易 | `SPARK_KEY` | - | [控制台](https://console.xfyun.cn/services/bmx1) |
+| MiniMax | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | 🟡 要点技巧 | `MINIMAX_KEY` | - | [控制台](https://platform.minimaxi.com/) |
+| 阶跃星辰 StepFun | 🟢 接口在线 | ⏭️ 无法判断 0/1 | 长期免费 | 🟢 容易 | `STEPFUN_KEY` | - | [控制台](https://platform.stepfun.com/interface-key) |
+| 零一万物 Yi | 🟠 接口异常 | ⏭️ 无法判断 0/2 | 未知 | ⛔ 不可用 | `YI_KEY` | - | [控制台](https://platform.lingyiwanwu.com/apikeys) |
+| 百川智能 Baichuan | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | 🟢 容易 | `BAICHUAN_KEY` | - | [控制台](https://platform.baichuan-ai.com/console/apikey) |
+| OpenRouter | 🟢 接口在线 | 🔵 目录已确认 0/17 | 长期免费 | 🟡 要点技巧 | `OPENROUTER_KEY` | 464（公开） | [控制台](https://openrouter.ai/keys) |
+| Groq | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 长期免费 | 🟠 较难 | `GROQ_KEY` | - | [控制台](https://console.groq.com/keys) |
+| Google Gemini | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | ⛔ 不可用 | `GEMINI_KEY` | - | [控制台](https://aistudio.google.com/app/apikey) |
+| Cerebras | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | ⛔ 不可用 | `CEREBRAS_KEY` | - | [控制台](https://cloud.cerebras.ai/) |
+| Mistral AI | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 长期免费 | 🟠 较难 | `MISTRAL_KEY` | - | [控制台](https://console.mistral.ai/api-keys/) |
+| Together AI | 🔓 无需密钥 | ⏭️ 无法判断 0/2 | 长期免费 | 🟠 较难 | `TOGETHER_KEY` | - | [控制台](https://api.together.xyz/settings/api-keys) |
+| NVIDIA NIM | 🟢 接口在线 | 🔵 目录已确认 0/5 | 长期免费 | 🟠 较难 | `NVIDIA_KEY` | 81（公开） | [控制台](https://build.nvidia.com/settings/api-keys) |
+| SambaNova (SambaCloud) | 🟢 接口在线 | 🔵 目录已确认 0/4 | 长期免费 | 🟢 容易 | `SAMBANOVA_KEY` | 7（公开） | [控制台](https://cloud.sambanova.ai/apis) |
+| Nebius Token Factory | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | 🟠 较难 | `NEBIUS_KEY` | - | [控制台](https://tokenfactory.nebius.com/) |
+| Novita AI | 🟢 接口在线 | 🔵 目录已确认 0/5 | 长期免费 | 🟢 容易 | `NOVITA_KEY` | 120（公开） | [控制台](https://novita.ai/settings/key-management) |
+| Cloudflare Workers AI | ⏭️ 未探活 | ⏭️ 无法判断 0/4 | 长期免费 | 🟡 要点技巧 | `CLOUDFLARE_API_TOKEN` | - | [控制台](https://dash.cloudflare.com/profile/api-tokens) |
 
 ## 免费政策与限流
 
@@ -158,6 +101,40 @@
 
 > 门槛列：✅ = 需要，— = 不需要，? = 官方页面未说明。
 > 「未公布」不代表没有限制 —— 大部分平台的限速数字只在登录后的控制台可见。
+
+## 中国大陆可用性
+
+这一节回答的是「**身在墙内能不能拿到并调用它**」，数据来自官方条款与实测。
+对我们来说，**地区封锁和非中国出口往往比外币卡更早成为障碍**。
+
+| 平台 | 拿到密钥的难度 | 原因 | 封锁大陆 | 需非中国出口 | 拿免费额度要绑卡 |
+| --- | --- | --- | :-: | :-: | :-: |
+| 智谱 AI (BigModel) | 🟢 容易 | 中国大陆用户用手机号+短信验证码注册（官方称也支持海外号码并可选国家区号）即可创建 API Key，免费模型在官方定价… | — | — | — |
+| 阿里云百炼 DashScope | 🟢 容易 | 只需一个能收短信的手机号注册阿里云账号、同意协议并开通百炼，即可拿到 API Key 使用免费额度，无需实名认证、无需… | — | — | — |
+| 硅基流动 SiliconFlow | 🟢 容易 | 用 +86 手机号（或邮箱/微信）注册 + 支付宝扫码人脸实名认证即可创建 API Key 并使用免费模型，全程无需银… | — | — | — |
+| 腾讯混元 / TokenHub | 🟢 容易 | 虽然硬性要求实名认证，但整套要求（+86 大陆手机号、大陆身份证、微信/QQ 扫码或人脸）对身在大陆的普通开发者都是现… | — | — | — |
+| 百度千帆 Qianfan | 🟢 容易 | 中国大陆开发者只需要一个能收短信的手机号注册百度账号、完成个人实名认证（大陆身份证刷脸或银联卡二选一），阅读并同意用户… | — | — | — |
+| 火山方舟 Volcengine Ark | 🟢 容易 | 中国大陆开发者用一个 +86 手机号短信注册火山引擎账号，创建 API Key，注册即得免费推理额度，个人实名认证可用… | — | — | — |
+| 讯飞星火 Spark | 🟢 容易 | 中国大陆开发者用手机号快捷登录或微信扫码即可注册，充值走支付宝/微信/银行汇款（人民币、无需外币卡），门槛只在必须用身… | — | — | — |
+| 阶跃星辰 StepFun | 🟢 容易 | 中国大陆用户用 +86 手机号即可注册，实名认证（证件号）后即可在控制台创建 API Key，充值走微信/支付宝、不需… | — | — | — |
+| 百川智能 Baichuan | 🟢 容易 | 面向中国大陆开发者的境内平台：用 +86 手机号+短信验证码即可注册，需完成实名认证（个人为姓名+证件类型+证件号码，… | — | — | — |
+| SambaNova (SambaCloud) | 🟢 容易 | 官方把免费额度定义为「账户没有关联任何支付方式」时的档位，并且 cloud.sambanova.ai/plans 的官… | ? | ? | — |
+| Novita AI | 🟢 容易 | 邮箱或 Google/GitHub/HuggingFace 即可注册，不要手机号、不要实名、领免费额度也不要银行卡，且… | — | — | — |
+| 月之暗面 Kimi | 🟡 要点技巧 | 中国大陆用户可用 +86 手机号注册、充值只用微信/支付宝、不需要外币卡或非中国 IP，但必须先完成实名认证（个人认证… | — | — | — |
+| 魔搭 ModelScope | 🟡 要点技巧 | 对大陆开发者来说卡点和钱、卡都无关：手机号与身份证人皆有之，难在「不是注册即用」——注册完只能拿到 Access To… | — | — | — |
+| MiniMax | 🟡 要点技巧 | 中国大陆用户可以直接注册（境内平台、人民币计价、微信充值，不需要外币卡），但按官方协议必须完成实名认证，且官方文档里找… | — | — | ? |
+| OpenRouter | 🟡 要点技巧 | 官方对免费层不要手机号、不要实名、也不要绑卡（定价表 Free 计划 Payment options = No，免费模… | — | ? | — |
+| Cloudflare Workers AI | 🟡 要点技巧 | 免费额度（每天 10,000 Neurons）不需要手机号、实名或银行卡，注册只要邮箱+密码；难点在于从大陆网络实测打… | ? | ? | — |
+| Groq | 🟠 较难 | 中国大陆 IP 直连 console.groq.com（注册/取 key）与 api.groq.com 均返回 403… | ? | ? | ? |
+| Mistral AI | 🟠 较难 | 拿 key 本身门槛很低（官方写明 Free mode 无需信用卡、注册只要邮箱，且条款未要求手机号/实名），真正卡住… | ? | ⛔ 是 | — |
+| Together AI | 🟠 较难 | Together AI 现已没有免费额度：注册后必须绑定一张支持周期性扣款的 Visa/Mastercard/Amex… | ? | ? | ⛔ 是 |
+| NVIDIA NIM | 🟠 较难 | 服务本身对中国大陆不封（build.nvidia.com 在国内可打开，中英文官方论坛都在运行），免费额度也不需要付费… | ? | ? | ? |
+| Nebius Token Factory | 🟠 较难 | 官方注册只支持 Google/GitHub/Microsoft 账号或邮箱+onboarding 表单，不需要手机号也… | ? | ? | ⛔ 是 |
+| 零一万物 Yi | ⛔ 不可用 | 官方 API 端点已直接返回 HTTP 410 model_service_closed『Model service … | — | — | ? |
+| Google Gemini | ⛔ 不可用 | 官方口径是中国大陆不在 Google AI Studio / Gemini API 的支持地区内，且 aistudio… | ⛔ 是 | ⛔ 是 | ? |
+| Cerebras | ⛔ 不可用 | 官方在 Cloudflare 上按国家/地区封禁 CN：中国大陆 IP 连控制台 cloud.cerebras.ai … | ⛔ 是 | ⛔ 是 | ⛔ 是 |
+
+> ⛔ **官方按国家/地区封锁中国大陆**：零一万物 Yi、Google Gemini、Cerebras。这不是「难申请」，是根本进不去。
 
 ## 自动发现
 
@@ -231,30 +208,30 @@
 
 ## 可用性时间线（自动累积）
 
-已累积 **3** 次巡检（2026-09-30 19:57 起）。这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。
+已累积 **4** 次巡检（2026-09-30 19:57 起）。这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。
 
 | 平台 | 巡检轮次 | 实测成功累计 | 限流(429)累计 | 探活异常 | 最容易限流的时段 |
 | --- | ---: | ---: | ---: | ---: | --- |
 | CHUTES_KEY | 2 | 0 | 0 | 0 | - |
-| Cerebras | 3 | 0 | 0 | 0 | - |
-| Cloudflare Workers AI | 3 | 0 | 0 | 0 | - |
+| Cerebras | 4 | 0 | 0 | 0 | - |
+| Cloudflare Workers AI | 4 | 0 | 0 | 0 | - |
 | DEEPSEEK_KEY | 2 | 0 | 0 | 0 | - |
 | GITHUB_MODELS_TOKEN | 2 | 0 | 0 | 2 | - |
-| Google Gemini | 3 | 0 | 0 | 0 | - |
-| Groq | 3 | 0 | 0 | 0 | - |
+| Google Gemini | 4 | 0 | 0 | 0 | - |
+| Groq | 4 | 0 | 0 | 0 | - |
 | HYPERBOLIC_KEY | 2 | 0 | 0 | 2 | - |
-| MiniMax | 3 | 0 | 0 | 0 | - |
-| Mistral AI | 3 | 0 | 0 | 0 | - |
-| NVIDIA NIM | 3 | 0 | 0 | 2 | - |
-| Nebius Token Factory | 3 | 0 | 0 | 0 | - |
-| Novita AI | 3 | 0 | 0 | 0 | - |
-| OpenRouter | 3 | 0 | 0 | 0 | - |
-| SambaNova (SambaCloud) | 3 | 0 | 0 | 0 | - |
-| Together AI | 3 | 0 | 0 | 0 | - |
-| 智谱 AI (BigModel) | 3 | 0 | 0 | 0 | - |
-| 月之暗面 Kimi | 3 | 0 | 0 | 0 | - |
-| 火山方舟 Volcengine Ark | 3 | 0 | 0 | 0 | - |
-| 百川智能 Baichuan | 3 | 0 | 0 | 0 | - |
+| MiniMax | 4 | 0 | 0 | 0 | - |
+| Mistral AI | 4 | 0 | 0 | 0 | - |
+| NVIDIA NIM | 4 | 0 | 0 | 2 | - |
+| Nebius Token Factory | 4 | 0 | 0 | 0 | - |
+| Novita AI | 4 | 0 | 0 | 0 | - |
+| OpenRouter | 4 | 0 | 0 | 0 | - |
+| SambaNova (SambaCloud) | 4 | 0 | 0 | 0 | - |
+| Together AI | 4 | 0 | 0 | 0 | - |
+| 智谱 AI (BigModel) | 4 | 0 | 0 | 0 | - |
+| 月之暗面 Kimi | 4 | 0 | 0 | 0 | - |
+| 火山方舟 Volcengine Ark | 4 | 0 | 0 | 0 | - |
+| 百川智能 Baichuan | 4 | 0 | 0 | 0 | - |
 
 > **没配密钥的平台，限流列会一直是 0** —— 429 只有真正调用时才会出现，
 > 匿名探活看不到它。想让这一节有数据，配一个密钥就行。
@@ -490,6 +467,7 @@ $env:ZHIPU_KEY="xxxx"; python update_list.py --only ZHIPU_KEY  # Windows PowerSh
 
 | 时间 | 可用模型 | 状态变化 |
 | --- | ---: | ---: |
+| 2026-10-01 02:53:04 | 0/88 | 52 |
 | 2026-09-30 19:48:18 | 0/83 | 0 |
 
 完整记录见 `history.jsonl`。
