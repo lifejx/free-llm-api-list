@@ -3,10 +3,10 @@
 自动巡检各大平台免费大模型接口的可用性，每 4 小时更新一次。
 密钥只存放在 GitHub Secrets 中，脚本不落地、不外传，仓库里只留下状态结果。
 
-- **最后更新**：2026-10-01 12:21:37 (北京时间 UTC+8)
-- **本次耗时**：10.7 秒　|　**巡检频率**：`0 */4 * * *`
-- **实测可用**：**0 / 88**（未配密钥但目录已确认存在 🔵 34 个）　|　**已配置平台**：0 / 24
-- **接口探活**：23 个平台已探活（🟢 在线 21，❌ 失效 0，📡 不通 0）　|　**可读目录**：5 个平台（其中 5 个无需密钥）
+- **最后更新**：2026-10-01 18:50:58 (北京时间 UTC+8)
+- **本次耗时**：156.9 秒　|　**巡检频率**：`0 */4 * * *`
+- **实测可用**：**3 / 88**（未配密钥但目录已确认存在 🔵 34 个）　|　**已配置平台**：1 / 24
+- **接口探活**：23 个平台已探活（🟢 在线 21，❌ 失效 0，📡 不通 0）　|　**可读目录**：6 个平台（其中 5 个无需密钥）
 
 > 这套清单是**自己维护自己**的：平台接口死活靠「匿名探活」（用一个无效密钥试，
 > 401 说明服务活着），模型增删靠拉平台公开的 `/models` 目录，
@@ -14,7 +14,7 @@
 
 | 状态 | 数量 | 说明 |
 | --- | ---: | --- |
-| ✅ 正常可用 | 0 | 用你的密钥实测返回 200 |
+| ✅ 正常可用 | 3 | 用你的密钥实测返回 200 |
 | 🔵 目录已确认 | 34 | 未配密钥，但平台公开目录中确认该模型存在 |
 | ⚠️ 限流/额度耗尽 | 0 | 返回 429 或提示配额/余额不足 |
 | 🟠 请求被拒 | 0 | 返回 400，参数或模型不被支持 |
@@ -22,9 +22,9 @@
 | ⚪ 目录中已消失 | 1 | 公开目录里查不到它了，疑似已下架 |
 | ❌ 模型已下架 | 0 | 返回 404，模型 ID 不存在 |
 | 🌐 服务端异常 | 0 | 返回 5xx，平台侧故障 |
-| 📡 网络超时/不可达 | 0 | 连接失败或超时 |
+| 📡 网络超时/不可达 | 1 | 连接失败或超时 |
 | ❔ 未知状态 | 0 | 其他返回码 |
-| ⏭️ 无法判断 | 53 | 未配密钥，且平台目录不公开，无从判断 |
+| ⏭️ 无法判断 | 49 | 未配密钥，且平台目录不公开，无从判断 |
 
 **平台级「接口探活」**（不需要任何密钥，用无效密钥试出来的）：
 
@@ -38,6 +38,15 @@
 | ❔ 探活异常 | 0 | 返回码无法归类 |
 | ⏭️ 未探活 | 1 | 缺少必要环境变量，或本次关闭了探活 |
 
+## 本次状态变化
+
+| 平台 | 模型 | 变化 |
+| --- | --- | --- |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3-8B` | ⏭️ 无法判断 → ✅ 正常可用 |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` | ⏭️ 无法判断 → 📡 网络超时/不可达 |
+| 硅基流动 SiliconFlow | `deepseek-ai/DeepSeek-R1-0528-Qwen3-8B` | ⏭️ 无法判断 → ✅ 正常可用 |
+| 硅基流动 SiliconFlow | `THUDM/GLM-Z1-9B-0414` | ⏭️ 无法判断 → ✅ 正常可用 |
+
 ## 平台总览
 
 | 平台 | 接口探活 | 模型状态 | 免费性质 | 大陆可用性 | 密钥变量 | 目录 | 申请地址 |
@@ -45,7 +54,7 @@
 | 智谱 AI (BigModel) | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | 🟢 容易 | `ZHIPU_KEY` | - | [控制台](https://open.bigmodel.cn/usercenter/apikeys) |
 | 月之暗面 Kimi | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 一次性赠送 | 🟡 要点技巧 | `MOONSHOT_KEY` | - | [控制台](https://platform.kimi.com/console/api-keys) |
 | 阿里云百炼 DashScope | 🟢 接口在线 | ⏭️ 无法判断 0/5 | 一次性赠送 | 🟢 容易 | `DASHSCOPE_KEY` | - | [控制台](https://bailian.console.aliyun.com/) |
-| 硅基流动 SiliconFlow | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | 🟢 容易 | `SILICONFLOW_KEY` | - | [控制台](https://cloud.siliconflow.cn/account/ak) |
+| 硅基流动 SiliconFlow | 🟢 接口在线 | ✅ 正常可用 3/4 | 长期免费 | 🟢 容易 | `SILICONFLOW_KEY` | 97 | [控制台](https://cloud.siliconflow.cn/account/ak) |
 | 魔搭 ModelScope | 🟢 接口在线 | 🔵 目录已确认 0/4 | 长期免费 | 🟡 要点技巧 | `MODELSCOPE_KEY` | 35（公开） | [控制台](https://modelscope.cn/my/myaccesstoken) |
 | 腾讯混元 / TokenHub | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | 🟢 容易 | `HUNYUAN_KEY` | - | [控制台](https://console.cloud.tencent.com/hunyuan/api-key) |
 | 百度千帆 Qianfan | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 一次性赠送 | 🟢 容易 | `QIANFAN_KEY` | - | [控制台](https://console.bce.baidu.com/iam/) |
@@ -184,7 +193,7 @@
 
 > 当前自动纳入模式：**safe**（`safe` = 只收机器确证免费的；`aggressive` = 名字像的也收；`off` = 只记候选）
 
-### 候选（未自动纳入，共 32 个）
+### 候选（未自动纳入，共 40 个）
 
 名字看起来是免费档、但平台没给出可机器核对的定价信息，所以只列在这里。
 想收进来就把对应 `id` 加到 `models.custom.json`，或者手动跑 `--adopt aggressive`。
@@ -215,13 +224,13 @@
 | OpenRouter | `bytedance-seed/seed-2-1-turbo` | 疑似免费 | 262K |
 | OpenRouter | `bytedance-seed/seed-2.0-lite` | 疑似免费 | 262K |
 | OpenRouter | `bytedance/ui-tars-1.5-7b` | 疑似免费 | 128K |
-| 魔搭 ModelScope | `OpenGVLab/InternVL3_5-241B-A28B` | 疑似免费 |  |
-| 魔搭 ModelScope | `PaddlePaddle/ERNIE-4.5-0.3B-PT` | 疑似免费 |  |
-| 魔搭 ModelScope | `PaddlePaddle/ERNIE-4.5-21B-A3B-PT` | 疑似免费 |  |
-| 魔搭 ModelScope | `PaddlePaddle/ERNIE-4.5-300B-A47B-PT` | 疑似免费 |  |
-| 魔搭 ModelScope | `PaddlePaddle/ERNIE-4.5-VL-28B-A3B-PT` | 疑似免费 |  |
-| 魔搭 ModelScope | `Qwen/Qwen3.5-27B` | 疑似免费 |  |
-| … | 其余 2 个已截断 | | |
+| 硅基流动 SiliconFlow | `Kev-4B` | 疑似免费 |  |
+| 硅基流动 SiliconFlow | `LoRA/Qwen/Qwen2.5-14B-Instruct` | 疑似免费 |  |
+| 硅基流动 SiliconFlow | `LoRA/Qwen/Qwen2.5-7B-Instruct` | 疑似免费 |  |
+| 硅基流动 SiliconFlow | `Pro/Qwen/Qwen2.5-7B-Instruct` | 疑似免费 |  |
+| 硅基流动 SiliconFlow | `Qwen/Qwen2.5-14B-Instruct` | 疑似免费 |  |
+| 硅基流动 SiliconFlow | `Qwen/Qwen2.5-7B-Instruct` | 疑似免费 |  |
+| … | 其余 10 个已截断 | | |
 
 ## 外部清单与官方文档变更
 
@@ -246,30 +255,30 @@
 
 ## 可用性时间线（自动累积）
 
-已累积 **7** 次巡检（2026-09-30 19:57 起）。这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。
+已累积 **8** 次巡检（2026-09-30 19:57 起）。这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。
 
 | 平台 | 巡检轮次 | 实测成功累计 | 限流(429)累计 | 探活异常 | 最容易限流的时段 |
 | --- | ---: | ---: | ---: | ---: | --- |
+| 硅基流动 SiliconFlow | 8 | 3 | 0 | 0 | - |
 | CHUTES_KEY | 2 | 0 | 0 | 0 | - |
-| Cerebras | 7 | 0 | 0 | 0 | - |
-| Cloudflare Workers AI | 7 | 0 | 0 | 0 | - |
+| Cerebras | 8 | 0 | 0 | 0 | - |
+| Cloudflare Workers AI | 8 | 0 | 0 | 0 | - |
 | DEEPSEEK_KEY | 2 | 0 | 0 | 0 | - |
 | GITHUB_MODELS_TOKEN | 2 | 0 | 0 | 2 | - |
-| Google Gemini | 7 | 0 | 0 | 0 | - |
-| Groq | 7 | 0 | 0 | 0 | - |
+| Google Gemini | 8 | 0 | 0 | 0 | - |
+| Groq | 8 | 0 | 0 | 0 | - |
 | HYPERBOLIC_KEY | 2 | 0 | 0 | 2 | - |
-| MiniMax | 7 | 0 | 0 | 0 | - |
-| Mistral AI | 7 | 0 | 0 | 0 | - |
-| NVIDIA NIM | 7 | 0 | 0 | 2 | - |
-| Nebius Token Factory | 7 | 0 | 0 | 0 | - |
-| Novita AI | 7 | 0 | 0 | 0 | - |
-| OpenRouter | 7 | 0 | 0 | 0 | - |
-| SambaNova (SambaCloud) | 7 | 0 | 0 | 0 | - |
-| Together AI | 7 | 0 | 0 | 0 | - |
-| 智谱 AI (BigModel) | 7 | 0 | 0 | 0 | - |
-| 月之暗面 Kimi | 7 | 0 | 0 | 0 | - |
-| 火山方舟 Volcengine Ark | 7 | 0 | 0 | 0 | - |
-| 百川智能 Baichuan | 7 | 0 | 0 | 0 | - |
+| MiniMax | 8 | 0 | 0 | 0 | - |
+| Mistral AI | 8 | 0 | 0 | 0 | - |
+| NVIDIA NIM | 8 | 0 | 0 | 2 | - |
+| Nebius Token Factory | 8 | 0 | 0 | 0 | - |
+| Novita AI | 8 | 0 | 0 | 0 | - |
+| OpenRouter | 8 | 0 | 0 | 0 | - |
+| SambaNova (SambaCloud) | 8 | 0 | 0 | 0 | - |
+| Together AI | 8 | 0 | 0 | 0 | - |
+| 智谱 AI (BigModel) | 8 | 0 | 0 | 0 | - |
+| 月之暗面 Kimi | 8 | 0 | 0 | 0 | - |
+| 火山方舟 Volcengine Ark | 8 | 0 | 0 | 0 | - |
 
 > **没配密钥的平台，限流列会一直是 0** —— 429 只有真正调用时才会出现，
 > 匿名探活看不到它。想让这一节有数据，配一个密钥就行。
@@ -291,10 +300,10 @@
 | 阿里云百炼 DashScope | `qwen-plus` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
 | 阿里云百炼 DashScope | `qwen-turbo` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
 | 阿里云百炼 DashScope | `qwen-long` | 人工登记 | 10M | ⏭️ 无法判断 | - | - | 缺少环境变量 DASHSCOPE_KEY |
-| 硅基流动 SiliconFlow | `Qwen/Qwen3-8B` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
-| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
-| 硅基流动 SiliconFlow | `deepseek-ai/DeepSeek-R1-0528-Qwen3-8B` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
-| 硅基流动 SiliconFlow | `THUDM/GLM-Z1-9B-0414` | 人工登记 |  | ⏭️ 无法判断 | - | - | 缺少环境变量 SILICONFLOW_KEY |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3-8B` | 人工登记 |  | ✅ 正常可用 | 200 | 4558 ms |  |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` | 人工登记 |  | 📡 网络超时/不可达 | - | 143996 ms | TimeoutError: The read operation timed out |
+| 硅基流动 SiliconFlow | `deepseek-ai/DeepSeek-R1-0528-Qwen3-8B` | 人工登记 |  | ✅ 正常可用 | 200 | 8999 ms |  |
+| 硅基流动 SiliconFlow | `THUDM/GLM-Z1-9B-0414` | 人工登记 |  | ✅ 正常可用 | 200 | 5367 ms |  |
 | 魔搭 ModelScope | `Qwen/Qwen3.8-27B` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
 | 魔搭 ModelScope | `deepseek-ai/DeepSeek-V4.1-Flash` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
 | 魔搭 ModelScope | `ZhipuAI/GLM-4.7-Flash` | 人工登记 |  | 🔵 目录已确认 | 200 | - | 公开目录中存在；未配密钥，无法验证可用性 |
@@ -376,9 +385,9 @@
 ```json
 {
   "apiProvider": "openai",
-  "openAiBaseUrl": "https://api.example.com/v1",
-  "openAiApiKey": "$YOUR_API_KEY",
-  "openAiModelId": "model-id"
+  "openAiBaseUrl": "https://api.siliconflow.cn/v1",
+  "openAiApiKey": "$SILICONFLOW_KEY",
+  "openAiModelId": "Qwen/Qwen3-8B"
 }
 ```
 
