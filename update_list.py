@@ -1417,7 +1417,7 @@ def status_cell(status: str) -> str:
 #   「哪个平台在哪个时段容易被限流」「额度大概几点重置」
 # --------------------------------------------------------------------------- #
 
-UPTIME_KEEP = 2190            # 每 4 小时一轮 => 约一年
+UPTIME_KEEP = 2190            # 每 8 小时一轮 => 约两年
 PROBE_SHORT = {"online": "on", "open": "op", "unstable": "un", "gone": "go",
                "unreachable": "ur", "unknown": "uk", "skipped": "sk"}
 PROBE_SHORT_BACK = {v: k for k, v in PROBE_SHORT.items()}
@@ -1530,7 +1530,7 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
 
     add("# 免费 LLM API 状态清单")
     add("")
-    add("自动巡检各大平台免费大模型接口的可用性，每 4 小时更新一次。")
+    add("自动巡检各大平台免费大模型接口的可用性，每 8 小时更新一次。")
     add("密钥只存放在 GitHub Secrets 中，脚本不落地、不外传，仓库里只留下状态结果。")
     add("")
     add(f"- **最后更新**：{generated_at.strftime('%Y-%m-%d %H:%M:%S')} (北京时间 UTC+8)")
@@ -1838,7 +1838,7 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
         add("")
         add("> **没配密钥的平台，限流列会一直是 0** —— 429 只有真正调用时才会出现，")
         add("> 匿名探活看不到它。想让这一节有数据，配一个密钥就行。")
-        add("> 时段按北京时间（UTC+8）统计，每 4 小时一个采样点，数据越攒越准。")
+        add("> 时段按北京时间（UTC+8）统计，每 8 小时一个采样点，数据越攒越准。")
         add("")
 
     add("## 模型明细")
@@ -1887,13 +1887,13 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
     add("   *Read and write permissions*（工作流里已经声明 `permissions: contents: write`，")
     add("   但如果这一步被组织策略限制，push 会失败）。")
     add("4. **手动跑一次**：**Actions → 更新免费 LLM API 状态 → Run workflow**，")
-    add("   之后每 4 小时会自动更新，也可以在触发时填 `only` 只检查某几个平台。")
+    add("   之后每 8 小时会自动更新，也可以在触发时填 `only` 只检查某几个平台。")
     add("")
     add("> 想降低提交频率，把 `.github/workflows/update.yml` 里的 `cron` 改成 `0 2 * * *`（每天一次）即可。")
     add("")
     add("## 自动更新原理")
     add("")
-    add("GitHub Actions 每 4 小时启动一次云环境，运行 `update_list.py`，全程不需要服务器。")
+    add("GitHub Actions 每 8 小时启动一次云环境，运行 `update_list.py`，全程不需要服务器。")
     add("脚本只用 Python 标准库，**不需要 pip install**。每一轮跑四件事：")
     add("")
     add("1. **匿名探活**：给每个平台发一条用「无效密钥」的请求。鉴权通常发生在解析模型之前，")
@@ -2028,7 +2028,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--retries", type=int, default=2, help="网络错误/5xx 重试次数，默认 2")
     parser.add_argument("--workers", type=int, default=6, help="并发数，默认 6")
     parser.add_argument("--out-dir", default=".", help="输出目录，默认脚本所在目录")
-    parser.add_argument("--cron", default="0 */4 * * *", help="写入 README 的巡检频率展示值")
+    parser.add_argument("--cron", default="0 */8 * * *", help="写入 README 的巡检频率展示值")
     parser.add_argument("--list", action="store_true", help="只打印内置模型池，不发请求")
     parser.add_argument("--no-history", action="store_true", help="不写入 history.jsonl")
     parser.add_argument("--probe", action=argparse.BooleanOptionalAction, default=True,

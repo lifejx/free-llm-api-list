@@ -1,9 +1,9 @@
 name: 更新免费 LLM API 状态
 
-# 每 4 小时跑一次（UTC 时间），也可在 Actions 页面手动触发
+# 每 8 小时跑一次（UTC 时间），也可在 Actions 页面手动触发
 on:
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '0 */8 * * *'
   workflow_dispatch:
     inputs:
       only:
@@ -70,7 +70,7 @@ jobs:
         run: |
           python update_list.py \
             --only "${{ github.event.inputs.only }}" \
-            --cron "0 */4 * * *"
+            --cron "0 */8 * * *"
 
       - name: 提交并推送更新
         run: |
