@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 0 个，剔除 0 个",
-  "updated_at": "2026-10-01 20:53:58",
+  "last_action": "本轮新纳入 1 个，剔除 2 个",
+  "updated_at": "2026-10-01 23:09:44",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -26,7 +26,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "rate_limited"
+        "last_status": "ok"
       },
       "google/gemma-4-31b-it:free": {
         "context": 262144,
@@ -123,24 +123,6 @@
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "ok"
-      },
-      "thinkingmachines/inkling-small:free": {
-        "context": 1048576,
-        "basis": "确认免费",
-        "adopted_at": "2026-09-30 19:48:18",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_status": "auth_error",
-        "last_fail": "2026-10-01 20:53 auth_error"
-      },
-      "thinkingmachines/inkling:free": {
-        "context": 1048576,
-        "basis": "确认免费",
-        "adopted_at": "2026-09-30 19:48:18",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_status": "auth_error",
-        "last_fail": "2026-10-01 20:53 auth_error"
       }
     },
     "NOVITA_KEY": {
@@ -172,6 +154,14 @@
         "context": 262144,
         "basis": "确认免费",
         "adopted_at": "2026-09-30 19:48:18",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "catalog_only"
+      },
+      "apodex/apodex-1.1-mini": {
+        "context": 262144,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-01 23:07:31",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "catalog_only"
