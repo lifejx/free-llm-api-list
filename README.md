@@ -3,8 +3,8 @@
 自动巡检各大平台免费大模型接口的可用性，每 4 小时更新一次。
 密钥只存放在 GitHub Secrets 中，脚本不落地、不外传，仓库里只留下状态结果。
 
-- **最后更新**：2026-10-01 10:13:56 (北京时间 UTC+8)
-- **本次耗时**：28.3 秒　|　**巡检频率**：`0 */4 * * *`
+- **最后更新**：2026-10-01 12:06:06 (北京时间 UTC+8)
+- **本次耗时**：11.4 秒　|　**巡检频率**：`0 */4 * * *`
 - **实测可用**：**0 / 88**（未配密钥但目录已确认存在 🔵 34 个）　|　**已配置平台**：0 / 24
 - **接口探活**：23 个平台已探活（🟢 在线 21，❌ 失效 0，📡 不通 0）　|　**可读目录**：5 个平台（其中 5 个无需密钥）
 
@@ -55,7 +55,7 @@
 | 阶跃星辰 StepFun | 🟢 接口在线 | ⏭️ 无法判断 0/1 | 长期免费 | 🟢 容易 | `STEPFUN_KEY` | - | [控制台](https://platform.stepfun.com/interface-key) |
 | 零一万物 Yi | 🟠 接口异常 | ⏭️ 无法判断 0/2 | 未知 | ⛔ 不可用 | `YI_KEY` | - | [控制台](https://platform.lingyiwanwu.com/apikeys) |
 | 百川智能 Baichuan | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | 🟢 容易 | `BAICHUAN_KEY` | - | [控制台](https://platform.baichuan-ai.com/console/apikey) |
-| OpenRouter | 🟢 接口在线 | 🔵 目录已确认 0/17 | 长期免费 | 🟡 要点技巧 | `OPENROUTER_KEY` | 464（公开） | [控制台](https://openrouter.ai/keys) |
+| OpenRouter | 🟢 接口在线 | 🔵 目录已确认 0/17 | 长期免费 | 🟡 要点技巧 | `OPENROUTER_KEY` | 462（公开） | [控制台](https://openrouter.ai/keys) |
 | Groq | 🟢 接口在线 | ⏭️ 无法判断 0/3 | 长期免费 | 🟠 较难 | `GROQ_KEY` | - | [控制台](https://console.groq.com/keys) |
 | Google Gemini | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 长期免费 | ⛔ 不可用 | `GEMINI_KEY` | - | [控制台](https://aistudio.google.com/app/apikey) |
 | Cerebras | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | ⛔ 不可用 | `CEREBRAS_KEY` | - | [控制台](https://cloud.cerebras.ai/) |
@@ -231,45 +231,49 @@
 
 | 来源 | 模型数 | 本轮变化 |
 | --- | ---: | --- |
-| Cline 模型目录 | 464 | 无变化 |
+| Cline 模型目录 | 462 | ➖ 2 个：`openai/gpt-6.1-sol-pro:batch`、`openai/gpt-6.1-sol:batch` |
 
 > Cline 模型目录：Cline 用量计费通道的目录；实测与 OpenRouter 一致（464 个），用来交叉验证
 
 ### 官方文档页变更提醒
 
-本轮 16 个官方页面都没有变化。
+**这些页面本轮内容变了，政策可能已经调整，建议去看一眼：**
 
-> 有 15 个页面是第一次抓取，本轮只建立基线，不算变更。
+| 页面 | 变更时间 | 链接 |
+| --- | --- | --- |
+| Gemini 定价 | 2026-10-01 12:06 | [打开](https://ai.google.dev/gemini-api/docs/pricing) |
+
+> 有 14 个页面是第一次抓取，本轮只建立基线，不算变更。
 > 有 1 个页面本轮抓取失败（阶跃星辰定价），不影响其他检测。
 
 共监控 16 个页面，摘要存放在 `sources.json`。
 
 ## 可用性时间线（自动累积）
 
-已累积 **5** 次巡检（2026-09-30 19:57 起）。这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。
+已累积 **6** 次巡检（2026-09-30 19:57 起）。这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。
 
 | 平台 | 巡检轮次 | 实测成功累计 | 限流(429)累计 | 探活异常 | 最容易限流的时段 |
 | --- | ---: | ---: | ---: | ---: | --- |
 | CHUTES_KEY | 2 | 0 | 0 | 0 | - |
-| Cerebras | 5 | 0 | 0 | 0 | - |
-| Cloudflare Workers AI | 5 | 0 | 0 | 0 | - |
+| Cerebras | 6 | 0 | 0 | 0 | - |
+| Cloudflare Workers AI | 6 | 0 | 0 | 0 | - |
 | DEEPSEEK_KEY | 2 | 0 | 0 | 0 | - |
 | GITHUB_MODELS_TOKEN | 2 | 0 | 0 | 2 | - |
-| Google Gemini | 5 | 0 | 0 | 0 | - |
-| Groq | 5 | 0 | 0 | 0 | - |
+| Google Gemini | 6 | 0 | 0 | 0 | - |
+| Groq | 6 | 0 | 0 | 0 | - |
 | HYPERBOLIC_KEY | 2 | 0 | 0 | 2 | - |
-| MiniMax | 5 | 0 | 0 | 0 | - |
-| Mistral AI | 5 | 0 | 0 | 0 | - |
-| NVIDIA NIM | 5 | 0 | 0 | 2 | - |
-| Nebius Token Factory | 5 | 0 | 0 | 0 | - |
-| Novita AI | 5 | 0 | 0 | 0 | - |
-| OpenRouter | 5 | 0 | 0 | 0 | - |
-| SambaNova (SambaCloud) | 5 | 0 | 0 | 0 | - |
-| Together AI | 5 | 0 | 0 | 0 | - |
-| 智谱 AI (BigModel) | 5 | 0 | 0 | 0 | - |
-| 月之暗面 Kimi | 5 | 0 | 0 | 0 | - |
-| 火山方舟 Volcengine Ark | 5 | 0 | 0 | 0 | - |
-| 百川智能 Baichuan | 5 | 0 | 0 | 0 | - |
+| MiniMax | 6 | 0 | 0 | 0 | - |
+| Mistral AI | 6 | 0 | 0 | 0 | - |
+| NVIDIA NIM | 6 | 0 | 0 | 2 | - |
+| Nebius Token Factory | 6 | 0 | 0 | 0 | - |
+| Novita AI | 6 | 0 | 0 | 0 | - |
+| OpenRouter | 6 | 0 | 0 | 0 | - |
+| SambaNova (SambaCloud) | 6 | 0 | 0 | 0 | - |
+| Together AI | 6 | 0 | 0 | 0 | - |
+| 智谱 AI (BigModel) | 6 | 0 | 0 | 0 | - |
+| 月之暗面 Kimi | 6 | 0 | 0 | 0 | - |
+| 火山方舟 Volcengine Ark | 6 | 0 | 0 | 0 | - |
+| 百川智能 Baichuan | 6 | 0 | 0 | 0 | - |
 
 > **没配密钥的平台，限流列会一直是 0** —— 429 只有真正调用时才会出现，
 > 匿名探活看不到它。想让这一节有数据，配一个密钥就行。
