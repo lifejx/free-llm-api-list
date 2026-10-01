@@ -860,6 +860,121 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
 
 
 # --------------------------------------------------------------------------- #
+# 打分
+#   原则：只用「能确证」的维度。缺数据的维度不计入，权重自动重新归一化，
+#   并在表里把缺失的维度标出来 —— 绝不用「未知」冒充中位数。
+# --------------------------------------------------------------------------- #
+
+SCORE_WEIGHTS = {
+    "free_kind": 30,      # 免费性质：长期免费 / 一次性赠送 / 无免费
+    "access": 25,         # 中国大陆可用性：能不能拿到 key
+    "rate_limit": 20,     # 官方公布的限速宽不宽松
+    "context": 15,        # 上下文长度
+    "breadth": 10,        # 免费模型数量
+}
+
+SCORE_LABELS = {
+    "free_kind": "免费性质", "access": "大陆门槛", "rate_limit": "限速",
+    "context": "上下文", "breadth": "模型数",
+}
+
+FREE_KIND_SCORE = {"长期免费": 10.0, "一次性赠送": 6.0, "无免费": 0.0, "未知": 3.0}
+DIFFICULTY_SCORE = {"easy": 10.0, "medium": 7.0, "hard": 3.0, "blocked": 0.0, "unknown": 4.0}
+
+
+def clean_number(text: object) -> int | None:
+    """只接受「就是个数字」的字段。长句子里的数字容易被误读，一律不认。"""
+    s = str(text or "").strip()
+    if not s or len(s) > 20 or not s[:1].isdigit():
+        return None
+    m = re.match(r"([\d,]+)\s*$", s)
+    if not m:
+        return None
+    try:
+        return int(m.group(1).replace(",", ""))
+    except ValueError:
+        return None
+
+
+def _score_rpm(v: int) -> float:
+    return 10.0 if v >= 1000 else 8.0 if v >= 100 else 6.0 if v >= 40 else 4.0 if v >= 20 else 2.0
+
+
+def _score_rpd(v: int) -> float:
+    return 10.0 if v >= 10000 else 8.0 if v >= 1000 else 5.0 if v >= 100 else 2.0
+
+
+def _score_tpd(v: int) -> float:
+    return 10.0 if v >= 10_000_000 else 8.0 if v >= 1_000_000 else 5.0 if v >= 100_000 else 2.0
+
+
+def _score_context(v: int) -> float:
+    return (10.0 if v >= 1_000_000 else 8.0 if v >= 262_144 else 7.0 if v >= 131_072
+            else 5.0 if v >= 32_768 else 3.0)
+
+
+def score_provider(entry: dict) -> dict:
+    """算一个平台的分数。返回总分、各分项、以及哪些维度缺数据。"""
+    pol = entry.get("policy") or {}
+    acc = pol.get("access") or {}
+    lm = pol.get("limits") or {}
+    parts: dict[str, float] = {}
+    missing: list[str] = []
+
+    kind = pol.get("free_kind")
+    if kind in FREE_KIND_SCORE:
+        parts["free_kind"] = FREE_KIND_SCORE[kind]
+    else:
+        missing.append("免费性质")
+
+    difficulty = acc.get("difficulty_cn")
+    if difficulty in DIFFICULTY_SCORE:
+        parts["access"] = DIFFICULTY_SCORE[difficulty]
+    else:
+        missing.append("大陆门槛")
+
+    rates = []
+    for field, fn in (("rpm", _score_rpm), ("rpd", _score_rpd), ("tpd", _score_tpd)):
+        value = clean_number(lm.get(field))
+        if value is not None:
+            rates.append(fn(value))
+    if rates:
+        parts["rate_limit"] = max(rates)
+    else:
+        missing.append("限速")
+
+    contexts = [m.get("context") for m in entry["models"] if isinstance(m.get("context"), int)]
+    if contexts:
+        parts["context"] = _score_context(max(contexts))
+    else:
+        missing.append("上下文")
+
+    count = len(entry["models"])
+    parts["breadth"] = min(10.0, count * 2.0) if count else 0.0
+
+    total_weight = sum(SCORE_WEIGHTS[k] for k in parts)
+    total = (sum(parts[k] * SCORE_WEIGHTS[k] for k in parts) / total_weight) if total_weight else 0.0
+    # 官方按国家封锁的平台，其他维度再好也没意义 —— 直接封顶
+    blocked = difficulty == "blocked"
+    if blocked:
+        total = min(total, 3.0)
+    return {
+        "score": round(total, 1),
+        "parts": {k: round(v, 1) for k, v in parts.items()},
+        "missing": missing,
+        "used_weight": total_weight,
+        "blocked": blocked,
+    }
+
+
+def score_label(score: float, blocked: bool = False) -> str:
+    if blocked:
+        return "⛔ 不可用"
+    return ("🟢 推荐" if score >= 7.5 else "🟡 可用" if score >= 5.5
+            else "🟠 一般" if score >= 3.5 else "🔴 不建议")
+
+
+# --------------------------------------------------------------------------- #
 # 可选的 SOCKS5 代理支持
 #   中国大陆本地直连国外平台常被 TLS 重置；把 socket.create_connection 接管掉，
 #   urllib 和 ssl 都不用改。GitHub Actions 上直连即可，不需要开。
@@ -1124,7 +1239,8 @@ def write_csv(path: Path, providers: list[dict]) -> None:
     # utf-8-sig：让 Excel 双击打开不乱码；lineterminator 用 \n 保持跨平台一致
     with path.open("w", newline="", encoding="utf-8-sig") as fh:
         writer = csv.writer(fh, lineterminator="\n")
-        writer.writerow(["平台", "接口探活", "免费性质", "RPM", "RPD", "TPM", "TPD", "重置",
+        writer.writerow(["平台", "综合分", "评价", "接口探活", "免费性质", "大陆门槛",
+                         "RPM", "RPD", "TPM", "TPD", "重置",
                          "手机号", "实名认证", "外币卡", "政策来源数", "政策核实日",
                          "密钥变量名", "模型ID", "来源", "BaseURL", "上下文",
                          "状态", "状态码", "延迟(ms)", "备注", "检测时间"])
@@ -1138,7 +1254,10 @@ def write_csv(path: Path, providers: list[dict]) -> None:
             for model in provider["models"]:
                 meta = STATUS_META.get(model["status"], STATUS_META["unknown"])
                 writer.writerow([
-                    provider["name"], probe_text, pol.get("free_kind", "-"),
+                    provider["name"], provider.get("score", "-"),
+                    score_label(provider["score"], (provider.get("score_detail") or {}).get("blocked")) if provider.get("score") is not None else "-",
+                    probe_text, pol.get("free_kind", "-"),
+                    ((pol.get("access") or {}).get("difficulty_cn") or "-"),
                     lm.get("rpm", "-"), lm.get("rpd", "-"), lm.get("tpm", "-"), lm.get("tpd", "-"),
                     lm.get("reset", "-"),
                     signup_cn.get(sg.get("phone"), "-"),
@@ -1415,6 +1534,33 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
         if blocked:
             add(f"> ⛔ **官方按国家/地区封锁中国大陆**：{'、'.join(blocked)}。这不是「难申请」，是根本进不去。")
             add("")
+
+    # ---------------- 平台打分 ----------------
+    scored = [p for p in providers if p.get("score") is not None]
+    if scored:
+        add("## 平台打分")
+        add("")
+        add("**打分原则：只用能确证的维度。** 缺数据的维度不计入总分，权重会自动重新归一化，")
+        add("并在末列标出缺了什么 —— 我们没有用「未知」去冒充中位数。")
+        add("")
+        w = " / ".join(f"{SCORE_LABELS[k]} {v}" for k, v in SCORE_WEIGHTS.items())
+        add(f"权重：{w}（满分 10）")
+        add("")
+        add("| # | 平台 | 综合分 | 评价 | 免费性质 | 大陆门槛 | 限速 | 上下文 | 模型数 | 缺数据 |")
+        add("| ---: | --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | --- |")
+        for i, p in enumerate(sorted(scored, key=lambda x: -x["score"]), 1):
+            det = p["score_detail"]
+            parts = det.get("parts") or {}
+            cell = lambda k: (f"{parts[k]:.1f}" if k in parts else "—")  # noqa: E731
+            miss = "、".join(det.get("missing") or []) or "-"
+            add(f"| {i} | {p['name']} | **{p['score']:.1f}** | {score_label(p['score'], (p.get('score_detail') or {}).get('blocked'))} | "
+                f"{cell('free_kind')} | {cell('access')} | {cell('rate_limit')} | "
+                f"{cell('context')} | {cell('breadth')} | {miss} |")
+        add("")
+        add("> **这个分数衡量的是「白嫖的性价比」，不是模型有多聪明。**")
+        add("> 「限速」和「上下文」两列出现 `—` 是因为官方没有公布数值或没登记上下文，")
+        add("> 不是它们不重要 —— 只是我们拒绝用猜的数字打分。")
+        add("")
 
     # ---------------- 自动发现 ----------------
     adopted = discovery.get("newly_adopted") or discovery.get("adopted") or []
@@ -1895,6 +2041,9 @@ def main(argv: list[str] | None = None) -> int:
         save_auto_pool(auto_path, auto_pool, f"本轮新纳入 {newly} 个，剔除 {len(dropped)} 个")
 
     summary = summarize(results)
+    for entry in results:
+        entry["score_detail"] = score_provider(entry)
+        entry["score"] = entry["score_detail"]["score"]
     changes = diff_status(previous, results)
     if previous is None:
         log("未找到上一次的 status.json，本次作为基线，不记录变化。")
@@ -1947,6 +2096,7 @@ def main(argv: list[str] | None = None) -> int:
                 "catalog": p["catalog"],
                 "status": p["status"], "available": p["available"],
                 "confirmed": p["confirmed"], "total": p["total"],
+                "score": p.get("score"), "score_detail": p.get("score_detail"),
                 "models": p["models"],
             }
             for p in results
