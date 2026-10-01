@@ -728,10 +728,31 @@ def build_providers(custom_path: Path | None, only: list[str]) -> list[dict]:
     return providers
 
 
+def select_batch(models: list[dict], previous_map: dict, run_index: int, batch: int) -> set[int]:
+    """按轮次挑一批要实测的模型，避免每轮把所有模型都打一遍。
+
+    优先测「从没测过的」，剩下的按轮次轮换 —— 这样巡检本身不会把免费额度烧光。
+    batch <= 0 表示不轮换，全测。
+    """
+    if batch <= 0 or batch >= len(models):
+        return set(range(len(models)))
+
+    fresh = [i for i, m in enumerate(models) if m["id"] not in previous_map]
+    rest = [i for i in range(len(models)) if i not in fresh]
+    pick: set[int] = set(fresh[:batch])
+    remaining = batch - len(pick)
+    if remaining > 0 and rest:
+        start = (run_index * remaining) % len(rest)
+        for k in range(min(remaining, len(rest))):
+            pick.add(rest[(start + k) % len(rest)])
+    return pick
+
+
 def check_providers(providers: list[dict], timeout: float, retries: int, workers: int,
                     checked_at: str, do_probe: bool = True, do_discover: bool = True,
                     adopt_mode: str = "safe", max_auto: int = 20,
-                    auto_pool: dict | None = None) -> tuple[list[dict], dict[str, dict], dict]:
+                    auto_pool: dict | None = None, previous: dict | None = None,
+                    run_index: int = 0, batch: int = 3) -> tuple[list[dict], dict[str, dict], dict]:
     """四阶段检测：① 匿名探活 ② 同步平台目录 ③ 自动发现并入池 ④ 逐模型实测。
 
     返回 (平台结果, {ENV: 目录条目}, 发现结果)
@@ -887,12 +908,37 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
     discovery["newly_adopted"] = newly_adopted
 
     # ---- 阶段四：判定初始状态，能实测的排进队列 ----
+    prev_by_env: dict[str, dict] = {}
+    for pv in ((previous or {}).get("providers") or []):
+        prev_by_env[pv.get("env", "")] = {m.get("id"): m for m in (pv.get("models") or [])}
+
+    rotated_count = 0
     for entry in results:
         cat = catalogs.get(entry["env"]) or {}
+        if entry["has_key"]:
+            prev_map = prev_by_env.get(entry["env"]) or {}
+            pick = select_batch(entry["models"], prev_map, run_index, batch)
+            for i, item in enumerate(entry["models"]):
+                if i in pick:
+                    test_jobs.append((entry, item, entry["base_url"], keys[entry["env"]]))
+                    continue
+                old = prev_map.get(item["id"])
+                rotated_count += 1
+                if old:
+                    item.update({
+                        "status": old.get("status") or "unknown",
+                        "http": old.get("http"),
+                        "latency_ms": old.get("latency_ms"),
+                        "note": ((old.get("note") or "").strip() + "（轮换中，沿用上轮结果）").strip(),
+                        "rotated": True,
+                    })
+                else:
+                    item.update({"status": "skipped", "http": None, "latency_ms": None,
+                                 "note": "轮换中，本轮未实测", "rotated": True})
         for item in entry["models"]:
-            if entry["has_key"]:
-                test_jobs.append((entry, item, entry["base_url"], keys[entry["env"]]))
-            elif cat:
+            if item["status"] is not None:
+                continue
+            if cat:
                 if item["id"] in cat:
                     item.update({"status": "catalog_only", "http": 200, "latency_ms": None,
                                  "note": "公开目录中存在；未配密钥，无法验证可用性"})
@@ -903,6 +949,9 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
                 reason = (f"缺少环境变量 {', '.join(entry['missing_env'])}"
                           if entry["missing_env"] else "未配密钥，且平台目录不公开")
                 item.update({"status": "skipped", "http": None, "latency_ms": None, "note": reason})
+
+    if rotated_count:
+        log(f"轮换实测：本轮测 {len(test_jobs)} 个，其余 {rotated_count} 个沿用上轮结果")
 
     if test_jobs:
         log(f"开始实测 {len(test_jobs)} 个模型（并发 {workers}，超时 {timeout:g}s，重试 {retries} 次）…")
@@ -1998,6 +2047,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                              "中国大陆本地直连国外平台常被重置时用得上；Actions 上不需要")
     parser.add_argument("--sources-file", default=SOURCES_FILE,
                         help="外部清单与文档摘要的状态文件，默认 sources.json")
+    parser.add_argument("--probe-batch", type=int, default=3,
+                        help="每个平台每轮最多实测几个模型（按轮次轮换），默认 3；"
+                             "填 0 表示不轮换、每轮全测。调小它能省下你的免费额度")
     parser.add_argument("--docs", action=argparse.BooleanOptionalAction, default=True,
                         help="是否检测官方文档页有没有变化，默认开启")
     return parser.parse_args(argv)
@@ -2066,6 +2118,8 @@ def main(argv: list[str] | None = None) -> int:
     generated_at = datetime.now(CST)
     checked_at = generated_at.strftime("%Y-%m-%d %H:%M:%S")
 
+    run_index = len(load_uptime(out_dir / "uptime.jsonl"))
+
     # ---- 外部清单源 + 官方文档变更检测 ----
     sources_state = load_sources(sources_path)
     sources_state, external_report = check_external_sources(
@@ -2089,7 +2143,8 @@ def main(argv: list[str] | None = None) -> int:
     results, catalogs, discovery = check_providers(
         providers, args.timeout, args.retries, args.workers, checked_at,
         do_probe=args.probe, do_discover=args.discover,
-        adopt_mode=args.adopt, max_auto=args.max_auto, auto_pool=auto_pool)
+        adopt_mode=args.adopt, max_auto=args.max_auto, auto_pool=auto_pool,
+        previous=previous, run_index=run_index, batch=args.probe_batch)
     elapsed = time.perf_counter() - started
 
     # ---- 把本轮新纳入的模型写进自动池，并做自净 ----
