@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 0 个，剔除 0 个",
-  "updated_at": "2026-10-01 18:53:35",
+  "last_action": "本轮新纳入 5 个，剔除 0 个",
+  "updated_at": "2026-10-01 19:08:03",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -170,6 +170,48 @@
         "context": 262144,
         "basis": "确认免费",
         "adopted_at": "2026-09-30 19:48:18",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "catalog_only"
+      }
+    },
+    "SILICONFLOW_KEY": {
+      "Qwen/Qwen2.5-72B-Instruct": {
+        "context": 32768,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-01 19:07:47",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "catalog_only"
+      },
+      "Qwen/Qwen2.5-7B-Instruct": {
+        "context": 32768,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-01 19:07:47",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "catalog_only"
+      },
+      "THUDM/GLM-4-9B-0414": {
+        "context": 32768,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-01 19:07:47",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "catalog_only"
+      },
+      "XingChenAGI/Xing4.0-29B": {
+        "context": 262144,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-01 19:07:47",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "catalog_only"
+      },
+      "tencent/Hunyuan-MT-7B": {
+        "context": 32768,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-01 19:07:47",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "catalog_only"

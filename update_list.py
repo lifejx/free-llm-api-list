@@ -410,7 +410,8 @@ def fetch_catalog(base_url: str, key: str, provider: dict, timeout: float) -> di
 # 明显不是聊天模型的 id 特征（向量、重排、审核、语音、图像/音乐生成）
 NON_CHAT_HINTS = ("embed", "rerank", "moderation", "content-safety", "guard",
                   "whisper", "tts", "text-to-speech", "stable-diffusion",
-                  "lyria", "veo", "imagen", "dall-e", "sdxl")
+                  "lyria", "veo", "imagen", "dall-e", "sdxl",
+                  "ocr", "asr", "sensevoice", "reranker")
 
 
 def looks_like_chat_model(entry: dict, model_id: str) -> bool:
@@ -431,6 +432,58 @@ def looks_like_chat_model(entry: dict, model_id: str) -> bool:
             if any(x != "text" for x in outs):
                 return False
     return True
+
+
+def fetch_pricing_catalog(url: str, timeout: float) -> dict:
+    """从「公开定价页」里抽出免费模型。
+
+    有些平台的模型列表接口不返回定价，但官网定价页的 HTML 里内嵌着完整数据，
+    字段形如 modelName / contextLen / price / type / subType。
+    这里把它转成和 /models 一样的结构，下游的免费判定、自动纳入、上下文填充都不用改。
+    """
+    ok, body, note = fetch_raw(url, timeout)
+    if not ok:
+        return {"ok": False, "entries": {}, "note": note}
+
+    # 页面里的 JSON 藏在 JS 字符串里，引号是转义过的，先反转义再解析
+    body = body.replace('\\"', '"').replace("\\n", " ")
+
+    entries: dict[str, dict] = {}
+    starts = [m.start() for m in re.finditer(r'"modelName":"', body)]
+    for i, pos in enumerate(starts):
+        end = starts[i + 1] if i + 1 < len(starts) else min(len(body), pos + 4000)
+        chunk = body[pos:end]
+        name = re.search(r'"modelName":"([^"\\]+)"', chunk)
+        if not name:
+            continue
+        mid = name.group(1)
+        price = re.search(r'"price":"([\d.]+)"', chunk)
+        ctx = re.search(r'"contextLen":(\d+)', chunk)
+        mtype = re.search(r'"type":"([^"]*)"', chunk)
+        subtype = re.search(r'"subType":"([^"]*)"', chunk)
+        if not price or float(price.group(1)) != 0:
+            continue                      # 不是免费模型
+        if mtype and mtype.group(1) != "text":
+            continue                      # 只收文本模型
+        if subtype and subtype.group(1) not in ("chat", ""):
+            continue                      # 只收对话模型，跳过 ASR/OCR/向量/图像
+        entry: dict = {"id": mid, "pricing": {"prompt": "0", "completion": "0"},
+                       "architecture": {"output_modalities": ["text"]}}
+        if ctx:
+            entry["context_length"] = int(ctx.group(1))
+        entries[mid] = entry
+
+    return {"ok": bool(entries), "entries": entries,
+            "note": "" if entries else "定价页里没解析出免费模型（页面结构可能变了）"}
+
+
+# 公开定价页作为「目录」来源：不需要密钥，但只对配了密钥的平台生效
+PRICING_SOURCES: dict[str, dict] = {
+    "SILICONFLOW_KEY": {
+        "url": "https://siliconflow.cn/pricing",
+        "note": "官网定价页内嵌 RSC 载荷，含 modelName / price / contextLen / subType",
+    },
+}
 
 
 def classify_free(entry: dict, model_id: str) -> str:
@@ -688,6 +741,7 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
     keys: dict[str, str] = {}
     probe_jobs: list[tuple[dict, str, str, dict]] = []
     catalog_jobs: list[tuple[dict, str, str, dict]] = []
+    pricing_jobs: list[tuple[dict, dict]] = []
     test_jobs: list[tuple[dict, dict, str, str]] = []
 
     for provider in providers:
@@ -736,6 +790,9 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
                 probe_jobs.append((entry, base_url, provider["models"][0]["id"], provider))
             if do_discover:
                 catalog_jobs.append((entry, base_url, key, provider))
+                price_src = PRICING_SOURCES.get(key_env)
+                if price_src:
+                    pricing_jobs.append((entry, price_src))
         elif url_missing:
             entry["probe"] = "skipped"
             entry["probe_note"] = f"缺少环境变量 {', '.join(url_missing)}，地址不完整，无法探测"
@@ -745,13 +802,32 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
 
     # ---- 阶段一 & 二：匿名探活 + 目录同步（并发） ----
     if probe_jobs or catalog_jobs:
-        log(f"匿名探活 {len(probe_jobs)} 个平台、同步目录 {len(catalog_jobs)} 个平台…")
+        log(f"匿名探活 {len(probe_jobs)} 个平台、同步目录 {len(catalog_jobs)} 个平台"
+            f"{'、解析定价页 ' + str(len(pricing_jobs)) + ' 个' if pricing_jobs else ''}…")
         with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
             p_futures = {pool.submit(probe_platform, bu, mid, pv, timeout): e
                          for e, bu, mid, pv in probe_jobs}
             c_futures = {pool.submit(fetch_catalog, bu, k, pv, timeout): e
                          for e, bu, k, pv in catalog_jobs}
-            for future in as_completed(list(p_futures) + list(c_futures)):
+            price_futures = {pool.submit(fetch_pricing_catalog, src["url"], timeout): e
+                             for e, src in pricing_jobs}
+            for future in as_completed(list(p_futures) + list(c_futures) + list(price_futures)):
+                if future in price_futures:
+                    entry = price_futures[future]
+                    try:
+                        out = future.result()
+                    except Exception as exc:  # noqa: BLE001
+                        out = {"ok": False, "entries": {}, "note": str(exc)}
+                    found = out.get("entries", {})
+                    if found:
+                        merged = dict(catalogs.get(entry["env"]) or {})
+                        merged.update(found)      # 定价页数据更准，覆盖 /models 的结果
+                        catalogs[entry["env"]] = merged
+                        entry["catalog"] = {"ok": True, "count": len(merged),
+                                            "public": True, "note": "含公开定价页"}
+                        log(f"  💰 [定价页] {entry['name']} 解析出 {len(found)} 个免费模型"
+                            f"（含上下文长度）")
+                    continue
                 if future in p_futures:
                     entry = p_futures[future]
                     try:
