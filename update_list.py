@@ -1300,7 +1300,21 @@ EXTERNAL_SOURCES = [
      "note": "HF 聚合 15+ 家供应商的实时路由目录，匿名即可读，每个「模型×供应商」组合自带定价、"
              "supports_tools、上下文。is_free 或定价 0/0 的 live 组合记为「0 元组合」，"
              "是发现「谁家又上新免费模型」最灵敏的传感器；调用本身走 HF 免费账号每月 $0.10 额度"},
+    {"name": "社区免费清单 (jtig37)", "url": "https://raw.githubusercontent.com/jtig37/free-llm-api-resources/main/README.md",
+     "kind": "github_readme",
+     "note": "社区人肉整理的免费 API 汇总（jtig37/free-llm-api-resources），"
+             "新平台往往先在这里被人发现。解析 HTML 表格中的平台名，监控增删变化"},
 ]
+
+
+def parse_github_readme(body: str) -> tuple[list[str], dict]:
+    """解析 jtig37/free-llm-api-resources 这类社区清单的 README（HTML 表格）。
+
+    提取 <td><a href="...">平台名</a> 中的平台名，返回 (平台名列表, {})。
+    """
+    ids: list[str] = sorted(set(re.findall(
+        r'<td[^>]*>\s*<a href="[^"]+"[^>]*>([^<]+)</a>\s*</td>', body)))
+    return ids, {}
 
 
 def parse_hf_router(body: str) -> tuple[list[str], dict[str, bool]]:
@@ -1389,6 +1403,8 @@ def check_external_sources(state: dict, timeout: float, workers: int) -> tuple[d
         try:
             if src.get("kind") == "hf_router":
                 ids, free_pairs = parse_hf_router(body)
+            elif src.get("kind") == "github_readme":
+                ids, free_pairs = parse_github_readme(body)
             else:
                 data = json.loads(body)
                 items = data.get("data") if isinstance(data, dict) else data
