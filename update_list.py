@@ -2060,11 +2060,15 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
     agent_ready = [(p["name"], m) for p in providers for m in p["models"]
                    if m.get("tools") == "yes" and m.get("status") == "ok"]
     if agent_ready:
-        add(f"### 🔧 工具调用实测通过的免费模型（{len(agent_ready)} 个）")
+        add(f"### 🔧 单次工具调用测试通过的免费模型（{len(agent_ready)} 个）")
         add("")
-        add("下面这些模型在真实请求里**端到端吐出了 `tool_calls`**，具备驱动 "
-            "DSH / Cline / Roo 的**基本能力**（轻量任务可直接用；真实 agent 长跑仍受顶部警告里的")
-        add("免费额度/限速约束，重活请上付费 API）：")
+        add("**注意：通过这项测试 ≠ 能驱动 agent。** 它只证明模型「会在被问天气时吐出"
+            " `tool_calls`」——这是一道最低门槛的能力筛查。2026-10-01/02 两轮真实场景实测"
+            "（DSH / Cline / Roo Code，几万 token 系统提示词 + 多轮工具循环）：下表中所有免费模型"
+            "**全部跑不动**，典型表现是输出格式跑偏、中途吐空、被限速截断。")
+        add("")
+        add("所以这个表的正确用法是：**快速排除**（连这关都过不了的 〽️/— 模型肯定没戏），"
+            "而不是「这些能用来干活」。想正经用 agent，请用付费 API：")
         add("")
         add("| 平台 | 模型 ID | 上下文 |")
         add("| --- | --- | ---: |")
@@ -2072,8 +2076,8 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
             add(f"| {name} | `{m['id']}` | {fmt_context(m.get('context'))} |")
         add("")
         add("> 判定方法：带 `tools` + `tool_choice=required` 发真实请求，返回里必须带原生 "
-            "`tool_calls`。`〽️ 收参不吐调用` 的模型接口不报错但 agent 接不住，不要用；")
-        add("> 思考型模型偶发「这轮调、下轮不调」，结论按最近一次实测滚动更新。")
+            "`tool_calls`。`〽️ 收参不吐调用` 和 `— 不支持工具` 的模型连单次调用都过不了；")
+        add("> 🔧 的模型过了单次调用，但 2026-10-02 实测在 Cline / Roo / DSH 真实任务里依然全部失败。")
         add("")
     add("| 平台 | 模型 ID | 来源 | 上下文 | 状态 | 工具调用 | HTTP | 延迟 | 备注 |")
     add("| --- | --- | --- | ---: | --- | --- | ---: | ---: | --- |")
