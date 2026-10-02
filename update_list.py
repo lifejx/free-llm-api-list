@@ -2382,6 +2382,16 @@ def main(argv: list[str] | None = None) -> int:
         previous=previous, run_index=run_index, batch=args.probe_batch)
     elapsed = time.perf_counter() - started
 
+    # --only 只跑了部分平台时，把上次结果里没跑的平台原样合并进来，
+    # 避免一次局部运行把全量 README/status.json 冲掉。
+    if only and isinstance(previous, dict):
+        ran_envs = {p["env"] for p in results}
+        carried = [p for p in previous.get("providers", [])
+                   if p.get("env") not in ran_envs]
+        if carried:
+            log(f"--only 模式：{len(carried)} 个未运行的平台沿用上轮结果")
+            results.extend(carried)
+
     # ---- 把本轮新纳入的模型写进自动池，并做自净 ----
     newly = 0
     for rec in discovery.get("newly_adopted", []):
