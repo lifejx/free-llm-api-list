@@ -322,6 +322,127 @@ def probe(base_url: str, model: dict, key: str, provider: dict, timeout: float,
                     "note": shorten(last_error)}
 
 
+# 工具调用（function calling）探测 —— agent 工具（DSH/Cline/Roo）的命根子。
+# 光有 200 不够：很多免费小模型要么 400 明说不支持，要么默默收下 tools 却从不吐 tool_calls。
+TOOL_DEFINITION = [{
+    "type": "function",
+    "function": {
+        "name": "get_weather",
+        "description": "查询指定城市的当前天气",
+        "parameters": {
+            "type": "object",
+            "properties": {"city": {"type": "string", "description": "城市名，例如 Beijing"}},
+            "required": ["city"],
+        },
+    },
+}]
+TOOL_PROMPT = "What is the weather like in Beijing right now? Use the get_weather tool."
+TOOL_MAX_TOKENS = 2048  # 思考模型要先烧推理 token，给小预算会误判成「不调用」
+TOOLS_META = {
+    "yes": ("🔧", "原生工具调用"),
+    "accepted": ("〽️", "收参不吐调用"),
+    "no": ("—", "不支持工具"),
+}
+
+
+def tools_label(value) -> str:
+    """CSV / 表格里展示工具调用实测结论。"""
+    meta = TOOLS_META.get(value)
+    if not meta:
+        return "未测"
+    return f"{meta[0]} {meta[1]}"
+
+
+def extract_tool_calls(body: str) -> tuple[bool, str]:
+    """从 chat/completions 200 响应里找原生 tool_calls。"""
+    try:
+        data = json.loads(body)
+        choices = data.get("choices") or []
+        msg = (choices[0] if choices else {}).get("message") or {}
+    except (ValueError, AttributeError, IndexError):
+        return False, ""
+    for call in msg.get("tool_calls") or []:
+        fn = (call or {}).get("function") or {}
+        if fn.get("name"):
+            return True, f"{fn['name']}({str(fn.get('arguments') or '')[:60]})"
+    return False, ""
+
+
+def probe_tools(base_url: str, model: dict, key: str, provider: dict,
+                timeout: float) -> dict:
+    """对已确认可用的模型再探一次工具调用，返回 {tools, tools_note}。
+
+    tools: yes=端到端吐出 tool_calls；accepted=参数被接受但没吐调用（agent 不可靠）；
+           no=明确不支持；None=限流/未知，本轮不判。
+    """
+    url = base_url.rstrip("/") + "/chat/completions"
+    headers = {"Content-Type": "application/json", "Accept": "application/json",
+               "User-Agent": UA}
+    auth = provider.get("auth", "bearer")
+    if auth == "api-key":
+        headers["api-key"] = key
+    elif auth == "x-api-key":
+        headers["x-api-key"] = key
+    else:
+        headers["Authorization"] = f"Bearer {key}"
+    headers.update(provider.get("headers", {}))
+
+    def post(tool_choice: str) -> tuple[int | None, str]:
+        payload = {
+            "model": model["id"],
+            "messages": [{"role": "user", "content": TOOL_PROMPT}],
+            "temperature": 0, "stream": False, "max_tokens": TOOL_MAX_TOKENS,
+            "tools": TOOL_DEFINITION, "tool_choice": tool_choice,
+        }
+        request = urllib.request.Request(
+            url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as resp:
+                return resp.status, resp.read(16384).decode("utf-8", "replace")
+        except urllib.error.HTTPError as exc:
+            try:
+                return exc.code, exc.read(4096).decode("utf-8", "replace")
+            except Exception:  # noqa: BLE001
+                return exc.code, ""
+        except (urllib.error.URLError, socket.timeout, TimeoutError, OSError):
+            return None, ""
+
+    code, body = post("required")
+    if code == 200:
+        called, frag = extract_tool_calls(body)
+        return {"tools": "yes" if called else "accepted",
+                "tools_note": frag if called else ""}
+
+    note = extract_message(body)
+    if code in (429, 402) or has_quota_hint(body):
+        return {"tools": None, "tools_note": "限流/额度不足，工具能力本轮未测"}
+    if code in (400, 406, 422) and re.search(r"tool_choice|required|\bany\b", note, re.I):
+        # 部分平台只接受 tool_choice=auto，降级再试
+        code2, body2 = post("auto")
+        if code2 == 200:
+            called, frag = extract_tool_calls(body2)
+            return {"tools": "yes" if called else "accepted", "tools_note": ""}
+        if code2 in (429, 402) or has_quota_hint(body2):
+            return {"tools": None, "tools_note": "限流/额度不足，工具能力本轮未测"}
+        code, body, note = code2, body2, (extract_message(body2) or note)
+    if code in (400, 406, 422) and re.search(r"tool|function|工具", note, re.I):
+        return {"tools": "no", "tools_note": shorten(note)}
+    return {"tools": None, "tools_note": ""}
+
+
+def probe_with_tools(base_url: str, model: dict, key: str, provider: dict,
+                     timeout: float, retries: int) -> dict:
+    """常规实测通过后追加一次工具调用探测（只有真实密钥的实测会走到这里）。"""
+    outcome = probe(base_url, model, key, provider, timeout, retries)
+    if outcome.get("status") == "ok":
+        try:
+            outcome.update(probe_tools(base_url, model, key, provider, timeout))
+        except Exception as exc:  # noqa: BLE001 - 工具探测失败不影响可用性结论
+            outcome.update({"tools": None,
+                            "tools_note": f"工具探测异常：{type(exc).__name__}"})
+    return outcome
+
+
 # --------------------------------------------------------------------------- #
 # 匿名探活 与 目录同步
 # --------------------------------------------------------------------------- #
@@ -803,6 +924,8 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
                 "status": None,
                 "http": None,
                 "latency_ms": None,
+                "tools": None,
+                "tools_note": "",
                 "checked_at": checked_at,
             })
 
@@ -901,6 +1024,8 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
                 "status": None,
                 "http": None,
                 "latency_ms": None,
+                "tools": None,
+                "tools_note": "",
                 "checked_at": checked_at,
             })
         newly_adopted.append(rec)
@@ -925,15 +1050,21 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
                 old = prev_map.get(item["id"])
                 rotated_count += 1
                 if old:
+                    # 去掉历史轮次追加过的后缀，避免每轮无限叠加
+                    base_note = re.sub(r"（轮换中，沿用上轮结果）+\s*$", "",
+                                       old.get("note") or "").strip()
                     item.update({
                         "status": old.get("status") or "unknown",
                         "http": old.get("http"),
                         "latency_ms": old.get("latency_ms"),
-                        "note": ((old.get("note") or "").strip() + "（轮换中，沿用上轮结果）").strip(),
+                        "tools": old.get("tools"),
+                        "tools_note": old.get("tools_note", ""),
+                        "note": (base_note + "（轮换中，沿用上轮结果）").strip(),
                         "rotated": True,
                     })
                 else:
                     item.update({"status": "skipped", "http": None, "latency_ms": None,
+                                 "tools": None,
                                  "note": "轮换中，本轮未实测", "rotated": True})
         for item in entry["models"]:
             if item["status"] is not None:
@@ -957,7 +1088,8 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
         log(f"开始实测 {len(test_jobs)} 个模型（并发 {workers}，超时 {timeout:g}s，重试 {retries} 次）…")
         with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
             futures = {
-                pool.submit(probe, base_url, {"id": item["id"]}, key, entry, timeout, retries): (entry, item)
+                pool.submit(probe_with_tools, base_url, {"id": item["id"]}, key,
+                            entry, timeout, retries): (entry, item)
                 for entry, item, base_url, key in test_jobs
             }
             for future in as_completed(futures):
@@ -966,11 +1098,12 @@ def check_providers(providers: list[dict], timeout: float, retries: int, workers
                     outcome = future.result()
                 except Exception as exc:  # noqa: BLE001 - 单点失败不影响整体
                     outcome = {"status": "unknown", "http": None, "latency_ms": None,
-                               "note": f"{type(exc).__name__}: {exc}"}
+                               "tools": None, "note": f"{type(exc).__name__}: {exc}"}
                 item.update(outcome)
                 meta = STATUS_META.get(item["status"], STATUS_META["unknown"])
+                tool_icon = TOOLS_META.get(item.get("tools"), ("", ""))[0]
                 log(f"  {meta['icon']} [{entry['name']}] {item['id']} "
-                    f"-> {item['status']} (HTTP {item.get('http')})")
+                    f"-> {item['status']} (HTTP {item.get('http')}) {tool_icon}")
 
     for entry in results:
         for item in entry["models"]:
@@ -1162,7 +1295,35 @@ def enable_socks_proxy(proxy: str) -> str:
 EXTERNAL_SOURCES = [
     {"name": "Cline 模型目录", "url": "https://api.cline.bot/api/v1/models",
      "note": "Cline 用量计费通道的目录；实测与 OpenRouter 一致（464 个），用来交叉验证"},
+    {"name": "HuggingFace Router 目录", "url": "https://router.huggingface.co/v1/models",
+     "kind": "hf_router",
+     "note": "HF 聚合 15+ 家供应商的实时路由目录，匿名即可读，每个「模型×供应商」组合自带定价、"
+             "supports_tools、上下文。is_free 或定价 0/0 的 live 组合记为「0 元组合」，"
+             "是发现「谁家又上新免费模型」最灵敏的传感器；调用本身走 HF 免费账号每月 $0.10 额度"},
 ]
+
+
+def parse_hf_router(body: str) -> tuple[list[str], dict[str, bool]]:
+    """解析 HF router 目录：返回 (模型ID列表, {模型@供应商: 是否支持工具调用})。
+
+    0 元组合的判定和 HF 自己的口径一致：is_free=true，或定价 input/output 均为 0。
+    """
+    data = json.loads(body)
+    items = data.get("data") if isinstance(data, dict) else data
+    ids: list[str] = []
+    free_pairs: dict[str, bool] = {}
+    for m in items or []:
+        if not isinstance(m, dict) or not m.get("id"):
+            continue
+        ids.append(str(m["id"]))
+        for p in m.get("providers") or []:
+            if not isinstance(p, dict) or p.get("status") != "live":
+                continue
+            pr = p.get("pricing") or {}
+            if p.get("is_free") or (pr.get("input") == 0 and pr.get("output") == 0):
+                free_pairs[f"{m['id']}@{p.get('provider')}"] = bool(p.get("supports_tools"))
+    return sorted(ids), dict(sorted(free_pairs.items()))
+
 
 DOC_WATCH = [
     {"name": "OpenRouter 限流", "url": "https://openrouter.ai/docs/api_reference/limits"},
@@ -1224,23 +1385,31 @@ def check_external_sources(state: dict, timeout: float, workers: int) -> tuple[d
     def job(src):
         ok, body, note = fetch_raw(src["url"], timeout)
         if not ok:
-            return src, None, None, note
+            return src, None, None, {}, note
         try:
-            data = json.loads(body)
+            if src.get("kind") == "hf_router":
+                ids, free_pairs = parse_hf_router(body)
+            else:
+                data = json.loads(body)
+                items = data.get("data") if isinstance(data, dict) else data
+                if not isinstance(items, list):
+                    return src, None, None, {}, "结构无法识别"
+                ids = sorted(str(m.get("id")) for m in items
+                             if isinstance(m, dict) and m.get("id"))
+                free_pairs = {}
         except ValueError:
-            return src, None, None, "返回的不是 JSON"
-        items = data.get("data") if isinstance(data, dict) else data
-        if not isinstance(items, list):
-            return src, None, None, "结构无法识别"
-        ids = sorted(str(m.get("id")) for m in items
-                     if isinstance(m, dict) and m.get("id"))
-        return src, ids, hashlib.sha1("\n".join(ids).encode()).hexdigest()[:16], ""
+            return src, None, None, {}, "返回的不是 JSON"
+        digest_src = ids + [f"{k}={int(v)}" for k, v in free_pairs.items()]
+        return src, ids, hashlib.sha1("\n".join(digest_src).encode()).hexdigest()[:16], \
+            free_pairs, ""
 
     with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
-        for src, ids, digest, note in pool.map(job, EXTERNAL_SOURCES):
+        for src, ids, digest, free_pairs, note in pool.map(job, EXTERNAL_SOURCES):
             old = state["external"].get(src["url"]) or {}
             rec = {"name": src["name"], "url": src["url"], "note": src.get("note", ""),
                    "count": len(ids) if ids else 0, "added": [], "removed": [],
+                   "free_count": len(free_pairs), "free_pairs": free_pairs,
+                   "free_added": [], "free_removed": [],
                    "changed": False, "error": note,
                    "checked_at": datetime.now(CST).strftime("%Y-%m-%d %H:%M")}
             if ids is not None:
@@ -1248,10 +1417,16 @@ def check_external_sources(state: dict, timeout: float, workers: int) -> tuple[d
                 if old_ids:
                     rec["added"] = sorted(set(ids) - old_ids)
                     rec["removed"] = sorted(old_ids - set(ids))
-                    rec["changed"] = bool(rec["added"] or rec["removed"])
+                old_free = old.get("free_pairs") or {}
+                if old_free:
+                    rec["free_added"] = sorted(set(free_pairs) - set(old_free))
+                    rec["free_removed"] = sorted(set(old_free) - set(free_pairs))
+                rec["changed"] = bool(rec["added"] or rec["removed"]
+                                      or rec["free_added"] or rec["free_removed"])
                 state["external"][src["url"]] = {
                     "name": src["name"], "count": len(ids), "hash": digest,
-                    "ids": ids, "checked_at": rec["checked_at"], "note": src.get("note", ""),
+                    "ids": ids, "free_pairs": free_pairs,
+                    "checked_at": rec["checked_at"], "note": src.get("note", ""),
                 }
             report.append(rec)
     return state, report
@@ -1368,7 +1543,7 @@ def write_csv(path: Path, providers: list[dict]) -> None:
                          "RPM", "RPD", "TPM", "TPD", "重置",
                          "手机号", "实名认证", "外币卡", "政策来源数", "政策核实日",
                          "密钥变量名", "模型ID", "来源", "BaseURL", "上下文",
-                         "状态", "状态码", "延迟(ms)", "备注", "检测时间"])
+                         "状态", "状态码", "工具调用", "延迟(ms)", "备注", "检测时间"])
         for provider in providers:
             probe = PROBE_META.get(provider.get("probe", "skipped"), PROBE_META["skipped"])
             probe_text = f"{probe['icon']} {probe['label']}"
@@ -1393,6 +1568,7 @@ def write_csv(path: Path, providers: list[dict]) -> None:
                     model.get("source", "人工登记"), provider["base_url"],
                     fmt_context(model.get("context")), f"{meta['icon']} {meta['label']}",
                     model.get("http") if model.get("http") is not None else "-",
+                    tools_label(model.get("tools")),
                     model.get("latency_ms") if model.get("latency_ms") is not None else "-",
                     model.get("note", ""), model.get("checked_at", ""),
                 ])
@@ -1811,8 +1987,21 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
                     cell += "：" + "、".join(f"`{x}`" for x in sample)
             else:
                 cell = "无变化"
+            if rec.get("free_count"):
+                pair_txt = f"；🟢 0 元组合 {rec['free_count']} 个"
+                if rec.get("free_added") or rec.get("free_removed"):
+                    pair_txt += (f"（新增 {len(rec['free_added'])}、消失 "
+                                 f"{len(rec['free_removed'])}）")
+                cell += pair_txt
             add(f"| {rec['name']} | {rec.get('count', 0)} | {cell} |")
         add("")
+        hf = next((r for r in ext if r.get("free_pairs")), None)
+        if hf:
+            add(f"**{hf['name']}当前的 0 元（live）组合**（✅=该供应商标注支持工具调用）：")
+            add("")
+            for pair, supports in list(hf["free_pairs"].items())[:15]:
+                add(f"- {'✅' if supports else '❔'} `{pair}`")
+            add("")
         for rec in ext:
             if rec.get("note"):
                 add(f"> {rec['name']}：{rec['note']}")
@@ -1868,14 +2057,33 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
 
     add("## 模型明细")
     add("")
-    add("| 平台 | 模型 ID | 来源 | 上下文 | 状态 | HTTP | 延迟 | 备注 |")
-    add("| --- | --- | --- | ---: | --- | ---: | ---: | --- |")
+    agent_ready = [(p["name"], m) for p in providers for m in p["models"]
+                   if m.get("tools") == "yes" and m.get("status") == "ok"]
+    if agent_ready:
+        add(f"### 🔧 工具调用实测通过的免费模型（{len(agent_ready)} 个）")
+        add("")
+        add("下面这些模型在真实请求里**端到端吐出了 `tool_calls`**，具备驱动 "
+            "DSH / Cline / Roo 的**基本能力**（轻量任务可直接用；真实 agent 长跑仍受顶部警告里的")
+        add("免费额度/限速约束，重活请上付费 API）：")
+        add("")
+        add("| 平台 | 模型 ID | 上下文 |")
+        add("| --- | --- | ---: |")
+        for name, m in agent_ready:
+            add(f"| {name} | `{m['id']}` | {fmt_context(m.get('context'))} |")
+        add("")
+        add("> 判定方法：带 `tools` + `tool_choice=required` 发真实请求，返回里必须带原生 "
+            "`tool_calls`。`〽️ 收参不吐调用` 的模型接口不报错但 agent 接不住，不要用；")
+        add("> 思考型模型偶发「这轮调、下轮不调」，结论按最近一次实测滚动更新。")
+        add("")
+    add("| 平台 | 模型 ID | 来源 | 上下文 | 状态 | 工具调用 | HTTP | 延迟 | 备注 |")
+    add("| --- | --- | --- | ---: | --- | --- | ---: | ---: | --- |")
     for provider in providers:
         for model in provider["models"]:
             note = (model.get("note", "") or "").replace("|", "\\|")
             add(f"| {provider['name']} | `{model['id']}` | {model.get('source', '人工登记')} | "
                 f"{fmt_context(model.get('context'))} | "
                 f"{status_cell(model['status'])} | "
+                f"{tools_label(model.get('tools'))} | "
                 f"{model.get('http') if model.get('http') is not None else '-'} | "
                 f"{fmt_ms(model.get('latency_ms')) if model.get('latency_ms') is not None else '-'} | "
                 f"{note} |")
@@ -1930,9 +2138,11 @@ def render_readme(providers: list[dict], summary: dict, changes: list[dict],
     add("   自动写进 `models.auto.json` 并纳入下一轮检测；名字像但无法确证的只进「候选区」。")
     add("   自动收进来的模型如果连续 3 轮实测失败，会被自动剔除（自净）。")
     add("4. **逐模型实测**：对**配了密钥**的平台，每个模型发一条 `max_tokens=1` 的极短请求，")
-    add("   几乎不消耗免费额度，按返回码判定可用性。")
-    add("5. **看外部清单**：拉一份别家维护的模型目录（目前是 Cline 的），和上一轮比对，")
-    add("   有增删就记下来 —— 用别人的清单当传感器。")
+    add("   几乎不消耗免费额度，按返回码判定可用性；可用的模型再带 `tools` 发一条真实请求，")
+    add("   只有返回里**真的吐出 `tool_calls`** 才标 🔧 —— 这才是 agent（DSH/Cline/Roo）能用的模型。")
+    add("   为省额度每轮只抽测一批，各模型轮流上，结论跨轮保留。")
+    add("5. **看外部清单**：拉别家维护的模型目录（Cline 清单、HuggingFace Router），和上一轮比对，")
+    add("   有增删、有新的 0 元组合就记下来 —— 用别人的清单当传感器。")
     add("6. **盯官方文档**：把十几个官方限流/定价页抓一遍，**只比对内容摘要，不解析数字**。")
     add("   页面一变就报警，然后人工去看一眼。政策数字难解析，但「页面变了」很容易检测。")
     add("")
