@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 0 个，剔除 0 个",
-  "updated_at": "2026-10-02 22:21:24",
+  "last_action": "本轮新纳入 1 个，剔除 0 个",
+  "updated_at": "2026-10-03 04:15:34",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -58,7 +58,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "catalog_only"
+        "last_status": "ok"
       },
       "nvidia/nemotron-3-super-120b-a12b:free": {
         "context": 262144,
@@ -147,6 +147,14 @@
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "catalog_only"
+      },
+      "inclusionai/ling-3.1-flash": {
+        "context": 262144,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-03 04:15:15",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "rate_limited"
       }
     },
     "NOVITA_KEY": {
@@ -198,7 +206,7 @@
         "adopted_at": "2026-10-01 19:07:47",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "ok"
       },
       "Qwen/Qwen2.5-7B-Instruct": {
         "context": 32768,
@@ -206,7 +214,7 @@
         "adopted_at": "2026-10-01 19:07:47",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "skipped"
+        "last_status": "ok"
       },
       "THUDM/GLM-4-9B-0414": {
         "context": 32768,
