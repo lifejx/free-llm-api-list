@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
   "last_action": "本轮新纳入 0 个，剔除 0 个",
-  "updated_at": "2026-10-03 11:01:12",
+  "updated_at": "2026-10-03 20:54:11",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -128,17 +128,19 @@
         "context": 1048576,
         "basis": "确认免费",
         "adopted_at": "2026-10-02 00:30:24",
-        "fail_streak": 0,
+        "fail_streak": 1,
         "note": "自动发现（确认免费）",
-        "last_status": "catalog_only"
+        "last_status": "auth_error",
+        "last_fail": "2026-10-03 20:54 auth_error"
       },
       "thinkingmachines/inkling:free": {
         "context": 1048576,
         "basis": "确认免费",
         "adopted_at": "2026-10-02 00:30:24",
-        "fail_streak": 0,
+        "fail_streak": 1,
         "note": "自动发现（确认免费）",
-        "last_status": "catalog_only"
+        "last_status": "auth_error",
+        "last_fail": "2026-10-03 20:54 auth_error"
       },
       "apodex/apodex-1.1-mini:free": {
         "context": 262144,
@@ -146,7 +148,7 @@
         "adopted_at": "2026-10-02 09:51:20",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "catalog_only"
+        "last_status": "ok"
       },
       "inclusionai/ling-3.1-flash": {
         "context": 262144,
