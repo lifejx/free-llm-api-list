@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 2 个，剔除 0 个",
-  "updated_at": "2026-10-04 21:35:24",
+  "last_action": "本轮新纳入 0 个，剔除 0 个",
+  "updated_at": "2026-10-05 02:54:46",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -144,18 +144,18 @@
         "context": 1048576,
         "basis": "确认免费",
         "adopted_at": "2026-10-04 21:34:21",
-        "fail_streak": 1,
+        "fail_streak": 2,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-10-04 21:35 auth_error",
+        "last_fail": "2026-10-05 02:54 auth_error",
         "last_status": "auth_error"
       },
       "thinkingmachines/inkling:free": {
         "context": 1048576,
         "basis": "确认免费",
         "adopted_at": "2026-10-04 21:34:21",
-        "fail_streak": 1,
+        "fail_streak": 2,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-10-04 21:35 auth_error",
+        "last_fail": "2026-10-05 02:54 auth_error",
         "last_status": "auth_error"
       }
     },
