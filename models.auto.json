@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 0 个，剔除 2 个",
-  "updated_at": "2026-10-04 11:32:32",
+  "last_action": "本轮新纳入 2 个，剔除 0 个",
+  "updated_at": "2026-10-04 21:35:24",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -34,7 +34,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "catalog_only"
+        "last_status": "ok"
       },
       "inclusionai/ling-3.0-flash-sante:free": {
         "context": 262144,
@@ -42,7 +42,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "catalog_only"
+        "last_status": "ok"
       },
       "liquid/lfm-2.5-2.6b:free": {
         "context": 65536,
@@ -50,7 +50,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "catalog_only"
+        "last_status": "ok"
       },
       "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
         "context": 256000,
@@ -139,6 +139,24 @@
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "rate_limited"
+      },
+      "thinkingmachines/inkling-small:free": {
+        "context": 1048576,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-04 21:34:21",
+        "fail_streak": 1,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-10-04 21:35 auth_error",
+        "last_status": "auth_error"
+      },
+      "thinkingmachines/inkling:free": {
+        "context": 1048576,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-04 21:34:21",
+        "fail_streak": 1,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-10-04 21:35 auth_error",
+        "last_status": "auth_error"
       }
     },
     "NOVITA_KEY": {
