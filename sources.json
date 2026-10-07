@@ -2,8 +2,8 @@
   "external": {
     "https://api.cline.bot/api/v1/models": {
       "name": "Cline 模型目录",
-      "count": 466,
-      "hash": "30eafc2a9e99c1f6",
+      "count": 465,
+      "hash": "d0d74d619268b607",
       "ids": [
         "aion-labs/aion-2.0",
         "aion-labs/aion-3.0",
@@ -134,7 +134,6 @@
         "inclusionai/ling-3.1-flash",
         "inference-net/schematron-v2-small",
         "inference-net/schematron-v2-turbo",
-        "kwaipilot/kat-coder-pro-v2.5",
         "liquid/lfm-2.5-2.6b:free",
         "mancer/weaver",
         "meituan/longcat-2.0",
@@ -473,13 +472,13 @@
         "~z-ai/glm-latest"
       ],
       "free_pairs": {},
-      "checked_at": "2026-10-07 04:40",
+      "checked_at": "2026-10-07 11:25",
       "note": "Cline 用量计费通道的目录；实测与 OpenRouter 一致（464 个），用来交叉验证"
     },
     "https://router.huggingface.co/v1/models": {
       "name": "HuggingFace Router 目录",
       "count": 136,
-      "hash": "5dc1f2bd2f1a0e55",
+      "hash": "0deada7aac1c768b",
       "ids": [
         "CohereLabs/aya-expanse-32b",
         "CohereLabs/aya-vision-32b",
@@ -602,11 +601,11 @@
         "zai-org/GLM-4.5V",
         "zai-org/GLM-4.5V-FP8",
         "zai-org/GLM-4.6",
+        "zai-org/GLM-4.6-FP8",
         "zai-org/GLM-4.6V",
         "zai-org/GLM-4.6V-FP8",
         "zai-org/GLM-4.6V-Flash",
         "zai-org/GLM-4.7",
-        "zai-org/GLM-4.7-FP8",
         "zai-org/GLM-4.7-Flash",
         "zai-org/GLM-5",
         "zai-org/GLM-5.1",
@@ -622,7 +621,7 @@
         "prism-ml/Ternary-Bonsai-27B-AWQ-4bit@together": true,
         "prism-ml/Ternary-Bonsai-27B-gguf@together": true
       },
-      "checked_at": "2026-10-07 04:40",
+      "checked_at": "2026-10-07 11:25",
       "note": "HF 聚合 15+ 家供应商的实时路由目录，匿名即可读，每个「模型×供应商」组合自带定价、supports_tools、上下文。is_free 或定价 0/0 的 live 组合记为「0 元组合」，是发现「谁家又上新免费模型」最灵敏的传感器；调用本身走 HF 免费账号每月 $0.10 额度"
     },
     "https://raw.githubusercontent.com/jtig37/free-llm-api-resources/main/README.md": {
@@ -653,7 +652,7 @@
         "glhf.chat (Free Beta)"
       ],
       "free_pairs": {},
-      "checked_at": "2026-10-07 04:40",
+      "checked_at": "2026-10-07 11:25",
       "note": "社区人肉整理的免费 API 汇总（jtig37/free-llm-api-resources），新平台往往先在这里被人发现。解析 HTML 表格中的平台名，监控增删变化"
     }
   },
@@ -664,7 +663,7 @@
       "size": 3102,
       "last_changed": "",
       "first_seen": "2026-10-01 02:37",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://docs.bigmodel.cn/cn/guide/start/pricing": {
       "name": "智谱价格",
@@ -672,7 +671,7 @@
       "size": 8412,
       "last_changed": "",
       "first_seen": "2026-10-01 02:37",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://platform.kimi.com/docs/pricing/limits": {
       "name": "Kimi 限流",
@@ -680,7 +679,7 @@
       "size": 1755,
       "last_changed": "",
       "first_seen": "2026-10-01 02:37",
-      "checked_at": "2026-10-06 22:36"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://platform.minimaxi.com/docs/guides/rate-limits.md": {
       "name": "MiniMax 限流",
@@ -688,7 +687,7 @@
       "size": 2912,
       "last_changed": "",
       "first_seen": "2026-10-01 02:37",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://api-docs.siliconflow.cn/docs/userguide/faqs/rate-limit-and-upgradation": {
       "name": "硅基流动限流",
@@ -696,7 +695,7 @@
       "size": 3749,
       "last_changed": "",
       "first_seen": "2026-10-01 02:37",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://platform.baichuan-ai.com/docs-v2/rate-limit": {
       "name": "百川限流",
@@ -704,7 +703,7 @@
       "size": 291,
       "last_changed": "",
       "first_seen": "2026-10-01 02:37",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://openrouter.ai/docs/api_reference/limits": {
       "name": "OpenRouter 限流",
@@ -712,7 +711,7 @@
       "size": 11565,
       "last_changed": "",
       "first_seen": "2026-10-01 02:53",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://console.groq.com/docs/rate-limits": {
       "name": "Groq 限流",
@@ -720,7 +719,7 @@
       "size": 5784,
       "last_changed": "2026-10-06 11:58",
       "first_seen": "2026-10-01 02:53",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://ai.google.dev/gemini-api/docs/rate-limits": {
       "name": "Gemini 限流",
@@ -728,15 +727,15 @@
       "size": 11183,
       "last_changed": "",
       "first_seen": "2026-10-01 02:53",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://ai.google.dev/gemini-api/docs/pricing": {
       "name": "Gemini 定价",
-      "hash": "d0c03a2167ba66a4",
-      "size": 65450,
-      "last_changed": "2026-10-07 04:40",
+      "hash": "d9ada848b59a4bc9",
+      "size": 65448,
+      "last_changed": "2026-10-07 11:25",
       "first_seen": "2026-10-01 02:53",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://inference-docs.cerebras.ai/support/rate-limits": {
       "name": "Cerebras 限流",
@@ -744,7 +743,7 @@
       "size": 7799,
       "last_changed": "",
       "first_seen": "2026-10-01 02:53",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://developers.cloudflare.com/workers-ai/platform/pricing/": {
       "name": "Cloudflare 定价",
@@ -752,7 +751,7 @@
       "size": 14615,
       "last_changed": "2026-10-02 00:02",
       "first_seen": "2026-10-01 02:53",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://docs.sambanova.ai/docs/en/models/rate-limits": {
       "name": "SambaNova 限流",
@@ -760,7 +759,7 @@
       "size": 4177,
       "last_changed": "2026-10-03 11:00",
       "first_seen": "2026-10-01 02:53",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://mistral.ai/pricing": {
       "name": "Mistral 价格",
@@ -768,7 +767,7 @@
       "size": 8454,
       "last_changed": "2026-10-06 11:58",
       "first_seen": "2026-10-01 02:53",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     },
     "https://docs.cline.bot/getting-started/free-models.md": {
       "name": "Cline 免费模型",
@@ -776,9 +775,9 @@
       "size": 2849,
       "last_changed": "2026-10-02 09:51",
       "first_seen": "2026-10-01 02:53",
-      "checked_at": "2026-10-07 04:40"
+      "checked_at": "2026-10-07 11:25"
     }
   },
-  "updated_at": "2026-10-07 04:40:26",
+  "updated_at": "2026-10-07 11:25:53",
   "note": "外部清单的模型 ID 快照 + 官方文档页的内容摘要。由 update_list.py 自动维护，用来发现「别家清单变了」和「官方政策页改了」。"
 }
