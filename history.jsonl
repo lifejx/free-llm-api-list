@@ -58,3 +58,4 @@
 {"at":"2026-10-17 10:14:50","ok":26,"catalog_only":13,"total":97,"adopted":3,"dropped":0,"changes":[{"provider":"月之暗面 Kimi","env":"MOONSHOT_KEY","model":"kimi-k2.5","from":"rate_limited","to":"bad_request"},{"provider":"OpenRouter","env":"OPENROUTER_KEY","model":"xingchen-agi/xing4.0-29b-a4b:free","from":"new","to":"rate_limited"}]}
 {"at":"2026-10-17 19:52:20","ok":27,"catalog_only":13,"total":97,"adopted":0,"dropped":0,"changes":[{"provider":"OpenRouter","env":"OPENROUTER_KEY","model":"poolside/laguna-xs-2.1:free","from":"rate_limited","to":"ok"}]}
 {"at":"2026-10-18 02:03:08","ok":27,"catalog_only":13,"total":97,"adopted":0,"dropped":2,"changes":[]}
+{"at":"2026-10-18 10:14:44","ok":26,"catalog_only":13,"total":97,"adopted":2,"dropped":0,"changes":[{"provider":"智谱 AI (BigModel)","env":"ZHIPU_KEY","model":"glm-4.7-flash","from":"ok","to":"rate_limited"}]}
