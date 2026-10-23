@@ -28,9 +28,9 @@
 
 ---
 
-- **最后更新**：2026-10-23 03:39:09 (北京时间 UTC+8)
-- **本次耗时**：28.6 秒　|　**巡检频率**：`0 */8 * * *`
-- **实测可用**：**28 / 99**（未配密钥但目录已确认存在 🔵 13 个）　|　**已配置平台**：5 / 24
+- **最后更新**：2026-10-23 10:39:05 (北京时间 UTC+8)
+- **本次耗时**：158.0 秒　|　**巡检频率**：`0 */8 * * *`
+- **实测可用**：**26 / 99**（未配密钥但目录已确认存在 🔵 13 个）　|　**已配置平台**：5 / 24
 - **接口探活**：23 个平台已探活（🟢 在线 21，❌ 失效 0，📡 不通 0）　|　**可读目录**：8 个平台（其中 3 个无需密钥）
 
 > 这套清单是**自己维护自己**的：平台接口死活靠「匿名探活」（用一个无效密钥试，
@@ -39,15 +39,15 @@
 
 | 状态 | 数量 | 说明 |
 | --- | ---: | --- |
-| ✅ 正常可用 | 28 | 用你的密钥实测返回 200 |
+| ✅ 正常可用 | 26 | 用你的密钥实测返回 200 |
 | 🔵 目录已确认 | 13 | 未配密钥，但平台公开目录中确认该模型存在 |
-| ⚠️ 限流/额度耗尽 | 6 | 返回 429 或提示配额/余额不足 |
-| 🟠 请求被拒 | 3 | 返回 400，参数或模型不被支持 |
+| ⚠️ 限流/额度耗尽 | 5 | 返回 429 或提示配额/余额不足 |
+| 🟠 请求被拒 | 5 | 返回 400，参数或模型不被支持 |
 | 🔑 密钥失效/无权限 | 4 | 返回 401/403，密钥无效或权限变更 |
 | ⚪ 目录中已消失 | 2 | 公开目录里查不到它了，疑似已下架 |
 | ❌ 模型已下架 | 1 | 返回 404，模型 ID 不存在 |
 | 🌐 服务端异常 | 0 | 返回 5xx，平台侧故障 |
-| 📡 网络超时/不可达 | 0 | 连接失败或超时 |
+| 📡 网络超时/不可达 | 1 | 连接失败或超时 |
 | ❔ 未知状态 | 0 | 其他返回码 |
 | ⏭️ 无法判断 | 42 | 未配密钥，且平台目录不公开，无从判断 |
 
@@ -67,16 +67,19 @@
 
 | 平台 | 模型 | 变化 |
 | --- | --- | --- |
-| 月之暗面 Kimi | `kimi-k2.5` | 🟠 请求被拒 → ⚠️ 限流/额度耗尽 |
+| 智谱 AI (BigModel) | `glm-4.7-flash` | ✅ 正常可用 → ⚠️ 限流/额度耗尽 |
+| 月之暗面 Kimi | `kimi-k3` | ⚠️ 限流/额度耗尽 → 🟠 请求被拒 |
+| 月之暗面 Kimi | `kimi-k2.5` | ⚠️ 限流/额度耗尽 → 🟠 请求被拒 |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` | ✅ 正常可用 → 📡 网络超时/不可达 |
 
 ## 平台总览
 
 | 平台 | 接口探活 | 模型状态 | 免费性质 | 大陆可用性 | 密钥变量 | 目录 | 申请地址 |
 | --- | --- | --- | --- | --- | --- | ---: | --- |
-| 智谱 AI (BigModel) | 🟢 接口在线 | ✅ 正常可用 3/4 | 长期免费 | 🟢 容易 | `ZHIPU_KEY` | 11 | [控制台](https://open.bigmodel.cn/usercenter/apikeys) |
-| 月之暗面 Kimi | 🟢 接口在线 | ⚠️ 限流/额度耗尽 0/3 | 一次性赠送 | 🟡 要点技巧 | `MOONSHOT_KEY` | 2 | [控制台](https://platform.kimi.com/console/api-keys) |
+| 智谱 AI (BigModel) | 🟢 接口在线 | ✅ 正常可用 2/4 | 长期免费 | 🟢 容易 | `ZHIPU_KEY` | 11 | [控制台](https://open.bigmodel.cn/usercenter/apikeys) |
+| 月之暗面 Kimi | 🟢 接口在线 | 🟠 请求被拒 0/3 | 一次性赠送 | 🟡 要点技巧 | `MOONSHOT_KEY` | 2 | [控制台](https://platform.kimi.com/console/api-keys) |
 | 阿里云百炼 DashScope | 🟢 接口在线 | ⏭️ 无法判断 0/5 | 一次性赠送 | 🟢 容易 | `DASHSCOPE_KEY` | - | [控制台](https://bailian.console.aliyun.com/) |
-| 硅基流动 SiliconFlow | 🟢 接口在线 | ✅ 正常可用 11/11 | 长期免费 | 🟢 容易 | `SILICONFLOW_KEY` | 98（公开） | [控制台](https://cloud.siliconflow.cn/account/ak) |
+| 硅基流动 SiliconFlow | 🟢 接口在线 | ✅ 正常可用 10/11 | 长期免费 | 🟢 容易 | `SILICONFLOW_KEY` | 98（公开） | [控制台](https://cloud.siliconflow.cn/account/ak) |
 | 魔搭 ModelScope | 🟢 接口在线 | 🟠 请求被拒 0/4 | 长期免费 | 🟡 要点技巧 | `MODELSCOPE_KEY` | 37 | [控制台](https://modelscope.cn/my/myaccesstoken) |
 | 腾讯混元 / TokenHub | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | 🟢 容易 | `HUNYUAN_KEY` | - | [控制台](https://console.cloud.tencent.com/hunyuan/api-key) |
 | 百度千帆 Qianfan | 🟢 接口在线 | ⏭️ 无法判断 0/4 | 一次性赠送 | 🟢 容易 | `QIANFAN_KEY` | - | [控制台](https://console.bce.baidu.com/iam/) |
@@ -92,10 +95,10 @@
 | Cerebras | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | ⛔ 不可用 | `CEREBRAS_KEY` | - | [控制台](https://cloud.cerebras.ai/) |
 | Mistral AI | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 长期免费 | 🟠 较难 | `MISTRAL_KEY` | - | [控制台](https://console.mistral.ai/api-keys/) |
 | Together AI | 🔓 无需密钥 | ⏭️ 无法判断 0/2 | 长期免费 | 🟠 较难 | `TOGETHER_KEY` | - | [控制台](https://api.together.xyz/settings/api-keys) |
-| NVIDIA NIM | 🟢 接口在线 | 🔵 目录已确认 0/5 | 长期免费 | 🟠 较难 | `NVIDIA_KEY` | 83（公开） | [控制台](https://build.nvidia.com/settings/api-keys) |
+| NVIDIA NIM | 🟢 接口在线 | 🔵 目录已确认 0/5 | 长期免费 | 🟠 较难 | `NVIDIA_KEY` | 84（公开） | [控制台](https://build.nvidia.com/settings/api-keys) |
 | SambaNova (SambaCloud) | 🟢 接口在线 | 🔵 目录已确认 0/4 | 长期免费 | 🟢 容易 | `SAMBANOVA_KEY` | 6（公开） | [控制台](https://cloud.sambanova.ai/apis) |
 | Nebius Token Factory | 🟢 接口在线 | ⏭️ 无法判断 0/2 | 一次性赠送 | 🟠 较难 | `NEBIUS_KEY` | - | [控制台](https://tokenfactory.nebius.com/) |
-| Novita AI | 🟢 接口在线 | 🔵 目录已确认 0/6 | 长期免费 | 🟢 容易 | `NOVITA_KEY` | 97（公开） | [控制台](https://novita.ai/settings/key-management) |
+| Novita AI | 🟢 接口在线 | 🔵 目录已确认 0/6 | 长期免费 | 🟢 容易 | `NOVITA_KEY` | 95（公开） | [控制台](https://novita.ai/settings/key-management) |
 | Cloudflare Workers AI | ⏭️ 未探活 | ⏭️ 无法判断 0/4 | 长期免费 | 🟡 要点技巧 | `CLOUDFLARE_API_TOKEN` | - | [控制台](https://dash.cloudflare.com/profile/api-tokens) |
 
 ## 免费政策与限流
@@ -215,12 +218,12 @@
 
 > 当前自动纳入模式：**safe**（`safe` = 只收机器确证免费的；`aggressive` = 名字像的也收；`off` = 只记候选）
 
-### 本轮自动剔除 2 个模型
+### 本轮自动纳入 2 个模型
 
-| 平台 | 模型 | 原因 |
-| --- | --- | --- |
-| OPENROUTER_KEY | `thinkingmachines/inkling-small:free` | 连续 3 轮实测失败（最近：auth_error） |
-| OPENROUTER_KEY | `thinkingmachines/inkling:free` | 连续 3 轮实测失败（最近：auth_error） |
+| 平台 | 模型 | 依据 | 上下文 |
+| --- | --- | --- | ---: |
+| OpenRouter | `thinkingmachines/inkling-small:free` | 确认免费 | 1M |
+| OpenRouter | `thinkingmachines/inkling:free` | 确认免费 | 1M |
 
 ### 候选（未自动纳入，共 43 个）
 
@@ -269,8 +272,8 @@
 
 | 来源 | 模型数 | 本轮变化 |
 | --- | ---: | --- |
-| Cline 模型目录 | 468 | ➕ 1 个、➖ 1 个：`minimax/minimax-m3.1-flash` |
-| HuggingFace Router 目录 | 128 | ➖ 4 个：`aisingapore/Gemma-SEA-LION-v4-27B-IT`、`aisingapore/Nemotron-SEA-LION-v4.8-120B-A12B`、`aisingapore/Qwen-SEA-LION-v4.5-27B-IT` |
+| Cline 模型目录 | 472 | ➕ 4 个：`@preset/cline-new27-20261022-gpt61sol-azure-r1`、`@preset/cline-new27-20261022-nemotron35vl-coreweave-r1`、`@preset/cline-new27-20261022-opus55-vertex-global-r1` |
+| HuggingFace Router 目录 | 131 | ➕ 5 个、➖ 2 个：`aisingapore/Gemma-SEA-LION-v4-27B-IT`、`aisingapore/Nemotron-SEA-LION-v4.8-120B-A12B`、`aisingapore/Qwen-SEA-LION-v4.5-27B-IT` |
 | 社区免费清单 (jtig37) | 21 | 无变化 |
 
 > Cline 模型目录：Cline 用量计费通道的目录；实测与 OpenRouter 一致（464 个），用来交叉验证
@@ -283,10 +286,8 @@
 
 | 页面 | 变更时间 | 链接 |
 | --- | --- | --- |
-| Gemini 定价 | 2026-10-23 03:39 | [打开](https://ai.google.dev/gemini-api/docs/pricing) |
-| Cline 免费模型 | 2026-10-23 03:39 | [打开](https://docs.cline.bot/getting-started/free-models.md) |
-| 智谱限流 | 2026-10-23 03:39 | [打开](https://docs.bigmodel.cn/cn/api/rate-limit) |
-| 智谱价格 | 2026-10-23 03:39 | [打开](https://docs.bigmodel.cn/cn/guide/start/pricing) |
+| 智谱限流 | 2026-10-23 10:39 | [打开](https://docs.bigmodel.cn/cn/api/rate-limit) |
+| 智谱价格 | 2026-10-23 10:39 | [打开](https://docs.bigmodel.cn/cn/guide/start/pricing) |
 
 > 有 2 个页面是第一次抓取，本轮只建立基线，不算变更。
 > 有 1 个页面本轮抓取失败（阶跃星辰定价），不影响其他检测。
@@ -295,30 +296,30 @@
 
 ## 可用性时间线（自动累积）
 
-已累积 **81** 次巡检（2026-09-30 19:57 起）。这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。
+已累积 **82** 次巡检（2026-09-30 19:57 起）。这一节是为了回答文档回答不了的问题：**哪个平台在哪个时段容易被限流**。
 
 | 平台 | 巡检轮次 | 实测成功累计 | 限流(429)累计 | 探活异常 | 最容易限流的时段 |
 | --- | ---: | ---: | ---: | ---: | --- |
-| OpenRouter | 78 | 697 | 218 | 0 | 11:00 前后 |
-| 智谱 AI (BigModel) | 78 | 198 | 44 | 0 | 11:00 前后 |
-| 月之暗面 Kimi | 79 | 0 | 30 | 0 | 03:00 前后 |
-| 硅基流动 SiliconFlow | 78 | 613 | 25 | 0 | 20:00 前后 |
-| 魔搭 ModelScope | 80 | 115 | 7 | 0 | 11:00 前后 |
+| OpenRouter | 79 | 711 | 221 | 0 | 11:00 前后 |
+| 智谱 AI (BigModel) | 79 | 200 | 46 | 0 | 10:00 前后 |
+| 月之暗面 Kimi | 80 | 0 | 30 | 0 | 03:00 前后 |
+| 硅基流动 SiliconFlow | 79 | 623 | 25 | 0 | 20:00 前后 |
+| 魔搭 ModelScope | 81 | 115 | 7 | 0 | 11:00 前后 |
 | CHUTES_KEY | 2 | 0 | 0 | 0 | - |
-| Cerebras | 78 | 0 | 0 | 0 | - |
-| Cloudflare Workers AI | 78 | 0 | 0 | 0 | - |
+| Cerebras | 79 | 0 | 0 | 0 | - |
+| Cloudflare Workers AI | 79 | 0 | 0 | 0 | - |
 | DEEPSEEK_KEY | 2 | 0 | 0 | 0 | - |
 | GITHUB_MODELS_TOKEN | 2 | 0 | 0 | 2 | - |
-| Google Gemini | 78 | 0 | 0 | 0 | - |
-| Groq | 78 | 0 | 0 | 0 | - |
+| Google Gemini | 79 | 0 | 0 | 0 | - |
+| Groq | 79 | 0 | 0 | 0 | - |
 | HYPERBOLIC_KEY | 2 | 0 | 0 | 2 | - |
-| MiniMax | 78 | 0 | 0 | 0 | - |
-| Mistral AI | 78 | 0 | 0 | 0 | - |
-| NVIDIA NIM | 78 | 0 | 0 | 2 | - |
-| Nebius Token Factory | 78 | 0 | 0 | 0 | - |
-| Novita AI | 78 | 0 | 0 | 0 | - |
-| SambaNova (SambaCloud) | 78 | 0 | 0 | 0 | - |
-| Together AI | 78 | 0 | 0 | 0 | - |
+| MiniMax | 79 | 0 | 0 | 0 | - |
+| Mistral AI | 79 | 0 | 0 | 0 | - |
+| NVIDIA NIM | 79 | 0 | 0 | 2 | - |
+| Nebius Token Factory | 79 | 0 | 0 | 0 | - |
+| Novita AI | 79 | 0 | 0 | 0 | - |
+| SambaNova (SambaCloud) | 79 | 0 | 0 | 0 | - |
+| Together AI | 79 | 0 | 0 | 0 | - |
 
 > **没配密钥的平台，限流列会一直是 0** —— 429 只有真正调用时才会出现，
 > 匿名探活看不到它。想让这一节有数据，配一个密钥就行。
@@ -326,7 +327,7 @@
 
 ## 模型明细
 
-### 🔧 单次工具调用测试通过的免费模型（20 个）
+### 🔧 单次工具调用测试通过的免费模型（18 个）
 
 **注意：通过这项测试 ≠ 能驱动 agent。** 它只证明模型「会在被问天气时吐出 `tool_calls`」——这是一道最低门槛的能力筛查。2026-10-01/02 两轮真实场景实测（DSH / Cline / Roo Code，几万 token 系统提示词 + 多轮工具循环）：下表中所有免费模型**全部跑不动**，典型表现是输出格式跑偏、中途吐空、被限速截断。
 
@@ -334,10 +335,8 @@
 
 | 平台 | 模型 ID | 上下文 |
 | --- | --- | ---: |
-| 智谱 AI (BigModel) | `glm-4.7-flash` | 200K |
 | 智谱 AI (BigModel) | `glm-4-flash-250414` | 128K |
 | 硅基流动 SiliconFlow | `Qwen/Qwen3-8B` |  |
-| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` |  |
 | 硅基流动 SiliconFlow | `Qwen/Qwen2.5-72B-Instruct` | 32K |
 | 硅基流动 SiliconFlow | `Qwen/Qwen2.5-7B-Instruct` | 32K |
 | 硅基流动 SiliconFlow | `THUDM/GLM-4-9B-0414` | 32K |
@@ -360,33 +359,33 @@
 
 | 平台 | 模型 ID | 来源 | 上下文 | 状态 | 工具调用 | HTTP | 延迟 | 备注 |
 | --- | --- | --- | ---: | --- | --- | ---: | ---: | --- |
-| 智谱 AI (BigModel) | `glm-4.7-flash` | 人工登记 | 200K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 975 ms |  |
-| 智谱 AI (BigModel) | `glm-4-flash-250414` | 人工登记 | 128K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 643 ms |  |
-| 智谱 AI (BigModel) | `glm-z1-flash` | 人工登记 | 128K | ⚠️ 限流/额度耗尽 | 未测 | 429 | 410 ms | 您的账户已达到速率限制，请您控制请求频率 |
-| 智谱 AI (BigModel) | `glm-4v-flash` | 人工登记 | 16K | ✅ 正常可用 | 未测 | 200 | 965 ms | （轮换中，沿用上轮结果） |
-| 月之暗面 Kimi | `kimi-k3` | 人工登记 |  | ⚠️ 限流/额度耗尽 | 未测 | 429 | 1302 ms | Your account org-43ae6cdc56084f82be6a274c615711c6<ak-fczmspxjhtri11cfzyi1> request reached max organization concurrency: 1, please try again after 1 seconds（Retry-After: 1 |
-| 月之暗面 Kimi | `kimi-k2.5` | 人工登记 |  | ⚠️ 限流/额度耗尽 | 未测 | 429 | 1299 ms | Your account org-43ae6cdc56084f82be6a274c615711c6<ak-fczmspxjhtri11cfzyi1> request reached max organization concurrency: 1, please try again after 1 seconds（Retry-After: 1 |
-| 月之暗面 Kimi | `kimi-k2.7-code` | 人工登记 |  | 🟠 请求被拒 | 未测 | 400 | 1233 ms | invalid temperature: only 1 is allowed for this model |
+| 智谱 AI (BigModel) | `glm-4.7-flash` | 人工登记 | 200K | ⚠️ 限流/额度耗尽 | 未测 | 429 | 548 ms | 该模型当前访问量过大，请您稍后再试 |
+| 智谱 AI (BigModel) | `glm-4-flash-250414` | 人工登记 | 128K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 704 ms |  |
+| 智谱 AI (BigModel) | `glm-z1-flash` | 人工登记 | 128K | ⚠️ 限流/额度耗尽 | 未测 | 429 | 410 ms | 您的账户已达到速率限制，请您控制请求频率（轮换中，沿用上轮结果） |
+| 智谱 AI (BigModel) | `glm-4v-flash` | 人工登记 | 16K | ✅ 正常可用 | 未测 | 200 | 924 ms |  |
+| 月之暗面 Kimi | `kimi-k3` | 人工登记 |  | 🟠 请求被拒 | 未测 | 400 | 1036 ms | invalid temperature: only 1 is allowed for this model |
+| 月之暗面 Kimi | `kimi-k2.5` | 人工登记 |  | 🟠 请求被拒 | 未测 | 400 | 1016 ms | invalid temperature: only 1 is allowed for this model |
+| 月之暗面 Kimi | `kimi-k2.7-code` | 人工登记 |  | 🟠 请求被拒 | 未测 | 400 | 999 ms | invalid temperature: only 1 is allowed for this model |
 | 阿里云百炼 DashScope | `qwen3.8-max` | 人工登记 |  | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 DASHSCOPE_KEY |
 | 阿里云百炼 DashScope | `qwen3.8-flash` | 人工登记 |  | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 DASHSCOPE_KEY |
 | 阿里云百炼 DashScope | `qwen-plus` | 人工登记 |  | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 DASHSCOPE_KEY |
 | 阿里云百炼 DashScope | `qwen-turbo` | 人工登记 |  | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 DASHSCOPE_KEY |
 | 阿里云百炼 DashScope | `qwen-long` | 人工登记 | 10M | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 DASHSCOPE_KEY |
-| 硅基流动 SiliconFlow | `Qwen/Qwen3-8B` | 人工登记 |  | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 6060 ms |  |
-| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` | 人工登记 |  | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 2196 ms | （轮换中，沿用上轮结果） |
-| 硅基流动 SiliconFlow | `deepseek-ai/DeepSeek-R1-0528-Qwen3-8B` | 人工登记 |  | ✅ 正常可用 | — 不支持工具 | 200 | 8017 ms | （轮换中，沿用上轮结果） |
-| 硅基流动 SiliconFlow | `THUDM/GLM-Z1-9B-0414` | 人工登记 |  | ✅ 正常可用 | 〽️ 收参不吐调用 | 200 | 8647 ms | （轮换中，沿用上轮结果） |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3-8B` | 人工登记 |  | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 6060 ms | （轮换中，沿用上轮结果） |
+| 硅基流动 SiliconFlow | `Qwen/Qwen3.5-4B` | 人工登记 |  | 📡 网络超时/不可达 | 未测 | - | 143626 ms | TimeoutError: The read operation timed out |
+| 硅基流动 SiliconFlow | `deepseek-ai/DeepSeek-R1-0528-Qwen3-8B` | 人工登记 |  | ✅ 正常可用 | — 不支持工具 | 200 | 8571 ms |  |
+| 硅基流动 SiliconFlow | `THUDM/GLM-Z1-9B-0414` | 人工登记 |  | ✅ 正常可用 | 〽️ 收参不吐调用 | 200 | 5946 ms |  |
 | 硅基流动 SiliconFlow | `Qwen/Qwen2.5-72B-Instruct` | 自动发现 | 32K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 904 ms | （轮换中，沿用上轮结果） |
 | 硅基流动 SiliconFlow | `Qwen/Qwen2.5-7B-Instruct` | 自动发现 | 32K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 997 ms | （轮换中，沿用上轮结果） |
 | 硅基流动 SiliconFlow | `THUDM/GLM-4-9B-0414` | 自动发现 | 32K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 1078 ms | （轮换中，沿用上轮结果） |
 | 硅基流动 SiliconFlow | `XingChenAGI/Xing4.0-29B` | 自动发现 | 262K | ✅ 正常可用 | 〽️ 收参不吐调用 | 200 | 784 ms | （轮换中，沿用上轮结果） |
 | 硅基流动 SiliconFlow | `tencent/Hunyuan-MT-7B` | 自动发现 | 32K | ✅ 正常可用 | — 不支持工具 | 200 | 672 ms | （轮换中，沿用上轮结果） |
-| 硅基流动 SiliconFlow | `zai-org/GLM-5.3-Flash` | 自动发现 | 1M | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 3482 ms |  |
-| 硅基流动 SiliconFlow | `deepseek-ai/DeepSeek-V4.1-Flash` | 自动发现 | 1M | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 1616 ms |  |
-| 魔搭 ModelScope | `Qwen/Qwen3.8-27B` | 人工登记 |  | 🔑 密钥失效/无权限 | 未测 | 403 | 1094 ms | For account security, please complete your profile via email verification. ModelScope Magicubes is only available to verified accounts. Please refer to https://modelscope.cn/my/se… |
-| 魔搭 ModelScope | `deepseek-ai/DeepSeek-V4.1-Flash` | 人工登记 |  | 🟠 请求被拒 | 未测 | 400 | 1288 ms | Model id : deepseek-ai/DeepSeek-V4.1-Flash , has no provider supported |
-| 魔搭 ModelScope | `ZhipuAI/GLM-4.7-Flash` | 人工登记 |  | 🔑 密钥失效/无权限 | 未测 | 403 | 1195 ms | For account security, please complete your profile via email verification. ModelScope Magicubes is only available to verified accounts. Please refer to https://modelscope.cn/my/se… |
-| 魔搭 ModelScope | `stepfun-ai/Step-3.7-Flash` | 人工登记 |  | 🟠 请求被拒 | 未测 | 400 | 980 ms | Model id : stepfun-ai/Step-3.7-Flash , has no provider supported（轮换中，沿用上轮结果） |
+| 硅基流动 SiliconFlow | `zai-org/GLM-5.3-Flash` | 自动发现 | 1M | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 3482 ms | （轮换中，沿用上轮结果） |
+| 硅基流动 SiliconFlow | `deepseek-ai/DeepSeek-V4.1-Flash` | 自动发现 | 1M | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 1616 ms | （轮换中，沿用上轮结果） |
+| 魔搭 ModelScope | `Qwen/Qwen3.8-27B` | 人工登记 |  | 🔑 密钥失效/无权限 | 未测 | 403 | 1114 ms | For account security, please complete your profile via email verification. ModelScope Magicubes is only available to verified accounts. Please refer to https://modelscope.cn/my/se… |
+| 魔搭 ModelScope | `deepseek-ai/DeepSeek-V4.1-Flash` | 人工登记 |  | 🟠 请求被拒 | 未测 | 400 | 1029 ms | Model id : deepseek-ai/DeepSeek-V4.1-Flash , has no provider supported |
+| 魔搭 ModelScope | `ZhipuAI/GLM-4.7-Flash` | 人工登记 |  | 🔑 密钥失效/无权限 | 未测 | 403 | 1195 ms | For account security, please complete your profile via email verification. ModelScope Magicubes is only available to verified accounts. Please refer to https://modelscope.cn/my/se…（轮换中，沿用上轮结果） |
+| 魔搭 ModelScope | `stepfun-ai/Step-3.7-Flash` | 人工登记 |  | 🟠 请求被拒 | 未测 | 400 | 1147 ms | Model id : stepfun-ai/Step-3.7-Flash , has no provider supported |
 | 腾讯混元 / TokenHub | `hy4-preview` | 人工登记 |  | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 HUNYUAN_KEY |
 | 腾讯混元 / TokenHub | `hy3-preview` | 人工登记 |  | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 HUNYUAN_KEY |
 | 百度千帆 Qianfan | `ERNIE-4.5-Turbo-128K` | 人工登记 | 131K | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 QIANFAN_KEY |
@@ -405,12 +404,12 @@
 | 零一万物 Yi | `yi-vision-v2` | 人工登记 |  | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 YI_KEY |
 | 百川智能 Baichuan | `Baichuan4-Turbo` | 人工登记 | 32K | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 BAICHUAN_KEY |
 | 百川智能 Baichuan | `Baichuan-M3-Plus` | 人工登记 |  | ⏭️ 无法判断 | 未测 | - | - | 缺少环境变量 BAICHUAN_KEY |
-| OpenRouter | `openrouter/free` | 人工登记 | 200K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 423 ms |  |
-| OpenRouter | `qwen/qwen3.8-27b:free` | 人工登记 | 262K | ❌ 模型已下架 | 未测 | 404 | 52 ms | This model is unavailable for free. The paid version is available now - use this slug instead: qwen/qwen3.8-27b |
-| OpenRouter | `cohere/north-mini-code:free` | 自动发现 | 256K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 250 ms |  |
-| OpenRouter | `dots-studio/dots-3-note-preview:free` | 自动发现 | 512K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 666 ms | （轮换中，沿用上轮结果） |
-| OpenRouter | `google/gemma-4-26b-a4b-it:free` | 自动发现 | 262K | ⚠️ 限流/额度耗尽 | 未测 | 429 | 172 ms | Provider returned error（轮换中，沿用上轮结果） |
-| OpenRouter | `google/gemma-4-31b-it:free` | 自动发现 | 262K | ⚠️ 限流/额度耗尽 | 未测 | 429 | 166 ms | Provider returned error（轮换中，沿用上轮结果） |
+| OpenRouter | `openrouter/free` | 人工登记 | 200K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 423 ms | （轮换中，沿用上轮结果） |
+| OpenRouter | `qwen/qwen3.8-27b:free` | 人工登记 | 262K | ❌ 模型已下架 | 未测 | 404 | 52 ms | This model is unavailable for free. The paid version is available now - use this slug instead: qwen/qwen3.8-27b（轮换中，沿用上轮结果） |
+| OpenRouter | `cohere/north-mini-code:free` | 自动发现 | 256K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 250 ms | （轮换中，沿用上轮结果） |
+| OpenRouter | `dots-studio/dots-3-note-preview:free` | 自动发现 | 512K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 706 ms |  |
+| OpenRouter | `google/gemma-4-26b-a4b-it:free` | 自动发现 | 262K | ⚠️ 限流/额度耗尽 | 未测 | 429 | 138 ms | Provider returned error |
+| OpenRouter | `google/gemma-4-31b-it:free` | 自动发现 | 262K | ⚠️ 限流/额度耗尽 | 未测 | 429 | 220 ms | Provider returned error |
 | OpenRouter | `liquid/lfm-2.5-2.6b:free` | 自动发现 | 65K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 170 ms | （轮换中，沿用上轮结果） |
 | OpenRouter | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 自动发现 | 256K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 193 ms | （轮换中，沿用上轮结果） |
 | OpenRouter | `nvidia/nemotron-3-super-120b-a12b:free` | 自动发现 | 262K | ✅ 正常可用 | 🔧 原生工具调用 | 200 | 545 ms | （轮换中，沿用上轮结果） |
@@ -599,6 +598,7 @@ $env:ZHIPU_KEY="xxxx"; python update_list.py --only ZHIPU_KEY  # Windows PowerSh
 
 | 时间 | 可用模型 | 状态变化 |
 | --- | ---: | ---: |
+| 2026-10-23 03:39:09 | 28/99 | 1 |
 | 2026-10-22 21:19:34 | 28/99 | 1 |
 | 2026-10-22 10:34:30 | 28/99 | 5 |
 | 2026-10-22 03:47:51 | 28/98 | 4 |
@@ -608,7 +608,6 @@ $env:ZHIPU_KEY="xxxx"; python update_list.py --only ZHIPU_KEY  # Windows PowerSh
 | 2026-10-20 10:43:23 | 25/98 | 2 |
 | 2026-10-20 04:48:24 | 25/98 | 0 |
 | 2026-10-19 23:08:58 | 25/98 | 4 |
-| 2026-10-19 10:30:23 | 24/97 | 4 |
 
 完整记录见 `history.jsonl`。
 
