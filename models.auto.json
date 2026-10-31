@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 0 个，剔除 2 个",
-  "updated_at": "2026-10-31 04:19:30",
+  "last_action": "本轮新纳入 2 个，剔除 1 个",
+  "updated_at": "2026-10-31 11:24:40",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -90,7 +90,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "ok"
+        "last_status": "rate_limited"
       },
       "qwen/qwen3.8-27b:free": {
         "context": 262144,
@@ -131,6 +131,24 @@
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "ok"
+      },
+      "thinkingmachines/inkling-small:free": {
+        "context": 1048576,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-31 11:24:09",
+        "fail_streak": 1,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-10-31 11:24 auth_error",
+        "last_status": "auth_error"
+      },
+      "thinkingmachines/inkling:free": {
+        "context": 1048576,
+        "basis": "确认免费",
+        "adopted_at": "2026-10-31 11:24:09",
+        "fail_streak": 1,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-10-31 11:24 auth_error",
+        "last_status": "auth_error"
       }
     },
     "NOVITA_KEY": {
@@ -247,15 +265,6 @@
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "ok"
-      },
-      "THUDM/": {
-        "context": 131072,
-        "basis": "确认免费",
-        "adopted_at": "2026-10-30 22:42:19",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_fail": "2026-10-31 04:19 bad_request",
-        "last_status": "bad_request"
       }
     }
   }
