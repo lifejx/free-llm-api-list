@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 2 个，剔除 0 个",
-  "updated_at": "2026-11-04 05:23:39",
+  "last_action": "本轮新纳入 0 个，剔除 3 个",
+  "updated_at": "2026-11-04 12:00:57",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -116,31 +116,13 @@
         "note": "自动发现（确认免费）",
         "last_status": "server_error"
       },
-      "thinkingmachines/inkling-small:free": {
-        "context": 1048576,
-        "basis": "确认免费",
-        "adopted_at": "2026-11-03 23:38:25",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-04 05:23 auth_error",
-        "last_status": "auth_error"
-      },
-      "thinkingmachines/inkling:free": {
-        "context": 1048576,
-        "basis": "确认免费",
-        "adopted_at": "2026-11-03 23:38:25",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-04 05:23 auth_error",
-        "last_status": "auth_error"
-      },
       "stealth/crouton-alpha": {
         "context": 1048576,
         "basis": "确认免费",
         "adopted_at": "2026-11-04 05:22:52",
-        "fail_streak": 1,
+        "fail_streak": 2,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-04 05:23 bad_request",
+        "last_fail": "2026-11-04 12:00 bad_request",
         "last_status": "bad_request"
       }
     },
@@ -257,24 +239,15 @@
         "adopted_at": "2026-10-15 20:58:12",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "rate_limited"
-      },
-      "zai-o": {
-        "context": 1048576,
-        "basis": "确认免费",
-        "adopted_at": "2026-11-03 23:38:25",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-04 05:23 bad_request",
-        "last_status": "bad_request"
+        "last_status": "ok"
       },
       "THUDM/": {
         "context": 131072,
         "basis": "确认免费",
         "adopted_at": "2026-11-04 05:22:52",
-        "fail_streak": 1,
+        "fail_streak": 2,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-04 05:23 bad_request",
+        "last_fail": "2026-11-04 12:00 bad_request",
         "last_status": "bad_request"
       }
     }
