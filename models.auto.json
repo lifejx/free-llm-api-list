@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 3 个，剔除 1 个",
-  "updated_at": "2026-11-18 13:14:40",
+  "last_action": "本轮新纳入 0 个，剔除 1 个",
+  "updated_at": "2026-11-19 00:50:35",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -136,9 +136,9 @@
         "context": 1048576,
         "basis": "确认免费",
         "adopted_at": "2026-11-18 13:14:04",
-        "fail_streak": 1,
+        "fail_streak": 2,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-18 13:14 auth_error",
+        "last_fail": "2026-11-19 00:50 auth_error",
         "last_status": "auth_error"
       }
     },
@@ -179,9 +179,10 @@
         "context": 262144,
         "basis": "确认免费",
         "adopted_at": "2026-10-01 23:07:31",
-        "fail_streak": 0,
+        "fail_streak": 1,
         "note": "自动发现（确认免费）",
-        "last_status": "catalog_only"
+        "last_status": "missing",
+        "last_fail": "2026-11-19 00:50 missing"
       },
       "nvrouter/auto": {
         "context": 1000000,
@@ -265,31 +266,22 @@
         "note": "自动发现（确认免费）",
         "last_status": "ok"
       },
-      "zai-o": {
-        "context": 1048576,
-        "basis": "确认免费",
-        "adopted_at": "2026-11-18 01:14:06",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-18 13:14 bad_request",
-        "last_status": "bad_request"
-      },
       "])</script><script>self.__next_f.push([1,": {
         "context": 32768,
         "basis": "确认免费",
         "adopted_at": "2026-11-18 13:14:04",
-        "fail_streak": 1,
+        "fail_streak": 2,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-18 13:14 bad_request",
+        "last_fail": "2026-11-19 00:50 bad_request",
         "last_status": "bad_request"
       },
       "deepseek-ai/DeepSeek-OC": {
         "context": 8192,
         "basis": "确认免费",
         "adopted_at": "2026-11-18 13:14:04",
-        "fail_streak": 1,
+        "fail_streak": 2,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-18 13:14 bad_request",
+        "last_fail": "2026-11-19 00:50 bad_request",
         "last_status": "bad_request"
       }
     }
