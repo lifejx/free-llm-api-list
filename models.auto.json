@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 2 个，剔除 3 个",
-  "updated_at": "2026-11-18 01:14:34",
+  "last_action": "本轮新纳入 3 个，剔除 1 个",
+  "updated_at": "2026-11-18 13:14:40",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
@@ -35,15 +35,6 @@
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "rate_limited"
-      },
-      "liquid/lfm-2.5-2.6b:free": {
-        "context": 65536,
-        "basis": "确认免费",
-        "adopted_at": "2026-09-30 19:48:18",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_status": "not_found",
-        "last_fail": "2026-11-18 01:14 not_found"
       },
       "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
         "context": 256000,
@@ -140,6 +131,15 @@
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "ok"
+      },
+      "thinkingmachines/inkling-2-small:free": {
+        "context": 1048576,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-18 13:14:04",
+        "fail_streak": 1,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-11-18 13:14 auth_error",
+        "last_status": "auth_error"
       }
     },
     "NOVITA_KEY": {
@@ -269,9 +269,27 @@
         "context": 1048576,
         "basis": "确认免费",
         "adopted_at": "2026-11-18 01:14:06",
+        "fail_streak": 2,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-11-18 13:14 bad_request",
+        "last_status": "bad_request"
+      },
+      "])</script><script>self.__next_f.push([1,": {
+        "context": 32768,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-18 13:14:04",
         "fail_streak": 1,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-18 01:14 bad_request",
+        "last_fail": "2026-11-18 13:14 bad_request",
+        "last_status": "bad_request"
+      },
+      "deepseek-ai/DeepSeek-OC": {
+        "context": 8192,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-18 13:14:04",
+        "fail_streak": 1,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-11-18 13:14 bad_request",
         "last_status": "bad_request"
       }
     }
