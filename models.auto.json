@@ -1,16 +1,17 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 1 个，剔除 5 个",
-  "updated_at": "2026-11-21 00:32:56",
+  "last_action": "本轮新纳入 2 个，剔除 0 个",
+  "updated_at": "2026-11-21 12:54:00",
   "providers": {
     "OPENROUTER_KEY": {
       "cohere/north-mini-code:free": {
         "context": 256000,
         "basis": "确认免费",
         "adopted_at": "2026-09-30 19:48:18",
-        "fail_streak": 0,
+        "fail_streak": 1,
         "note": "自动发现（确认免费）",
-        "last_status": "ok"
+        "last_status": "not_found",
+        "last_fail": "2026-11-21 12:54 not_found"
       },
       "dots-studio/dots-3-note-preview:free": {
         "context": 512000,
@@ -138,19 +139,19 @@
         "context": 262144,
         "basis": "确认免费",
         "adopted_at": "2026-09-30 19:48:18",
-        "fail_streak": 1,
+        "fail_streak": 2,
         "note": "自动发现（确认免费）",
         "last_status": "missing",
-        "last_fail": "2026-11-21 00:32 missing"
+        "last_fail": "2026-11-21 12:54 missing"
       },
       "dev/glm46": {
         "context": 256000,
         "basis": "确认免费",
         "adopted_at": "2026-09-30 19:48:18",
-        "fail_streak": 1,
+        "fail_streak": 2,
         "note": "自动发现（确认免费）",
         "last_status": "missing",
-        "last_fail": "2026-11-21 00:32 missing"
+        "last_fail": "2026-11-21 12:54 missing"
       },
       "inclusionai/ling-3.0-flash-sante": {
         "context": 262144,
@@ -230,9 +231,27 @@
         "context": 1048576,
         "basis": "确认免费",
         "adopted_at": "2026-11-21 00:30:29",
+        "fail_streak": 2,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-11-21 12:54 bad_request",
+        "last_status": "bad_request"
+      },
+      "])</script><script>self.__next_f.push([1,": {
+        "context": 32768,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-21 12:53:27",
         "fail_streak": 1,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-21 00:32 bad_request",
+        "last_fail": "2026-11-21 12:54 bad_request",
+        "last_status": "bad_request"
+      },
+      "deepseek-ai/DeepSeek-OC": {
+        "context": 8192,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-21 12:53:27",
+        "fail_streak": 1,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-11-21 12:54 bad_request",
         "last_status": "bad_request"
       }
     }
