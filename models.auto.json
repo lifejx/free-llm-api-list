@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 0 个，剔除 1 个",
-  "updated_at": "2026-11-25 14:14:03",
+  "last_action": "本轮新纳入 1 个，剔除 3 个",
+  "updated_at": "2026-11-26 02:18:31",
   "providers": {
     "OPENROUTER_KEY": {
       "google/gemma-4-26b-a4b-it:free": {
@@ -18,7 +18,7 @@
         "adopted_at": "2026-09-30 19:48:18",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "ok"
+        "last_status": "rate_limited"
       },
       "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
         "context": 256000,
@@ -115,15 +115,6 @@
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "rate_limited"
-      },
-      "dots-studio/dots-3-note-preview:free": {
-        "context": 512000,
-        "basis": "确认免费",
-        "adopted_at": "2026-11-23 12:51:40",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_status": "not_found",
-        "last_fail": "2026-11-25 14:14 not_found"
       }
     },
     "NOVITA_KEY": {
@@ -201,22 +192,13 @@
         "note": "自动发现（确认免费）",
         "last_status": "ok"
       },
-      "])</script><script>self.__next_f.push([1,": {
-        "context": 32768,
+      "zai-o": {
+        "context": 1048576,
         "basis": "确认免费",
-        "adopted_at": "2026-11-25 03:13:19",
-        "fail_streak": 2,
+        "adopted_at": "2026-11-26 02:18:13",
+        "fail_streak": 1,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-25 14:14 bad_request",
-        "last_status": "bad_request"
-      },
-      "deepseek-ai/DeepSeek-OC": {
-        "context": 8192,
-        "basis": "确认免费",
-        "adopted_at": "2026-11-25 03:13:19",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-25 14:14 bad_request",
+        "last_fail": "2026-11-26 02:18 bad_request",
         "last_status": "bad_request"
       }
     }
