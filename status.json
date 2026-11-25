@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-11-24T19:13:19Z",
-  "generated_at_cst": "2026-11-25 03:13:19",
-  "elapsed_seconds": 32.46,
+  "generated_at": "2026-11-25T06:11:24Z",
+  "generated_at_cst": "2026-11-25 14:11:24",
+  "elapsed_seconds": 159.12,
   "cron": "0 */8 * * *",
   "adopt_mode": "safe",
   "summary": {
-    "ok": 23,
+    "ok": 21,
     "catalog_only": 5,
-    "rate_limited": 10,
+    "rate_limited": 11,
     "bad_request": 8,
     "auth_error": 2,
     "missing": 7,
     "not_found": 3,
     "server_error": 0,
-    "network_error": 1,
+    "network_error": 2,
     "unknown": 0,
     "skipped": 39,
     "probe_online": 20,
@@ -30,46 +30,39 @@
     "providers_catalog_public": 3,
     "providers_catalog_ok": 9,
     "models_total": 98,
-    "models_available": 23,
-    "models_confirmed": 28,
+    "models_available": 21,
+    "models_confirmed": 26,
     "models_auto": 23
   },
   "changes": [
     {
-      "provider": "月之暗面 Kimi",
-      "env": "MOONSHOT_KEY",
-      "model": "kimi-k3",
-      "from": "rate_limited",
-      "to": "bad_request"
-    },
-    {
-      "provider": "月之暗面 Kimi",
-      "env": "MOONSHOT_KEY",
-      "model": "kimi-k2.7-code",
-      "from": "rate_limited",
-      "to": "bad_request"
+      "provider": "硅基流动 SiliconFlow",
+      "env": "SILICONFLOW_KEY",
+      "model": "XingChenAGI/Xing4.0-29B",
+      "from": "ok",
+      "to": "network_error"
     },
     {
       "provider": "OpenRouter",
       "env": "OPENROUTER_KEY",
-      "model": "dots-studio/dots-3-note-preview:free",
+      "model": "google/gemma-4-26b-a4b-it:free",
       "from": "ok",
-      "to": "not_found"
+      "to": "rate_limited"
     }
   ],
   "uptime": {
-    "records": 170,
+    "records": 171,
     "since": "2026-09-30 19:57",
-    "until": "2026-11-25 03:13",
+    "until": "2026-11-25 14:11",
     "providers": [
       {
         "env": "OPENROUTER_KEY",
         "name": "OpenRouter",
-        "runs": 167,
-        "rate_limited": 588,
-        "ok": 1626,
+        "runs": 168,
+        "rate_limited": 592,
+        "ok": 1635,
         "catalog_only": 265,
-        "missing": 193,
+        "missing": 195,
         "auth_error": 216,
         "probe_bad": 0,
         "peak_hour": 11
@@ -77,9 +70,9 @@
       {
         "env": "ZHIPU_KEY",
         "name": "智谱 AI (BigModel)",
-        "runs": 167,
-        "rate_limited": 109,
-        "ok": 489,
+        "runs": 168,
+        "rate_limited": 110,
+        "ok": 492,
         "catalog_only": 0,
         "missing": 0,
         "auth_error": 0,
@@ -89,7 +82,7 @@
       {
         "env": "MOONSHOT_KEY",
         "name": "月之暗面 Kimi",
-        "runs": 168,
+        "runs": 169,
         "rate_limited": 107,
         "ok": 0,
         "catalog_only": 0,
@@ -99,11 +92,23 @@
         "peak_hour": 4
       },
       {
+        "env": "VOLC_ARK_KEY",
+        "name": "火山方舟 Volcengine Ark",
+        "runs": 168,
+        "rate_limited": 32,
+        "ok": 167,
+        "catalog_only": 0,
+        "missing": 38,
+        "auth_error": 0,
+        "probe_bad": 1,
+        "peak_hour": 3
+      },
+      {
         "env": "SILICONFLOW_KEY",
         "name": "硅基流动 SiliconFlow",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 30,
-        "ok": 1547,
+        "ok": 1556,
         "catalog_only": 18,
         "missing": 0,
         "auth_error": 0,
@@ -111,26 +116,14 @@
         "peak_hour": 23
       },
       {
-        "env": "VOLC_ARK_KEY",
-        "name": "火山方舟 Volcengine Ark",
-        "runs": 167,
-        "rate_limited": 26,
-        "ok": 167,
-        "catalog_only": 0,
-        "missing": 37,
-        "auth_error": 0,
-        "probe_bad": 1,
-        "peak_hour": 3
-      },
-      {
         "env": "MODELSCOPE_KEY",
         "name": "魔搭 ModelScope",
-        "runs": 169,
+        "runs": 170,
         "rate_limited": 7,
         "ok": 115,
         "catalog_only": 33,
         "missing": 6,
-        "auth_error": 307,
+        "auth_error": 309,
         "probe_bad": 0,
         "peak_hour": 11
       },
@@ -149,7 +142,7 @@
       {
         "env": "CEREBRAS_KEY",
         "name": "Cerebras",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -161,7 +154,7 @@
       {
         "env": "CLOUDFLARE_API_TOKEN",
         "name": "Cloudflare Workers AI",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -197,7 +190,7 @@
       {
         "env": "GEMINI_KEY",
         "name": "Google Gemini",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -209,7 +202,7 @@
       {
         "env": "GROQ_KEY",
         "name": "Groq",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -233,7 +226,7 @@
       {
         "env": "MINIMAX_KEY",
         "name": "MiniMax",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -245,7 +238,7 @@
       {
         "env": "MISTRAL_KEY",
         "name": "Mistral AI",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -257,19 +250,19 @@
       {
         "env": "NVIDIA_KEY",
         "name": "NVIDIA NIM",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
-        "catalog_only": 515,
-        "missing": 314,
+        "catalog_only": 516,
+        "missing": 318,
         "auth_error": 0,
-        "probe_bad": 20,
+        "probe_bad": 21,
         "peak_hour": null
       },
       {
         "env": "NEBIUS_KEY",
         "name": "Nebius Token Factory",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -281,10 +274,10 @@
       {
         "env": "NOVITA_KEY",
         "name": "Novita AI",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
-        "catalog_only": 1085,
+        "catalog_only": 1088,
         "missing": 20,
         "auth_error": 0,
         "probe_bad": 0,
@@ -293,11 +286,11 @@
       {
         "env": "SAMBANOVA_KEY",
         "name": "SambaNova (SambaCloud)",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
-        "catalog_only": 536,
-        "missing": 128,
+        "catalog_only": 537,
+        "missing": 131,
         "auth_error": 0,
         "probe_bad": 0,
         "peak_hour": null
@@ -305,7 +298,7 @@
       {
         "env": "TOGETHER_KEY",
         "name": "Together AI",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -317,7 +310,7 @@
       {
         "env": "BAICHUAN_KEY",
         "name": "百川智能 Baichuan",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -329,7 +322,7 @@
       {
         "env": "QIANFAN_KEY",
         "name": "百度千帆 Qianfan",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -341,7 +334,7 @@
       {
         "env": "HUNYUAN_KEY",
         "name": "腾讯混元 / TokenHub",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -353,7 +346,7 @@
       {
         "env": "SPARK_KEY",
         "name": "讯飞星火 Spark",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -365,7 +358,7 @@
       {
         "env": "STEPFUN_KEY",
         "name": "阶跃星辰 StepFun",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -377,7 +370,7 @@
       {
         "env": "DASHSCOPE_KEY",
         "name": "阿里云百炼 DashScope",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
@@ -389,13 +382,13 @@
       {
         "env": "YI_KEY",
         "name": "零一万物 Yi",
-        "runs": 167,
+        "runs": 168,
         "rate_limited": 0,
         "ok": 0,
         "catalog_only": 0,
         "missing": 0,
         "auth_error": 0,
-        "probe_bad": 167,
+        "probe_bad": 168,
         "peak_hour": null
       }
     ]
@@ -406,12 +399,14 @@
         "name": "Cline 模型目录",
         "url": "https://api.cline.bot/api/v1/models",
         "note": "Cline 用量计费通道的目录；实测与 OpenRouter 一致（464 个），用来交叉验证",
-        "count": 456,
-        "added": [],
+        "count": 458,
+        "added": [
+          "upstage/solar-mini-4-5",
+          "upstage/solar-pro-4-contributor",
+          "xiaomi/mimo-v2.6-flash-mopd"
+        ],
         "removed": [
-          "dots-studio/dots-3-note-preview:free",
-          "mistralai/mistral-medium-3",
-          "mistralai/mistral-medium-3.1"
+          "xiaomi/mimo-v2.5"
         ],
         "free_count": 0,
         "free_pairs": {},
@@ -419,80 +414,31 @@
         "free_removed": [],
         "changed": true,
         "error": "",
-        "checked_at": "2026-11-25 03:13"
+        "checked_at": "2026-11-25 14:11"
       },
       {
         "name": "HuggingFace Router 目录",
         "url": "https://router.huggingface.co/v1/models",
         "note": "HF 聚合 15+ 家供应商的实时路由目录，匿名即可读，每个「模型×供应商」组合自带定价、supports_tools、上下文。is_free 或定价 0/0 的 live 组合记为「0 元组合」，是发现「谁家又上新免费模型」最灵敏的传感器；调用本身走 HF 免费账号每月 $0.10 额度",
-        "count": 104,
-        "added": [],
+        "count": 103,
+        "added": [
+          "Qwen/Qwen3.8-Flash-Next",
+          "XiaomiMiMo/MiMo-V2.6-Flash-MOPD",
+          "deepseek-ai/DeepSeek-V3-0324"
+        ],
         "removed": [
-          "BSC-LT/ALIA-40b-instruct-2606",
-          "CohereLabs/aya-expanse-32b",
-          "CohereLabs/aya-vision-32b",
-          "CohereLabs/c4ai-command-a-03-2025",
-          "CohereLabs/c4ai-command-r-08-2024",
-          "CohereLabs/c4ai-command-r7b-12-2024",
-          "CohereLabs/c4ai-command-r7b-arabic-02-2025",
-          "CohereLabs/command-a-reasoning-08-2025",
-          "CohereLabs/command-a-translate-08-2025",
-          "CohereLabs/command-a-vision-07-2025",
-          "CohereLabs/tiny-aya-earth",
-          "CohereLabs/tiny-aya-fire",
-          "CohereLabs/tiny-aya-global",
-          "CohereLabs/tiny-aya-water",
-          "NousResearch/Hermes-3-Llama-3.1-70B",
-          "Qwen/Qwen3.5-122B-A10B",
-          "Qwen/Qwen3.8-Flash-Next-FP8",
-          "Sao10K/L3-8B-Stheno-v3.2",
-          "XiaomiMiMo/MiMo-V2.5-Pro",
-          "aisingapore/Gemma-SEA-LION-v4-27B-IT",
-          "aisingapore/Nemotron-SEA-LION-v4.8-120B-A12B",
-          "aisingapore/Qwen-SEA-LION-v4-32B-IT",
-          "aisingapore/Qwen-SEA-LION-v4.5-27B-IT",
-          "alpindale/WizardLM-2-8x22B",
-          "cyankiwi/Qwen3.5-9B-AWQ-4bit",
-          "deepseek-ai/DeepSeek-R1",
-          "deepseek-ai/DeepSeek-V3-0324",
-          "ibm-granite/granite-4.2-30b",
-          "ibm-granite/granite-4.2-3b",
-          "inclusionAI/Ling-3.0-flash-Fin",
-          "inclusionAI/Ling-3.1-flash",
-          "moonshotai/Kimi-K2-Instruct",
-          "moonshotai/Kimi-K2-Instruct-0905",
-          "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-NVFP4",
-          "speakleash/Bielik-11B-v3.0-Instruct",
-          "stepfun-ai/Step-3.5-Flash",
-          "stepfun-ai/Step-3.7-Flash",
-          "swiss-ai/Apertus-70B-Instruct-2509",
-          "swiss-ai/Apertus-v1.5-70B",
-          "tencent/Hy3",
-          "zai-org/AutoGLM-Phone-9B-Multilingual",
-          "zai-org/GLM-4.5",
-          "zai-org/GLM-4.5-Air",
-          "zai-org/GLM-4.5V",
-          "zai-org/GLM-4.5V-FP8",
-          "zai-org/GLM-4.6-FP8",
-          "zai-org/GLM-4.6V",
-          "zai-org/GLM-4.6V-FP8",
-          "zai-org/GLM-4.6V-Flash",
-          "zai-org/GLM-4.7-FP8",
-          "zai-org/GLM-5.1",
-          "zai-org/GLM-5.1-FP8",
-          "zai-org/GLM-5.2-FP8",
-          "zai-org/GLM-5.3-BF16",
-          "zai-org/GLM-5.3-Flash-BF16"
+          "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+          "Qwen/Qwen3-VL-30B-A3B-Instruct",
+          "XiaomiMiMo/MiMo-V2.5",
+          "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp"
         ],
         "free_count": 0,
         "free_pairs": {},
         "free_added": [],
-        "free_removed": [
-          "deepseek-ai/DeepSeek-V4.1-Flash-1017@ovhcloud"
-        ],
+        "free_removed": [],
         "changed": true,
         "error": "",
-        "checked_at": "2026-11-25 03:13"
+        "checked_at": "2026-11-25 14:11"
       },
       {
         "name": "社区免费清单 (jtig37)",
@@ -507,7 +453,7 @@
         "free_removed": [],
         "changed": false,
         "error": "",
-        "checked_at": "2026-11-25 03:13"
+        "checked_at": "2026-11-25 14:11"
       }
     ],
     "docs": [
@@ -515,7 +461,7 @@
         "name": "OpenRouter 限流",
         "url": "https://openrouter.ai/docs/api_reference/limits",
         "changed": true,
-        "last_changed": "2026-11-25 03:13",
+        "last_changed": "2026-11-25 14:11",
         "size": 254246,
         "first_seen": "2026-10-01 02:53",
         "error": ""
@@ -550,8 +496,8 @@
       {
         "name": "Cerebras 限流",
         "url": "https://inference-docs.cerebras.ai/support/rate-limits",
-        "changed": false,
-        "last_changed": "2026-11-24 15:41",
+        "changed": true,
+        "last_changed": "2026-11-25 14:11",
         "size": 77571,
         "first_seen": "2026-10-01 02:53",
         "error": ""
@@ -569,7 +515,7 @@
         "name": "SambaNova 限流",
         "url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
         "changed": true,
-        "last_changed": "2026-11-25 03:13",
+        "last_changed": "2026-11-25 14:11",
         "size": 75946,
         "first_seen": "2026-10-01 02:53",
         "error": ""
@@ -596,8 +542,8 @@
         "name": "智谱限流",
         "url": "https://docs.bigmodel.cn/cn/api/rate-limit",
         "changed": true,
-        "last_changed": "2026-11-25 03:13",
-        "size": 68538,
+        "last_changed": "2026-11-25 14:11",
+        "size": 68542,
         "first_seen": "2026-10-01 02:37",
         "error": ""
       },
@@ -605,8 +551,8 @@
         "name": "智谱价格",
         "url": "https://docs.bigmodel.cn/cn/guide/start/pricing",
         "changed": true,
-        "last_changed": "2026-11-25 03:13",
-        "size": 62076,
+        "last_changed": "2026-11-25 14:11",
+        "size": 68410,
         "first_seen": "2026-10-01 02:37",
         "error": ""
       },
@@ -614,8 +560,8 @@
         "name": "Kimi 限流",
         "url": "https://platform.kimi.com/docs/pricing/limits",
         "changed": true,
-        "last_changed": "2026-11-25 03:13",
-        "size": 44005,
+        "last_changed": "2026-11-25 14:11",
+        "size": 44001,
         "first_seen": "2026-10-01 02:37",
         "error": ""
       },
@@ -643,7 +589,7 @@
         "changed": false,
         "last_changed": "",
         "size": 0,
-        "first_seen": "2026-11-25 03:13",
+        "first_seen": "2026-11-25 14:11",
         "error": "HTTP 404"
       },
       {
@@ -658,24 +604,15 @@
     ]
   },
   "discovery": {
-    "newly_adopted": 2,
-    "adopted": [
+    "newly_adopted": 0,
+    "adopted": [],
+    "dropped": [
       {
-        "provider": "硅基流动 SiliconFlow",
         "env": "SILICONFLOW_KEY",
-        "model": "])</script><script>self.__next_f.push([1,",
-        "basis": "确认免费",
-        "context": 32768
-      },
-      {
-        "provider": "硅基流动 SiliconFlow",
-        "env": "SILICONFLOW_KEY",
-        "model": "deepseek-ai/DeepSeek-OC",
-        "basis": "确认免费",
-        "context": 8192
+        "model": "zai-o",
+        "reason": "连续 3 轮实测失败（最近：bad_request）"
       }
     ],
-    "dropped": [],
     "absent": [],
     "candidates_total": 53,
     "candidates": [
@@ -1085,13 +1022,13 @@
       {
         "provider": "OpenRouter",
         "env": "OPENROUTER_KEY",
-        "count": 435,
+        "count": 437,
         "public": false
       },
       {
         "provider": "NVIDIA NIM",
         "env": "NVIDIA_KEY",
-        "count": 32,
+        "count": 30,
         "public": true
       },
       {
@@ -1217,15 +1154,15 @@
           "source": "人工登记",
           "status": "rate_limited",
           "http": 429,
-          "latency_ms": 763,
+          "latency_ms": 359,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "glm-4-flash-250414",
           "context": 128000,
-          "note": "",
+          "note": "（轮换中，沿用上轮结果）",
           "auto": false,
           "source": "人工登记",
           "status": "ok",
@@ -1233,21 +1170,21 @@
           "latency_ms": 893,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "glm-z1-flash",
           "context": 128000,
-          "note": "（轮换中，沿用上轮结果）",
+          "note": "",
           "auto": false,
           "source": "人工登记",
           "status": "ok",
           "http": 200,
-          "latency_ms": 524,
+          "latency_ms": 482,
           "tools": "accepted",
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "glm-4v-flash",
@@ -1257,10 +1194,10 @@
           "source": "人工登记",
           "status": "ok",
           "http": 200,
-          "latency_ms": 1275,
+          "latency_ms": 512,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -1372,10 +1309,10 @@
           "source": "人工登记",
           "status": "bad_request",
           "http": 400,
-          "latency_ms": 1745,
+          "latency_ms": 1196,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "kimi-k2.5",
@@ -1385,10 +1322,10 @@
           "source": "人工登记",
           "status": "bad_request",
           "http": 400,
-          "latency_ms": 1739,
+          "latency_ms": 1242,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "kimi-k2.7-code",
@@ -1398,10 +1335,10 @@
           "source": "人工登记",
           "status": "bad_request",
           "http": 400,
-          "latency_ms": 1754,
+          "latency_ms": 1228,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -1518,7 +1455,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "qwen3.8-flash",
@@ -1531,7 +1468,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "qwen-plus",
@@ -1544,7 +1481,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "qwen-turbo",
@@ -1557,7 +1494,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "qwen-long",
@@ -1570,7 +1507,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -1655,8 +1592,8 @@
         "note": "含公开定价页"
       },
       "status": "ok",
-      "available": 10,
-      "confirmed": 10,
+      "available": 9,
+      "confirmed": 9,
       "total": 14,
       "score": 10.0,
       "score_detail": {
@@ -1685,7 +1622,7 @@
           "latency_ms": 4706,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -1699,7 +1636,7 @@
           "latency_ms": 143198,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -1713,13 +1650,13 @@
           "latency_ms": 12870,
           "tools": "no",
           "tools_note": "Function call is not supported for this model.",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
           "id": "THUDM/GLM-Z1-9B-0414",
           "context": "",
-          "note": "",
+          "note": "（轮换中，沿用上轮结果）",
           "auto": false,
           "source": "人工登记",
           "status": "ok",
@@ -1727,12 +1664,13 @@
           "latency_ms": 15270,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "Qwen/Qwen2.5-72B-Instruct",
           "context": 32768,
-          "note": "",
+          "note": "（轮换中，沿用上轮结果）",
           "auto": true,
           "source": "自动发现",
           "status": "ok",
@@ -1740,12 +1678,13 @@
           "latency_ms": 813,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "Qwen/Qwen2.5-7B-Instruct",
           "context": 32768,
-          "note": "",
+          "note": "（轮换中，沿用上轮结果）",
           "auto": true,
           "source": "自动发现",
           "status": "ok",
@@ -1753,49 +1692,47 @@
           "latency_ms": 886,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "THUDM/GLM-4-9B-0414",
           "context": 32768,
-          "note": "（轮换中，沿用上轮结果）",
+          "note": "",
           "auto": true,
           "source": "自动发现",
           "status": "ok",
           "http": 200,
-          "latency_ms": 568,
+          "latency_ms": 7118,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "XingChenAGI/Xing4.0-29B",
           "context": 262144,
-          "note": "（轮换中，沿用上轮结果）",
+          "note": "TimeoutError: The read operation timed out",
           "auto": true,
           "source": "自动发现",
-          "status": "ok",
-          "http": 200,
-          "latency_ms": 655,
-          "tools": "accepted",
+          "status": "network_error",
+          "http": null,
+          "latency_ms": 143773,
+          "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "tencent/Hunyuan-MT-7B",
           "context": 32768,
-          "note": "（轮换中，沿用上轮结果）",
+          "note": "",
           "auto": true,
           "source": "自动发现",
           "status": "ok",
           "http": 200,
-          "latency_ms": 584,
+          "latency_ms": 766,
           "tools": "no",
           "tools_note": "Function call is not supported for this model.",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "zai-org/GLM-5.3-Flash",
@@ -1808,7 +1745,7 @@
           "latency_ms": 1781,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -1822,7 +1759,7 @@
           "latency_ms": 1268,
           "tools": "accepted",
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -1836,7 +1773,7 @@
           "latency_ms": 518,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -1850,7 +1787,7 @@
           "latency_ms": 520,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -1864,7 +1801,7 @@
           "latency_ms": 508,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         }
       ]
@@ -1977,15 +1914,15 @@
           "source": "人工登记",
           "status": "auth_error",
           "http": 403,
-          "latency_ms": 1193,
+          "latency_ms": 1292,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "deepseek-ai/DeepSeek-V4.1-Flash",
           "context": "",
-          "note": "Model id : deepseek-ai/DeepSeek-V4.1-Flash , has no provider supported",
+          "note": "Model id : deepseek-ai/DeepSeek-V4.1-Flash , has no provider supported（轮换中，沿用上轮结果）",
           "auto": false,
           "source": "人工登记",
           "status": "bad_request",
@@ -1993,21 +1930,21 @@
           "latency_ms": 1151,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "ZhipuAI/GLM-4.7-Flash",
           "context": "",
-          "note": "For account security, please complete your profile via email verification. ModelScope Magicubes is only available to verified accounts. Please refer to https://modelscope.cn/my/se…（轮换中，沿用上轮结果）",
+          "note": "For account security, please complete your profile via email verification. ModelScope Magicubes is only available to verified accounts. Please refer to https://modelscope.cn/my/se…",
           "auto": false,
           "source": "人工登记",
           "status": "auth_error",
           "http": 403,
-          "latency_ms": 976,
+          "latency_ms": 1229,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "stepfun-ai/Step-3.7-Flash",
@@ -2017,10 +1954,10 @@
           "source": "人工登记",
           "status": "bad_request",
           "http": 400,
-          "latency_ms": 1138,
+          "latency_ms": 1499,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -2137,7 +2074,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "hy3-preview",
@@ -2150,7 +2087,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -2234,7 +2171,7 @@
         "ok": false,
         "count": 0,
         "public": false,
-        "note": "HTTP 403：目录不可读"
+        "note": "HTTP 429：目录不可读"
       },
       "status": "skipped",
       "available": 0,
@@ -2267,7 +2204,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "ERNIE-4.5-Turbo-32K",
@@ -2280,7 +2217,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "DeepSeek-R1",
@@ -2293,7 +2230,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "Kimi-K2-Instruct",
@@ -2306,7 +2243,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -2383,7 +2320,7 @@
       "missing_env": [],
       "probe": "online",
       "probe_http": 401,
-      "probe_note": "The API key format is incorrect. Request id: 021795547605123fd2367ab9d84aba0106fa01cb6cae01a6ff675",
+      "probe_note": "The API key format is incorrect. Request id: 0217955870935428d04290f080f41f1dcb9c4b0d68f0930aa5846",
       "catalog": {
         "ok": true,
         "count": 55,
@@ -2413,30 +2350,28 @@
         {
           "id": "doubao-seed-2-1-pro-260628",
           "context": "",
-          "note": "The request failed because your account has an overdue balance. Request id: 0217955061171516baea902239f26d786b4cc818bae24a830e36a（轮换中，沿用上轮结果）",
+          "note": "The request failed because your account has an overdue balance. Request id: 0217955871023002d417bd9da6e7dfe27ae15305eaa9a4f8c4567",
           "auto": false,
           "source": "人工登记",
           "status": "rate_limited",
           "http": 403,
-          "latency_ms": 2177,
+          "latency_ms": 1056,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "doubao-seed-2-1-lite-260915",
           "context": "",
-          "note": "The request failed because your account has an overdue balance. Request id: 021795506116688035772df07ab2d666278dcdeb9c281b24fcd95（轮换中，沿用上轮结果）",
+          "note": "The request failed because your account has an overdue balance. Request id: 021795587103467fbcc013cde10a689f8f390ac862f8b0486d9dd",
           "auto": false,
           "source": "人工登记",
           "status": "rate_limited",
           "http": 403,
-          "latency_ms": 1198,
+          "latency_ms": 2386,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "doubao-seed-2-1-turbo-260628",
@@ -2449,13 +2384,13 @@
           "latency_ms": 3764,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
           "id": "doubao-seed-2-1-pro-260915",
           "context": "",
-          "note": "The request failed because your account has an overdue balance. Request id: 0217955476187292add8b472a5fbe1ec0e05874620a4ba067554f",
+          "note": "The request failed because your account has an overdue balance. Request id: 0217955476187292add8b472a5fbe1ec0e05874620a4ba067554f（轮换中，沿用上轮结果）",
           "auto": false,
           "source": "人工登记",
           "status": "rate_limited",
@@ -2463,12 +2398,13 @@
           "latency_ms": 936,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "deepseek-v4-1-flash-261017",
           "context": "",
-          "note": "The request failed because your account has an overdue balance. Request id: 02179554761902987f3736e221e9b38891865435b80182a68cbbb",
+          "note": "The request failed because your account has an overdue balance. Request id: 02179554761902987f3736e221e9b38891865435b80182a68cbbb（轮换中，沿用上轮结果）",
           "auto": false,
           "source": "人工登记",
           "status": "rate_limited",
@@ -2476,12 +2412,13 @@
           "latency_ms": 1307,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "glm-5-3-flash-260828",
           "context": "",
-          "note": "The request failed because your account has an overdue balance. Request id: 0217955476187285c5680dfe824b0583deb71be9fa5a1d5685b34",
+          "note": "The request failed because your account has an overdue balance. Request id: 0217955476187285c5680dfe824b0583deb71be9fa5a1d5685b34（轮换中，沿用上轮结果）",
           "auto": false,
           "source": "人工登记",
           "status": "rate_limited",
@@ -2489,21 +2426,21 @@
           "latency_ms": 964,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "kimi-k3-1-pro-261024",
           "context": "",
-          "note": "The request failed because your account has an overdue balance. Request id: 021795462836090e5dadbf20cfd2299792795a4ebfc3b4d4ebea6（轮换中，沿用上轮结果）",
+          "note": "The request failed because your account has an overdue balance. Request id: 021795587103530ed9c07a18069cfb59ad66daf7e7bd92154e0c6",
           "auto": false,
           "source": "人工登记",
           "status": "rate_limited",
           "http": 403,
-          "latency_ms": 814,
+          "latency_ms": 1996,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -2618,7 +2555,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -2735,7 +2672,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "MiniMax-M2.7",
@@ -2748,7 +2685,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "MiniMax-M2.5",
@@ -2761,7 +2698,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -2878,7 +2815,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -2993,7 +2930,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "yi-vision-v2",
@@ -3006,7 +2943,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -3122,7 +3059,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "Baichuan-M3-Plus",
@@ -3135,7 +3072,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -3215,13 +3152,13 @@
       "probe_note": "Invalid API key: this is not an OpenRouter API key. OpenRouter keys start with \"sk-or-\". If you use an OpenAI or Anthropic SDK, check that it is not picking up OPENAI_API_KEY or A…",
       "catalog": {
         "ok": true,
-        "count": 435,
+        "count": 437,
         "public": false,
         "note": ""
       },
       "status": "ok",
-      "available": 10,
-      "confirmed": 10,
+      "available": 9,
+      "confirmed": 9,
       "total": 15,
       "score": 7.7,
       "score_detail": {
@@ -3241,44 +3178,41 @@
         {
           "id": "openrouter/free",
           "context": 200000,
-          "note": "（轮换中，沿用上轮结果）",
+          "note": "",
           "auto": false,
           "source": "人工登记",
           "status": "ok",
           "http": 200,
-          "latency_ms": 288,
+          "latency_ms": 305,
           "tools": "yes",
-          "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "tools_note": "get_weather({\n      \"city\": \"Beijing\"\n    })",
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "qwen/qwen3.8-27b:free",
           "context": 262144,
-          "note": "This model is unavailable for free. The paid version is available now - use this slug instead: qwen/qwen3.8-27b（轮换中，沿用上轮结果）",
+          "note": "This model is unavailable for free. The paid version is available now - use this slug instead: qwen/qwen3.8-27b",
           "auto": false,
           "source": "人工登记",
           "status": "not_found",
           "http": 404,
-          "latency_ms": 25,
+          "latency_ms": 28,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "google/gemma-4-26b-a4b-it:free",
           "context": 262144,
-          "note": "（轮换中，沿用上轮结果）",
+          "note": "Provider returned error",
           "auto": true,
           "source": "自动发现",
-          "status": "ok",
-          "http": 200,
-          "latency_ms": 746,
+          "status": "rate_limited",
+          "http": 429,
+          "latency_ms": 85,
           "tools": null,
-          "tools_note": "限流/额度不足，工具能力本轮未测",
-          "checked_at": "2026-11-25 03:13:19",
-          "rotated": true
+          "tools_note": "",
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "google/gemma-4-31b-it:free",
@@ -3291,7 +3225,7 @@
           "latency_ms": 446,
           "tools": null,
           "tools_note": "限流/额度不足，工具能力本轮未测",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -3305,7 +3239,7 @@
           "latency_ms": 463,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -3319,7 +3253,7 @@
           "latency_ms": 5070,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -3333,7 +3267,7 @@
           "latency_ms": 382,
           "tools": "yes",
           "tools_note": "get_weather({\n      \"city\": \"Beijing\"\n    })",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -3347,7 +3281,7 @@
           "latency_ms": 54,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -3361,7 +3295,7 @@
           "latency_ms": 1048,
           "tools": "yes",
           "tools_note": "get_weather({\"city\":\"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -3375,7 +3309,7 @@
           "latency_ms": 774,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -3389,7 +3323,7 @@
           "latency_ms": 216,
           "tools": "yes",
           "tools_note": "get_weather({\"city\": \"Beijing\"})",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
@@ -3403,13 +3337,13 @@
           "latency_ms": 385,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19",
+          "checked_at": "2026-11-25 14:11:24",
           "rotated": true
         },
         {
           "id": "particle-ai/particle-1:free",
           "context": 1048576,
-          "note": "",
+          "note": "（轮换中，沿用上轮结果）",
           "auto": true,
           "source": "自动发现",
           "status": "ok",
@@ -3417,12 +3351,13 @@
           "latency_ms": 410,
           "tools": null,
           "tools_note": "限流/额度不足，工具能力本轮未测",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "inclusionai/ling-3.2-flash:free",
           "context": 1048576,
-          "note": "Provider returned error",
+          "note": "Provider returned error（轮换中，沿用上轮结果）",
           "auto": true,
           "source": "自动发现",
           "status": "rate_limited",
@@ -3430,12 +3365,13 @@
           "latency_ms": 540,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         },
         {
           "id": "dots-studio/dots-3-note-preview:free",
           "context": 512000,
-          "note": "dots-studio/dots-3-note-preview:free is no longer available on OpenRouter: no provider serves this model anymore. See available models at https://openrouter.ai/models",
+          "note": "dots-studio/dots-3-note-preview:free is no longer available on OpenRouter: no provider serves this model anymore. See available models at https://openrouter.ai/models（轮换中，沿用上轮结果）",
           "auto": true,
           "source": "自动发现",
           "status": "not_found",
@@ -3443,7 +3379,8 @@
           "latency_ms": 36,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24",
+          "rotated": true
         }
       ]
     },
@@ -3558,7 +3495,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "openai/gpt-oss-20b",
@@ -3571,7 +3508,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "qwen/qwen3.8-27b",
@@ -3584,7 +3521,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -3701,7 +3638,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "gemini-3.5-flash",
@@ -3714,7 +3651,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "gemini-3.1-flash-lite",
@@ -3727,7 +3664,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "gemini-2.5-flash",
@@ -3740,7 +3677,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -3856,7 +3793,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "qwen-3.8-27b",
@@ -3869,7 +3806,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -3986,7 +3923,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "mistral-moderation-2603",
@@ -3999,7 +3936,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -4116,7 +4053,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "together/Tev1-4B-experimental",
@@ -4129,7 +4066,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -4211,7 +4148,7 @@
       "probe_note": "The model 'deepseek-ai/deepseek-v4.1-flash' has reached its end of life on 2026-11-16T08:00:00Z and is no longer available.",
       "catalog": {
         "ok": true,
-        "count": 32,
+        "count": 30,
         "public": true,
         "note": ""
       },
@@ -4246,7 +4183,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "z-ai/glm-5-3",
@@ -4259,7 +4196,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "moonshotai/kimi-k3",
@@ -4272,7 +4209,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "nvidia/nemotron-3-ultra-550b-a55b",
@@ -4285,7 +4222,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "openai/gpt-oss-20b",
@@ -4298,7 +4235,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -4414,7 +4351,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "DeepSeek-V3.1",
@@ -4427,7 +4364,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "Meta-Llama-3.3-70B-Instruct",
@@ -4440,7 +4377,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "gpt-oss-120b",
@@ -4453,7 +4390,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -4570,7 +4507,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "moonshotai/Kimi-K2.5",
@@ -4583,7 +4520,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -4700,7 +4637,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "inclusionai/ling-3.0-flash-sante",
@@ -4713,7 +4650,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "inclusionai/ling-3.0-flash-vl",
@@ -4726,7 +4663,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     },
@@ -4842,7 +4779,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "@cf/qwen/qwen3.8-27b",
@@ -4855,7 +4792,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "@cf/openai/gpt-oss-120b",
@@ -4868,7 +4805,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         },
         {
           "id": "@cf/zai-org/glm-4.7-flash",
@@ -4881,7 +4818,7 @@
           "latency_ms": null,
           "tools": null,
           "tools_note": "",
-          "checked_at": "2026-11-25 03:13:19"
+          "checked_at": "2026-11-25 14:11:24"
         }
       ]
     }
