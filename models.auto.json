@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 0 个，剔除 0 个",
-  "updated_at": "2026-11-26 14:05:58",
+  "last_action": "本轮新纳入 9 个，剔除 1 个",
+  "updated_at": "2026-11-27 01:59:24",
   "providers": {
     "OPENROUTER_KEY": {
       "google/gemma-4-26b-a4b-it:free": {
@@ -192,14 +192,78 @@
         "note": "自动发现（确认免费）",
         "last_status": "ok"
       },
-      "zai-o": {
+      "OpenMOSS-Team/MOSS-Image": {
+        "context": "",
+        "basis": "确认免费",
+        "adopted_at": "2026-11-27 01:58:57",
+        "fail_streak": 1,
+        "note": "自动发现（确认免费）",
+        "last_fail": "2026-11-27 01:59 bad_request",
+        "last_status": "bad_request"
+      },
+      "Qwen/Qwen2.5-72B-Instruct-128K": {
+        "context": 131072,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-27 01:58:57",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "ok"
+      },
+      "Qwen/Qwen3-32B": {
+        "context": 131072,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-27 01:58:57",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "ok"
+      },
+      "Qwen/Qwen3.5-35B-A3B": {
+        "context": 262144,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-27 01:58:57",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "skipped"
+      },
+      "THUDM/GLM-4-32B-0414": {
+        "context": 32768,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-27 01:58:57",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "skipped"
+      },
+      "XingChenAGI/XingChenGSR-V1.0": {
+        "context": "",
+        "basis": "确认免费",
+        "adopted_at": "2026-11-27 01:58:57",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "skipped"
+      },
+      "deepseek-ai/DeepSeek-R1": {
+        "context": 163840,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-27 01:58:57",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "skipped"
+      },
+      "moonshotai/Kimi-K2.7-Code": {
+        "context": 262144,
+        "basis": "确认免费",
+        "adopted_at": "2026-11-27 01:58:57",
+        "fail_streak": 0,
+        "note": "自动发现（确认免费）",
+        "last_status": "skipped"
+      },
+      "zai-org/GLM-5.3": {
         "context": 1048576,
         "basis": "确认免费",
-        "adopted_at": "2026-11-26 02:18:13",
-        "fail_streak": 2,
+        "adopted_at": "2026-11-27 01:58:57",
+        "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-26 14:05 bad_request",
-        "last_status": "bad_request"
+        "last_status": "skipped"
       }
     }
   }
