@@ -1,7 +1,7 @@
 {
   "note": "本文件由 update_list.py 自动维护：只收录能被机器确证免费的模型，连续 3 轮实测失败会自动剔除。人工请改 providers.json 或 models.custom.json。",
-  "last_action": "本轮新纳入 0 个，剔除 0 个",
-  "updated_at": "2026-11-27 13:56:25",
+  "last_action": "本轮新纳入 0 个，剔除 1 个",
+  "updated_at": "2026-11-28 01:44:40",
   "providers": {
     "OPENROUTER_KEY": {
       "google/gemma-4-26b-a4b-it:free": {
@@ -166,7 +166,7 @@
         "adopted_at": "2026-10-01 19:07:47",
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
-        "last_status": "network_error"
+        "last_status": "ok"
       },
       "tencent/Hunyuan-MT-7B": {
         "context": 32768,
@@ -191,15 +191,6 @@
         "fail_streak": 0,
         "note": "自动发现（确认免费）",
         "last_status": "ok"
-      },
-      "OpenMOSS-Team/MOSS-Image": {
-        "context": "",
-        "basis": "确认免费",
-        "adopted_at": "2026-11-27 01:58:57",
-        "fail_streak": 2,
-        "note": "自动发现（确认免费）",
-        "last_fail": "2026-11-27 13:56 bad_request",
-        "last_status": "bad_request"
       },
       "Qwen/Qwen2.5-72B-Instruct-128K": {
         "context": 131072,
